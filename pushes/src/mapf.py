@@ -73,9 +73,13 @@ def pp(env):
             seen.setdefault(node.timestamp, []).append(node)
 
         if res.status == classes.A_Star_result.fail:
-            print(f"Agent <{handle}> couldn't find an target!")
+            print(f"Agent <{handle}> couldn't find a valid schedule!")
             return -1
 
         schedules[handle] = res
         
     return schedules
+
+
+if __name__ == '__main__':
+    pass

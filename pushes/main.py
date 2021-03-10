@@ -26,10 +26,13 @@ direction_to_str = {-1 : "pass...", 0: "North", 1: "East", 2: "South", 3: "West"
 action_to_str = {-1 : "pass...", 0 : "Do nothing", 1: "Left", 2 : "Forward", 3 : "Right", 4 : "Stop moving"}
 
 
-render = False
+render = True
 print_more_info = False
 
 try:
+
+    time_start = time.time()
+
     # Initalize the Environment
     rail_generator=sparse_rail_generator(
         max_num_cities = 5,
@@ -40,14 +43,14 @@ try:
     )
     
     env = RailEnv(
-        width=100, height=100,
+        width=50, height=50,
         rail_generator=rail_generator,
         schedule_generator=sparse_schedule_generator(),
         number_of_agents=17
     )
-    
 
     obs, info = env.reset()
+    print(f"Created an reseted the Environment in {time.time()-time_start:5f}sec\n")
     
     
     # Just do one dummy step so the Trains get a Position. My assumption is, that it is always the same
@@ -66,7 +69,7 @@ try:
     action_dict = dict()
     
     # For Loop with all the steps predicted by the agent
-    for step in range(200):
+    for step in range(2000):
         
         for handle in range(env.get_num_agents()):
         
