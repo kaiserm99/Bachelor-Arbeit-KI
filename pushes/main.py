@@ -14,11 +14,10 @@ Usage:
 
 import time
 
-from flatland.core.env import Environment
 from flatland.envs.rail_env import RailEnv
-from flatland.envs.rail_generators import sparse_rail_generator
-from flatland.envs.schedule_generators import sparse_schedule_generator
 from flatland.utils.rendertools import RenderTool
+
+from flatland.envs.rail_generators import rail_from_file
 
 import src.mapf as mapf
 
@@ -30,26 +29,17 @@ render = True
 print_more_info = False
 
 try:
-
+    
     time_start = time.time()
 
-    # Initalize the Environment
-    rail_generator=sparse_rail_generator(
-        max_num_cities = 5,
-        grid_mode= False,
-        max_rails_between_cities = 5,
-        max_rails_in_city = 5, 
-        seed=0
-    )
-    
     env = RailEnv(
-        width=50, height=50,
-        rail_generator=rail_generator,
-        schedule_generator=sparse_schedule_generator(),
-        number_of_agents=17
+        width=0,
+        height=0,
+        rail_generator=rail_from_file("../scratch/test-envs/Test_20/Level_1.pkl"),
+        number_of_agents=2
     )
 
-    obs, info = env.reset()
+    _, info = env.reset()
     print(f"Created an reseted the Environment in {time.time()-time_start:5f}sec\n")
     
     
@@ -65,6 +55,7 @@ try:
         env_renderer = RenderTool(env, screen_width=2000, screen_height=2000)
         env_renderer.render_env(show=True, frames=False, show_observations=False, show_predictions=False)
     
+    time.sleep(1000)
     # Empty action dictionary which has the predicted actions in it for each step
     action_dict = dict()
     
@@ -96,7 +87,7 @@ try:
 
         if render: 
             env_renderer.render_env(show=True, frames=False, show_observations=False, show_predictions=True)
-            time.sleep(0.1)
+            time.sleep(0.3)
 
         if done["__all__"]:
             print(f"\nAll Agents are in their targets! After {step+1} iterations.")

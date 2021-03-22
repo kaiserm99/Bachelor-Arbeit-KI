@@ -17,38 +17,6 @@ import src.next_cell as nc
 import src.classes as classes
 
 
-def delete_open_list(t, open_list, other_obstacles, handle=-1):    
-        
-    for n, timestamp in enumerate(range(t, 2*t)):
-        
-        res = other_obstacles.get(timestamp)
-        
-        if res is None:
-            return open_list
-            
-        # Wenn der Zeitpunkt und die Position gelich wie eine der obstacles ist, dann lösche dies aus der open_list
-        for obs in res:        
-            
-            open_list = [ op for op in open_list if not (op.timestamp == timestamp - (2 * n + 1) and op.position == obs.position)]
-            
-    return open_list
-
-
-def delete_open_list_gerade(t, open_list, other_obstacles, handle=-1):
-     
-    for n, timestamp in enumerate(range(t+1, 2*t)):
-        
-        res = other_obstacles.get(timestamp)
-
-        if res is None: return open_list
-            
-        for obs in res:
-            
-            open_list = [ op for op in open_list if not (op.timestamp == timestamp - (2 * (n+1)) and op.position == obs.position)]
-            
-    return open_list
-
-
 
 def search(handle, position, direction, target, other_obstacles, env):
 
@@ -84,58 +52,21 @@ def search(handle, position, direction, target, other_obstacles, env):
             # den gleichen Zeitpunkt und die gleiche Position wie andere obsacles haben
             if app_cells[0] == False:
                 
-                t = succ_cells[0].timestamp
-                
-                # Check if the other actions are applicable. 
-                for n, app in enumerate(app_cells[1:]):
-
-                    if not app: continue
-                    
-                    pos_succ = succ_cells[n+1]
-                    
-                    # If the position is not the same as in the previous timestamp, then it is applicaple
-                    insert = True
-                    for obs in other_obstacles[t-1]:
-                    
-                        if pos_succ.position == obs.position:
-                            insert = False
-                            break
-                    
-                    if insert: heapq.heappush(open_list, pos_succ)
-
-                # Always delete all the state with the same position an coressponding timestamp
-                open_list = delete_open_list(t, open_list, other_obstacles, handle)
+                pass
                 
             
             # When there is a False in the rest of the applicable cells, without the first stop_moving one
             elif not all(app_cells[1:]):
                 
-                t = succ_cells[1].timestamp
-                
-                # Im folgenden wird geprüft, ob die stop_moving action mit dem jeweiligen Zeitstamp
-                # auch anwendbar ist. Wenn zwei Züge sich zum Zeitpunkt X treffen, so muss überprüft werden,
-                # ob an im X+1-ten obstacle die gleiche Position wie in X vorherrscht
-                pos_succ = succ_cells[0]
-                
-                insert = True
-                for obs in other_obstacles[t+1]:
-                    
-                    if pos_succ.position == obs.position:
-                        insert = False
-                        break
-                
-                if insert: heapq.heappush(open_list, pos_succ)
+                # Die Stopp-Aktion wird immer hinzugefügt
+                heapq.heappush(open_list, succ_cells[0])
 
-                # Check if the other actions are applicable. The are if app == True. Then it can get appended to the
-                # open list for further preparation
+                # Alle Aktionen, die False sind werden rausgeworfen
                 for n, app in enumerate(app_cells[1:]):
 
                     if not app: continue
                     
                     heapq.heappush(open_list, succ_cells[n+1])
-
-                # Always delete all the state with the same position an coressponding timestamp
-                open_list = delete_open_list_gerade(t, open_list, other_obstacles, handle)
 
             else:
                 
