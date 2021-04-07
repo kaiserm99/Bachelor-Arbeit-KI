@@ -12,6 +12,8 @@ Usage:
 
 """
 
+# DEBUG: 6 -> 3, 4, 25 -> 15
+
 import sys
 import time
 from typing import Optional, List, Dict
@@ -173,7 +175,7 @@ def get_grid_actions(env, filename="grid_actions.yaml"):
                 
                 # Check the critical positions
                 for handle in range(env.get_num_agents()):
-                    if np.count_nonzero(env_map[handle, y, x] == np.inf) < 2 and np.count_nonzero(env_map[handle, y, x]):
+                    if np.count_nonzero(env_map[handle, y, x] == np.inf) < 2:
                         critcal.append(calc_coord(position))
                         break
 
@@ -220,20 +222,22 @@ def main():
 
     try:
 
+        time_start = time.time()
         env = RailEnv(
             width=0,
             height=0,
-            rail_generator=rail_from_file("../scratch/test-envs/Test_8/Level_0.pkl"),
-            number_of_agents=12
+            rail_generator=rail_from_file("../scratch/test-envs/Test_6/Level_0.pkl"),
+            number_of_agents=9
         )
 
         _, info = env.reset()
 
-        env.step({i : 2 for i in range(env.get_num_agents())})
-        env.step({i : 2 for i in range(env.get_num_agents())})
+        for _ in range(1):
+        	env.step({i : 2 for i in range(env.get_num_agents())})
 
-        get_grid_actions(env)
-        get_grid(env)
+        # env.step({0 : 4, 1 : 2})
+
+        print(f"Created an reseted the Environment in {time.time()-time_start:5f}sec\n")
 
         print("Start searching...")
     
@@ -245,11 +249,13 @@ def main():
             env_renderer = RenderTool(env, screen_width=2000, screen_height=2000)
             env_renderer.render_env(show=True, frames=False, show_observations=False, show_predictions=False)
         
+        # time.sleep(100000)
+        # time.sleep(100000)
         # Empty action dictionary which has the predicted actions in it for each step
         action_dict = dict()
         
         # For Loop with all the steps predicted by the agent
-        for step in range(1000):
+        for step in range(2000):
             
             for handle in range(env.get_num_agents()):
             
@@ -274,7 +280,7 @@ def main():
 
             if render:
                 env_renderer.render_env(show=True, frames=False, show_observations=False, show_predictions=False)
-                time.sleep(0.2)
+                time.sleep(0.3)
 
             if done["__all__"]:
                 print(f"\nAll Agents are in their targets! After {step+1} iterations.")

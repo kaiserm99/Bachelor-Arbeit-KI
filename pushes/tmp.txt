@@ -1,0 +1,1304 @@
+Creating a grid with shape: 5 25 25
+
+Vertex Error at: 4: (17,21,1) and 4: (17,21,3)
+INFO: Lsg: A[0]: 4: (17,21,1) <-> A[3]: 4: (17,21,3);
+INFO: Lsg: A[0]: 3: (17,20,1) <-> A[3]: 5: (17,20,3);
+INFO: Found a Critical State A[3]: 5: (17,20,3)
+INFO: Same way A[3]: 6: (17,19,3)
+INFO VERTEX: Set A[3]: (y=17, x=19), time: 6 to 9
+Agent 3: VC(t=6,y=17,x=19)
+Agent 3: VC(t=7,y=17,x=19)
+Agent 3: VC(t=8,y=17,x=19)
+Agent 3: VC(t=9,y=17,x=19)
+INFO: Lsg: A[0]: 2: (17,19,0) <-> A[3]: 6: (17,19,3);
+INFO: Found a Critical State A[3]: 6: (17,19,3)
+INFO: Not Same way A[3]: 7: (17,18,3)
+INFO: First time the Solution is different!
+INFO VERTEX: Set A[0]: (y=17, x=19), time: 2 to 6
+Agent 0: VC(t=2,y=17,x=19)
+Agent 0: VC(t=3,y=17,x=19)
+Agent 0: VC(t=4,y=17,x=19)
+Agent 0: VC(t=5,y=17,x=19)
+Agent 0: VC(t=6,y=17,x=19)
+
+Vertex Error at: 4: (17,21,3) and 4: (17,21,1)
+INFO: Lsg: A[3]: 4: (17,21,3) <-> A[0]: 4: (17,21,1);
+INFO: Lsg: A[3]: 3: (17,22,3) <-> A[0]: 5: (17,22,1);
+INFO: Lsg: A[3]: 2: (17,23,2) <-> A[0]: 6: (17,23,1);
+INFO: Lsg: A[3]: 1: (16,23,2) <-> A[0]: 7: (16,23,0);
+INFO: Lsg: A[3]: 0: (15,23,2) <-> A[0]: 8: (15,23,0);
+INFO: Found Not-Possible A[0]: 8: (15,23,0)
+
+Final Constraints:
+Agent 0: VC(t=6,y=17,x=19)
+VC(t=5,y=17,x=19)
+VC(t=4,y=17,x=19)
+VC(t=2,y=17,x=19)
+VC(t=3,y=17,x=19)
+
+Agent 3: VC(t=8,y=17,x=19)
+VC(t=9,y=17,x=19)
+VC(t=6,y=17,x=19)
+VC(t=7,y=17,x=19)
+
+
+Vertex Error at: 4: (17,21,1) and 4: (17,21,3)
+INFO: Lsg: A[0]: 4: (17,21,1) <-> A[3]: 4: (17,21,3);
+INFO: Lsg: A[0]: 3: (17,20,1) <-> A[3]: 5: (17,20,3);
+INFO: Found a Critical State A[3]: 5: (17,20,3)
+INFO: Not Same way A[3]: 6: (16,20,0)
+INFO: First time the Solution is different!
+INFO VERTEX: Set A[0]: (y=17, x=20), time: 3 to 5
+Agent 0: VC(t=3,y=17,x=20)
+Agent 0: VC(t=4,y=17,x=20)
+Agent 0: VC(t=5,y=17,x=20)
+
+Vertex Error at: 4: (17,21,3) and 4: (17,21,1)
+INFO: Lsg: A[3]: 4: (17,21,3) <-> A[0]: 4: (17,21,1);
+INFO: Lsg: A[3]: 3: (17,22,3) <-> A[0]: 5: (17,22,1);
+INFO: Lsg: A[3]: 2: (17,23,2) <-> A[0]: 6: (17,23,1);
+INFO: Lsg: A[3]: 1: (16,23,2) <-> A[0]: 7: (16,23,0);
+INFO: Lsg: A[3]: 0: (15,23,2) <-> A[0]: 8: (15,23,0);
+INFO: Found Not-Possible A[0]: 8: (15,23,0)
+
+Final Constraints:
+Agent 0: VC(t=5,y=17,x=20)
+VC(t=3,y=17,x=20)
+VC(t=4,y=17,x=20)
+
+
+Vertex Error at: 12: (16,23,0) and 12: (16,23,2)
+INFO: Lsg: A[0]: 12: (16,23,0) <-> A[1]: 12: (16,23,2);
+INFO: Lsg: A[0]: 11: (17,23,1) <-> A[1]: 13: (17,23,2);
+INFO: Lsg: A[0]: 10: (17,22,1) <-> A[1]: 14: (17,22,3);
+INFO: Lsg: A[0]: 9: (17,21,1) <-> A[1]: 15: (17,21,3);
+INFO: Lsg: A[0]: 8: (17,20,1) <-> A[1]: 16: (17,20,3);
+INFO: Found a Critical State A[1]: 16: (17,20,3)
+INFO: Same way A[1]: 17: (17,19,3)
+INFO VERTEX: Set A[1]: (y=17, x=19), time: 17 to 20
+Agent 1: VC(t=17,y=17,x=19)
+Agent 1: VC(t=18,y=17,x=19)
+Agent 1: VC(t=19,y=17,x=19)
+Agent 1: VC(t=20,y=17,x=19)
+INFO: Lsg: A[0]: 7: (17,19,0) <-> A[1]: 17: (17,19,3);
+INFO: Found a Critical State A[1]: 17: (17,19,3)
+INFO: Not Same way A[1]: 18: (17,18,3)
+INFO: First time the Solution is different!
+INFO VERTEX: Set A[0]: (y=17, x=19), time: 7 to 17
+Agent 0: VC(t=7,y=17,x=19)
+Agent 0: VC(t=8,y=17,x=19)
+Agent 0: VC(t=9,y=17,x=19)
+Agent 0: VC(t=10,y=17,x=19)
+Agent 0: VC(t=11,y=17,x=19)
+Agent 0: VC(t=12,y=17,x=19)
+Agent 0: VC(t=13,y=17,x=19)
+Agent 0: VC(t=14,y=17,x=19)
+Agent 0: VC(t=15,y=17,x=19)
+Agent 0: VC(t=16,y=17,x=19)
+Agent 0: VC(t=17,y=17,x=19)
+
+Vertex Error at: 12: (16,23,2) and 12: (16,23,0)
+INFO: Lsg: A[1]: 12: (16,23,2) <-> A[0]: 12: (16,23,0);
+INFO: Lsg: A[1]: 11: (15,23,2) <-> A[0]: 13: (15,23,0);
+INFO: Lsg: A[1]: 10: (14,23,2) <-> A[0]: 14: (14,23,0);
+INFO: Lsg: A[1]: 9: (13,23,2) <-> A[0]: 15: (13,23,0);
+INFO: Lsg: A[1]: 8: (12,23,1) <-> A[0]: 16: (12,23,0);
+INFO: Lsg: A[1]: 7: (12,22,1) <-> A[0]: 17: (12,22,3);
+INFO: Lsg: A[1]: 6: (12,21,1) <-> A[0]: 18: (12,21,3);
+INFO: Lsg: A[1]: 5: (12,20,1) <-> A[0]: 19: (12,20,3);
+INFO: Lsg: A[1]: 4: (12,19,1) <-> A[0]: 20: (12,19,3);
+INFO: Lsg: A[1]: 3: (12,18,1) <-> A[0]: 21: (12,18,3);
+INFO: Lsg: A[1]: 2: (12,17,1) <-> A[0]: 22: (12,17,3);
+INFO: Lsg: A[1]: 1: (12,16,1) <-> A[0]: 23: (12,16,3);
+INFO: There is a goal constraint with A[1] and B[0]
+INFO VERTEX: Set A[1]: (y=12, x=16), time: 1 to 23
+Agent 1: VC(t=1,y=12,x=16)
+Agent 1: VC(t=2,y=12,x=16)
+Agent 1: VC(t=3,y=12,x=16)
+Agent 1: VC(t=4,y=12,x=16)
+Agent 1: VC(t=5,y=12,x=16)
+Agent 1: VC(t=6,y=12,x=16)
+Agent 1: VC(t=7,y=12,x=16)
+Agent 1: VC(t=8,y=12,x=16)
+Agent 1: VC(t=9,y=12,x=16)
+Agent 1: VC(t=10,y=12,x=16)
+Agent 1: VC(t=11,y=12,x=16)
+Agent 1: VC(t=12,y=12,x=16)
+Agent 1: VC(t=13,y=12,x=16)
+Agent 1: VC(t=14,y=12,x=16)
+Agent 1: VC(t=15,y=12,x=16)
+Agent 1: VC(t=16,y=12,x=16)
+Agent 1: VC(t=17,y=12,x=16)
+Agent 1: VC(t=18,y=12,x=16)
+Agent 1: VC(t=19,y=12,x=16)
+Agent 1: VC(t=20,y=12,x=16)
+Agent 1: VC(t=21,y=12,x=16)
+Agent 1: VC(t=22,y=12,x=16)
+Agent 1: VC(t=23,y=12,x=16)
+
+Final Constraints:
+Agent 0: VC(t=17,y=17,x=19)
+VC(t=16,y=17,x=19)
+VC(t=15,y=17,x=19)
+VC(t=8,y=17,x=19)
+VC(t=13,y=17,x=19)
+VC(t=9,y=17,x=19)
+VC(t=12,y=17,x=19)
+VC(t=7,y=17,x=19)
+VC(t=10,y=17,x=19)
+VC(t=14,y=17,x=19)
+VC(t=11,y=17,x=19)
+
+Agent 1: VC(t=20,y=17,x=19)
+VC(t=19,y=17,x=19)
+VC(t=17,y=17,x=19)
+VC(t=18,y=17,x=19)
+
+Agent 1: VC(t=23,y=12,x=16)
+VC(t=22,y=12,x=16)
+VC(t=21,y=12,x=16)
+VC(t=20,y=12,x=16)
+VC(t=19,y=12,x=16)
+VC(t=17,y=12,x=16)
+VC(t=5,y=12,x=16)
+VC(t=10,y=12,x=16)
+VC(t=1,y=12,x=16)
+VC(t=3,y=12,x=16)
+VC(t=2,y=12,x=16)
+VC(t=6,y=12,x=16)
+VC(t=8,y=12,x=16)
+VC(t=9,y=12,x=16)
+VC(t=11,y=12,x=16)
+VC(t=7,y=12,x=16)
+VC(t=16,y=12,x=16)
+VC(t=4,y=12,x=16)
+VC(t=12,y=12,x=16)
+VC(t=13,y=12,x=16)
+VC(t=18,y=12,x=16)
+VC(t=14,y=12,x=16)
+VC(t=15,y=12,x=16)
+
+
+Vertex Error at: 11: (15,23,0) and 11: (15,23,2)
+INFO: Lsg: A[0]: 11: (15,23,0) <-> A[1]: 11: (15,23,2);
+INFO: Lsg: A[0]: 10: (16,23,0) <-> A[1]: 12: (16,23,2);
+INFO: Lsg: A[0]: 9: (17,23,1) <-> A[1]: 13: (17,23,2);
+INFO: Lsg: A[0]: 8: (17,22,1) <-> A[1]: 14: (17,22,3);
+INFO: Lsg: A[0]: 7: (17,21,1) <-> A[1]: 15: (17,21,3);
+INFO: Lsg: A[0]: 6: (17,20,1) <-> A[1]: 16: (17,20,3);
+INFO: Found a Critical State A[1]: 16: (17,20,3)
+INFO: Same way A[1]: 17: (17,19,3)
+INFO VERTEX: Set A[1]: (y=17, x=19), time: 17 to 20
+Agent 1: VC(t=17,y=17,x=19)
+Agent 1: VC(t=18,y=17,x=19)
+Agent 1: VC(t=19,y=17,x=19)
+Agent 1: VC(t=20,y=17,x=19)
+INFO: Lsg: A[0]: 5: (17,19,0) <-> A[1]: 17: (17,19,3);
+INFO: Found a Critical State A[1]: 17: (17,19,3)
+INFO: Not Same way A[1]: 18: (17,18,3)
+INFO: First time the Solution is different!
+INFO VERTEX: Set A[0]: (y=17, x=19), time: 2 to 17
+Agent 0: VC(t=2,y=17,x=19)
+Agent 0: VC(t=3,y=17,x=19)
+Agent 0: VC(t=4,y=17,x=19)
+Agent 0: VC(t=5,y=17,x=19)
+Agent 0: VC(t=6,y=17,x=19)
+Agent 0: VC(t=7,y=17,x=19)
+Agent 0: VC(t=8,y=17,x=19)
+Agent 0: VC(t=9,y=17,x=19)
+Agent 0: VC(t=10,y=17,x=19)
+Agent 0: VC(t=11,y=17,x=19)
+Agent 0: VC(t=12,y=17,x=19)
+Agent 0: VC(t=13,y=17,x=19)
+Agent 0: VC(t=14,y=17,x=19)
+Agent 0: VC(t=15,y=17,x=19)
+Agent 0: VC(t=16,y=17,x=19)
+Agent 0: VC(t=17,y=17,x=19)
+
+Vertex Error at: 11: (15,23,2) and 11: (15,23,0)
+INFO: Lsg: A[1]: 11: (15,23,2) <-> A[0]: 11: (15,23,0);
+INFO: Lsg: A[1]: 10: (14,23,2) <-> A[0]: 12: (14,23,0);
+INFO: Lsg: A[1]: 9: (13,23,2) <-> A[0]: 13: (13,23,0);
+INFO: Lsg: A[1]: 8: (12,23,1) <-> A[0]: 14: (12,23,0);
+INFO: Lsg: A[1]: 7: (12,22,1) <-> A[0]: 15: (12,22,3);
+INFO: Lsg: A[1]: 6: (12,21,1) <-> A[0]: 16: (12,21,3);
+INFO: Lsg: A[1]: 5: (12,20,1) <-> A[0]: 17: (12,20,3);
+INFO: Lsg: A[1]: 4: (12,19,1) <-> A[0]: 18: (12,19,3);
+INFO: Lsg: A[1]: 3: (12,18,1) <-> A[0]: 19: (12,18,3);
+INFO: Lsg: A[1]: 2: (12,17,1) <-> A[0]: 20: (12,17,3);
+INFO: Lsg: A[1]: 1: (12,16,1) <-> A[0]: 21: (12,16,3);
+INFO: There is a goal constraint with A[1] and B[0]
+INFO VERTEX: Set A[1]: (y=12, x=16), time: 1 to 21
+Agent 1: VC(t=1,y=12,x=16)
+Agent 1: VC(t=2,y=12,x=16)
+Agent 1: VC(t=3,y=12,x=16)
+Agent 1: VC(t=4,y=12,x=16)
+Agent 1: VC(t=5,y=12,x=16)
+Agent 1: VC(t=6,y=12,x=16)
+Agent 1: VC(t=7,y=12,x=16)
+Agent 1: VC(t=8,y=12,x=16)
+Agent 1: VC(t=9,y=12,x=16)
+Agent 1: VC(t=10,y=12,x=16)
+Agent 1: VC(t=11,y=12,x=16)
+Agent 1: VC(t=12,y=12,x=16)
+Agent 1: VC(t=13,y=12,x=16)
+Agent 1: VC(t=14,y=12,x=16)
+Agent 1: VC(t=15,y=12,x=16)
+Agent 1: VC(t=16,y=12,x=16)
+Agent 1: VC(t=17,y=12,x=16)
+Agent 1: VC(t=18,y=12,x=16)
+Agent 1: VC(t=19,y=12,x=16)
+Agent 1: VC(t=20,y=12,x=16)
+Agent 1: VC(t=21,y=12,x=16)
+
+Final Constraints:
+Agent 0: VC(t=17,y=17,x=19)
+VC(t=16,y=17,x=19)
+VC(t=15,y=17,x=19)
+VC(t=12,y=17,x=19)
+VC(t=13,y=17,x=19)
+VC(t=9,y=17,x=19)
+VC(t=8,y=17,x=19)
+VC(t=14,y=17,x=19)
+VC(t=11,y=17,x=19)
+VC(t=2,y=17,x=19)
+VC(t=10,y=17,x=19)
+VC(t=3,y=17,x=19)
+VC(t=7,y=17,x=19)
+VC(t=4,y=17,x=19)
+VC(t=5,y=17,x=19)
+VC(t=6,y=17,x=19)
+
+Agent 1: VC(t=20,y=17,x=19)
+VC(t=19,y=17,x=19)
+VC(t=17,y=17,x=19)
+VC(t=18,y=17,x=19)
+
+Agent 1: VC(t=21,y=12,x=16)
+VC(t=20,y=12,x=16)
+VC(t=19,y=12,x=16)
+VC(t=17,y=12,x=16)
+VC(t=5,y=12,x=16)
+VC(t=10,y=12,x=16)
+VC(t=1,y=12,x=16)
+VC(t=3,y=12,x=16)
+VC(t=2,y=12,x=16)
+VC(t=6,y=12,x=16)
+VC(t=8,y=12,x=16)
+VC(t=9,y=12,x=16)
+VC(t=11,y=12,x=16)
+VC(t=7,y=12,x=16)
+VC(t=16,y=12,x=16)
+VC(t=4,y=12,x=16)
+VC(t=12,y=12,x=16)
+VC(t=13,y=12,x=16)
+VC(t=18,y=12,x=16)
+VC(t=14,y=12,x=16)
+VC(t=15,y=12,x=16)
+
+
+Vertex Error at: 12: (16,23,0) and 12: (16,23,2)
+INFO: Lsg: A[0]: 12: (16,23,0) <-> A[1]: 12: (16,23,2);
+INFO: Lsg: A[0]: 11: (17,23,1) <-> A[1]: 13: (17,23,2);
+INFO: Lsg: A[0]: 10: (17,22,1) <-> A[1]: 14: (17,22,3);
+INFO: Lsg: A[0]: 9: (17,21,1) <-> A[1]: 15: (17,21,3);
+INFO: Lsg: A[0]: 8: (17,20,1) <-> A[1]: 16: (17,20,3);
+INFO: Found a Critical State A[1]: 16: (17,20,3)
+INFO: Not Same way A[1]: 17: (16,20,0)
+INFO: First time the Solution is different!
+INFO VERTEX: Set A[0]: (y=17, x=20), time: 8 to 16
+Agent 0: VC(t=8,y=17,x=20)
+Agent 0: VC(t=9,y=17,x=20)
+Agent 0: VC(t=10,y=17,x=20)
+Agent 0: VC(t=11,y=17,x=20)
+Agent 0: VC(t=12,y=17,x=20)
+Agent 0: VC(t=13,y=17,x=20)
+Agent 0: VC(t=14,y=17,x=20)
+Agent 0: VC(t=15,y=17,x=20)
+Agent 0: VC(t=16,y=17,x=20)
+
+Vertex Error at: 12: (16,23,2) and 12: (16,23,0)
+INFO: Lsg: A[1]: 12: (16,23,2) <-> A[0]: 12: (16,23,0);
+INFO: Lsg: A[1]: 11: (15,23,2) <-> A[0]: 13: (15,23,0);
+INFO: Lsg: A[1]: 10: (14,23,2) <-> A[0]: 14: (14,23,0);
+INFO: Lsg: A[1]: 9: (13,23,2) <-> A[0]: 15: (13,23,0);
+INFO: Lsg: A[1]: 8: (12,23,1) <-> A[0]: 16: (12,23,0);
+INFO: Lsg: A[1]: 7: (12,22,1) <-> A[0]: 17: (12,22,3);
+INFO: Lsg: A[1]: 6: (12,21,1) <-> A[0]: 18: (12,21,3);
+INFO: Lsg: A[1]: 5: (12,20,1) <-> A[0]: 19: (12,20,3);
+INFO: Lsg: A[1]: 4: (12,19,1) <-> A[0]: 20: (12,19,3);
+INFO: Lsg: A[1]: 3: (12,18,1) <-> A[0]: 21: (12,18,3);
+INFO: Lsg: A[1]: 2: (12,17,1) <-> A[0]: 22: (12,17,3);
+INFO: Lsg: A[1]: 1: (12,16,1) <-> A[0]: 23: (12,16,3);
+INFO: There is a goal constraint with A[1] and B[0]
+INFO VERTEX: Set A[1]: (y=12, x=16), time: 1 to 23
+Agent 1: VC(t=1,y=12,x=16)
+Agent 1: VC(t=2,y=12,x=16)
+Agent 1: VC(t=3,y=12,x=16)
+Agent 1: VC(t=4,y=12,x=16)
+Agent 1: VC(t=5,y=12,x=16)
+Agent 1: VC(t=6,y=12,x=16)
+Agent 1: VC(t=7,y=12,x=16)
+Agent 1: VC(t=8,y=12,x=16)
+Agent 1: VC(t=9,y=12,x=16)
+Agent 1: VC(t=10,y=12,x=16)
+Agent 1: VC(t=11,y=12,x=16)
+Agent 1: VC(t=12,y=12,x=16)
+Agent 1: VC(t=13,y=12,x=16)
+Agent 1: VC(t=14,y=12,x=16)
+Agent 1: VC(t=15,y=12,x=16)
+Agent 1: VC(t=16,y=12,x=16)
+Agent 1: VC(t=17,y=12,x=16)
+Agent 1: VC(t=18,y=12,x=16)
+Agent 1: VC(t=19,y=12,x=16)
+Agent 1: VC(t=20,y=12,x=16)
+Agent 1: VC(t=21,y=12,x=16)
+Agent 1: VC(t=22,y=12,x=16)
+Agent 1: VC(t=23,y=12,x=16)
+
+Final Constraints:
+Agent 0: VC(t=16,y=17,x=20)
+VC(t=15,y=17,x=20)
+VC(t=14,y=17,x=20)
+VC(t=9,y=17,x=20)
+VC(t=12,y=17,x=20)
+VC(t=10,y=17,x=20)
+VC(t=11,y=17,x=20)
+VC(t=8,y=17,x=20)
+VC(t=13,y=17,x=20)
+
+Agent 1: VC(t=23,y=12,x=16)
+VC(t=22,y=12,x=16)
+VC(t=21,y=12,x=16)
+VC(t=20,y=12,x=16)
+VC(t=19,y=12,x=16)
+VC(t=17,y=12,x=16)
+VC(t=5,y=12,x=16)
+VC(t=10,y=12,x=16)
+VC(t=1,y=12,x=16)
+VC(t=3,y=12,x=16)
+VC(t=2,y=12,x=16)
+VC(t=6,y=12,x=16)
+VC(t=8,y=12,x=16)
+VC(t=9,y=12,x=16)
+VC(t=11,y=12,x=16)
+VC(t=7,y=12,x=16)
+VC(t=16,y=12,x=16)
+VC(t=4,y=12,x=16)
+VC(t=12,y=12,x=16)
+VC(t=13,y=12,x=16)
+VC(t=18,y=12,x=16)
+VC(t=14,y=12,x=16)
+VC(t=15,y=12,x=16)
+
+
+Vertex Error at: 11: (15,23,0) and 11: (15,23,2)
+INFO: Lsg: A[0]: 11: (15,23,0) <-> A[1]: 11: (15,23,2);
+INFO: Lsg: A[0]: 10: (16,23,0) <-> A[1]: 12: (16,23,2);
+INFO: Lsg: A[0]: 9: (17,23,1) <-> A[1]: 13: (17,23,2);
+INFO: Lsg: A[0]: 8: (17,22,1) <-> A[1]: 14: (17,22,3);
+INFO: Lsg: A[0]: 7: (17,21,1) <-> A[1]: 15: (17,21,3);
+INFO: Lsg: A[0]: 6: (17,20,1) <-> A[1]: 16: (17,20,3);
+INFO: Found a Critical State A[1]: 16: (17,20,3)
+INFO: Not Same way A[1]: 17: (16,20,0)
+INFO: First time the Solution is different!
+INFO VERTEX: Set A[0]: (y=17, x=20), time: 6 to 16
+Agent 0: VC(t=6,y=17,x=20)
+Agent 0: VC(t=7,y=17,x=20)
+Agent 0: VC(t=8,y=17,x=20)
+Agent 0: VC(t=9,y=17,x=20)
+Agent 0: VC(t=10,y=17,x=20)
+Agent 0: VC(t=11,y=17,x=20)
+Agent 0: VC(t=12,y=17,x=20)
+Agent 0: VC(t=13,y=17,x=20)
+Agent 0: VC(t=14,y=17,x=20)
+Agent 0: VC(t=15,y=17,x=20)
+Agent 0: VC(t=16,y=17,x=20)
+
+Vertex Error at: 11: (15,23,2) and 11: (15,23,0)
+INFO: Lsg: A[1]: 11: (15,23,2) <-> A[0]: 11: (15,23,0);
+INFO: Lsg: A[1]: 10: (14,23,2) <-> A[0]: 12: (14,23,0);
+INFO: Lsg: A[1]: 9: (13,23,2) <-> A[0]: 13: (13,23,0);
+INFO: Lsg: A[1]: 8: (12,23,1) <-> A[0]: 14: (12,23,0);
+INFO: Lsg: A[1]: 7: (12,22,1) <-> A[0]: 15: (12,22,3);
+INFO: Lsg: A[1]: 6: (12,21,1) <-> A[0]: 16: (12,21,3);
+INFO: Lsg: A[1]: 5: (12,20,1) <-> A[0]: 17: (12,20,3);
+INFO: Lsg: A[1]: 4: (12,19,1) <-> A[0]: 18: (12,19,3);
+INFO: Lsg: A[1]: 3: (12,18,1) <-> A[0]: 19: (12,18,3);
+INFO: Lsg: A[1]: 2: (12,17,1) <-> A[0]: 20: (12,17,3);
+INFO: Lsg: A[1]: 1: (12,16,1) <-> A[0]: 21: (12,16,3);
+INFO: There is a goal constraint with A[1] and B[0]
+INFO VERTEX: Set A[1]: (y=12, x=16), time: 1 to 21
+Agent 1: VC(t=1,y=12,x=16)
+Agent 1: VC(t=2,y=12,x=16)
+Agent 1: VC(t=3,y=12,x=16)
+Agent 1: VC(t=4,y=12,x=16)
+Agent 1: VC(t=5,y=12,x=16)
+Agent 1: VC(t=6,y=12,x=16)
+Agent 1: VC(t=7,y=12,x=16)
+Agent 1: VC(t=8,y=12,x=16)
+Agent 1: VC(t=9,y=12,x=16)
+Agent 1: VC(t=10,y=12,x=16)
+Agent 1: VC(t=11,y=12,x=16)
+Agent 1: VC(t=12,y=12,x=16)
+Agent 1: VC(t=13,y=12,x=16)
+Agent 1: VC(t=14,y=12,x=16)
+Agent 1: VC(t=15,y=12,x=16)
+Agent 1: VC(t=16,y=12,x=16)
+Agent 1: VC(t=17,y=12,x=16)
+Agent 1: VC(t=18,y=12,x=16)
+Agent 1: VC(t=19,y=12,x=16)
+Agent 1: VC(t=20,y=12,x=16)
+Agent 1: VC(t=21,y=12,x=16)
+
+Final Constraints:
+Agent 0: VC(t=16,y=17,x=20)
+VC(t=15,y=17,x=20)
+VC(t=14,y=17,x=20)
+VC(t=7,y=17,x=20)
+VC(t=6,y=17,x=20)
+VC(t=13,y=17,x=20)
+VC(t=8,y=17,x=20)
+VC(t=9,y=17,x=20)
+VC(t=12,y=17,x=20)
+VC(t=10,y=17,x=20)
+VC(t=11,y=17,x=20)
+
+Agent 1: VC(t=21,y=12,x=16)
+VC(t=20,y=12,x=16)
+VC(t=19,y=12,x=16)
+VC(t=17,y=12,x=16)
+VC(t=5,y=12,x=16)
+VC(t=10,y=12,x=16)
+VC(t=1,y=12,x=16)
+VC(t=3,y=12,x=16)
+VC(t=2,y=12,x=16)
+VC(t=6,y=12,x=16)
+VC(t=8,y=12,x=16)
+VC(t=9,y=12,x=16)
+VC(t=11,y=12,x=16)
+VC(t=7,y=12,x=16)
+VC(t=16,y=12,x=16)
+VC(t=4,y=12,x=16)
+VC(t=12,y=12,x=16)
+VC(t=13,y=12,x=16)
+VC(t=18,y=12,x=16)
+VC(t=14,y=12,x=16)
+VC(t=15,y=12,x=16)
+
+
+Edge Error at: 18: (17,18,3) and 18: (17,17,1)
+INFO: Lsg: A[1]: 18: (17,18,3) <-> A[4]: 19: (17,18,1);
+INFO: Lsg: A[1]: 17: (17,19,3) <-> A[4]: 20: (17,19,1);
+INFO: Found a Critical State A[1]: 17: (17,19,3)
+INFO VERTEX: Set A[4]: (y=17, x=18), time: 18 to 21
+Agent 1: VC(t=18,y=17,x=18)
+Agent 1: VC(t=19,y=17,x=18)
+Agent 1: VC(t=20,y=17,x=18)
+Agent 1: VC(t=21,y=17,x=18)
+INFO: Lsg: A[1]: 16: (17,20,3) <-> A[4]: 21: (17,20,1);
+INFO: Found a Critical State A[1]: 16: (17,20,3)
+INFO VERTEX: Set A[4]: (y=17, x=19), time: 17 to 20
+Agent 1: VC(t=17,y=17,x=19)
+Agent 1: VC(t=18,y=17,x=19)
+Agent 1: VC(t=19,y=17,x=19)
+Agent 1: VC(t=20,y=17,x=19)
+INFO: Lsg: A[1]: 15: (17,21,3) <-> A[4]: 22: (17,21,1);
+INFO: Lsg: A[1]: 14: (17,22,3) <-> A[4]: 23: (17,22,1);
+INFO: There is a goal constraint with A[1] and B[4]
+INFO VERTEX: Set A[1]: (y=17, x=22), time: 14 to 23
+Agent 1: VC(t=14,y=17,x=22)
+Agent 1: VC(t=15,y=17,x=22)
+Agent 1: VC(t=16,y=17,x=22)
+Agent 1: VC(t=17,y=17,x=22)
+Agent 1: VC(t=18,y=17,x=22)
+Agent 1: VC(t=19,y=17,x=22)
+Agent 1: VC(t=20,y=17,x=22)
+Agent 1: VC(t=21,y=17,x=22)
+Agent 1: VC(t=22,y=17,x=22)
+Agent 1: VC(t=23,y=17,x=22)
+
+Edge Error at: 18: (17,17,1) and 18: (17,18,3)
+INFO: Lsg: A[4]: 18: (17,17,1) <-> A[1]: 19: (17,17,3);
+ACHTUNG: Inizaler State ist kritische Stelle!!!!
+
+INFO: Lsg: A[4]: 17: (17,16,1) <-> A[1]: 20: (17,16,3);
+INFO: Found a Critical State A[4]: 17: (17,16,1)
+INFO VERTEX: Set A[1]: (y=17, x=17), time: 18 to 21
+Agent 4: VC(t=18,y=17,x=17)
+Agent 4: VC(t=19,y=17,x=17)
+Agent 4: VC(t=20,y=17,x=17)
+Agent 4: VC(t=21,y=17,x=17)
+INFO: Lsg: A[4]: 16: (17,15,1) <-> A[1]: 21: (17,15,3);
+INFO: Lsg: A[4]: 15: (17,14,1) <-> A[1]: 22: (17,14,3);
+INFO: Lsg: A[4]: 14: (17,13,2) <-> A[1]: 23: (17,13,3);
+INFO: Found a Critical State A[4]: 14: (17,13,2)
+INFO VERTEX: Set A[1]: (y=17, x=14), time: 15 to 50
+Agent 4: VC(t=15,y=17,x=14)
+Agent 4: VC(t=16,y=17,x=14)
+Agent 4: VC(t=17,y=17,x=14)
+Agent 4: VC(t=18,y=17,x=14)
+Agent 4: VC(t=19,y=17,x=14)
+Agent 4: VC(t=20,y=17,x=14)
+Agent 4: VC(t=21,y=17,x=14)
+Agent 4: VC(t=22,y=17,x=14)
+Agent 4: VC(t=23,y=17,x=14)
+Agent 4: VC(t=24,y=17,x=14)
+Agent 4: VC(t=25,y=17,x=14)
+Agent 4: VC(t=26,y=17,x=14)
+Agent 4: VC(t=27,y=17,x=14)
+Agent 4: VC(t=28,y=17,x=14)
+Agent 4: VC(t=29,y=17,x=14)
+Agent 4: VC(t=30,y=17,x=14)
+Agent 4: VC(t=31,y=17,x=14)
+Agent 4: VC(t=32,y=17,x=14)
+Agent 4: VC(t=33,y=17,x=14)
+Agent 4: VC(t=34,y=17,x=14)
+Agent 4: VC(t=35,y=17,x=14)
+Agent 4: VC(t=36,y=17,x=14)
+Agent 4: VC(t=37,y=17,x=14)
+Agent 4: VC(t=38,y=17,x=14)
+Agent 4: VC(t=39,y=17,x=14)
+Agent 4: VC(t=40,y=17,x=14)
+Agent 4: VC(t=41,y=17,x=14)
+Agent 4: VC(t=42,y=17,x=14)
+Agent 4: VC(t=43,y=17,x=14)
+Agent 4: VC(t=44,y=17,x=14)
+Agent 4: VC(t=45,y=17,x=14)
+Agent 4: VC(t=46,y=17,x=14)
+Agent 4: VC(t=47,y=17,x=14)
+Agent 4: VC(t=48,y=17,x=14)
+Agent 4: VC(t=49,y=17,x=14)
+Agent 4: VC(t=50,y=17,x=14)
+INFO: Found a Critical State A[1]: 23: (17,13,3)
+INFO: Same way A[1]: 24: (16,13,0)
+INFO VERTEX: Set A[1]: (y=16, x=13), time: 24 to 53
+Agent 1: VC(t=24,y=16,x=13)
+Agent 1: VC(t=25,y=16,x=13)
+Agent 1: VC(t=26,y=16,x=13)
+Agent 1: VC(t=27,y=16,x=13)
+Agent 1: VC(t=28,y=16,x=13)
+Agent 1: VC(t=29,y=16,x=13)
+Agent 1: VC(t=30,y=16,x=13)
+Agent 1: VC(t=31,y=16,x=13)
+Agent 1: VC(t=32,y=16,x=13)
+Agent 1: VC(t=33,y=16,x=13)
+Agent 1: VC(t=34,y=16,x=13)
+Agent 1: VC(t=35,y=16,x=13)
+Agent 1: VC(t=36,y=16,x=13)
+Agent 1: VC(t=37,y=16,x=13)
+Agent 1: VC(t=38,y=16,x=13)
+Agent 1: VC(t=39,y=16,x=13)
+Agent 1: VC(t=40,y=16,x=13)
+Agent 1: VC(t=41,y=16,x=13)
+Agent 1: VC(t=42,y=16,x=13)
+Agent 1: VC(t=43,y=16,x=13)
+Agent 1: VC(t=44,y=16,x=13)
+Agent 1: VC(t=45,y=16,x=13)
+Agent 1: VC(t=46,y=16,x=13)
+Agent 1: VC(t=47,y=16,x=13)
+Agent 1: VC(t=48,y=16,x=13)
+Agent 1: VC(t=49,y=16,x=13)
+Agent 1: VC(t=50,y=16,x=13)
+Agent 1: VC(t=51,y=16,x=13)
+Agent 1: VC(t=52,y=16,x=13)
+Agent 1: VC(t=53,y=16,x=13)
+INFO: Lsg: A[4]: 13: (16,13,2) <-> A[1]: 24: (16,13,0);
+INFO: Lsg: A[4]: 12: (15,13,2) <-> A[1]: 25: (15,13,0);
+INFO: Lsg: A[4]: 11: (14,13,1) <-> A[1]: 26: (14,13,0);
+INFO: Lsg: A[4]: 10: (14,12,1) <-> A[1]: 27: (14,12,3);
+INFO: Lsg: A[4]: 9: (14,11,1) <-> A[1]: 28: (14,11,3);
+INFO: Found a Critical State A[4]: 9: (14,11,1)
+INFO VERTEX: Set A[1]: (y=14, x=12), time: 10 to 27
+Agent 4: VC(t=10,y=14,x=12)
+Agent 4: VC(t=11,y=14,x=12)
+Agent 4: VC(t=12,y=14,x=12)
+Agent 4: VC(t=13,y=14,x=12)
+Agent 4: VC(t=14,y=14,x=12)
+Agent 4: VC(t=15,y=14,x=12)
+Agent 4: VC(t=16,y=14,x=12)
+Agent 4: VC(t=17,y=14,x=12)
+Agent 4: VC(t=18,y=14,x=12)
+Agent 4: VC(t=19,y=14,x=12)
+Agent 4: VC(t=20,y=14,x=12)
+Agent 4: VC(t=21,y=14,x=12)
+Agent 4: VC(t=22,y=14,x=12)
+Agent 4: VC(t=23,y=14,x=12)
+Agent 4: VC(t=24,y=14,x=12)
+Agent 4: VC(t=25,y=14,x=12)
+Agent 4: VC(t=26,y=14,x=12)
+Agent 4: VC(t=27,y=14,x=12)
+INFO: Found a Critical State A[1]: 28: (14,11,3)
+INFO: Same way A[1]: 29: (14,10,3)
+INFO VERTEX: Set A[1]: (y=14, x=10), time: 29 to 58
+Agent 1: VC(t=29,y=14,x=10)
+Agent 1: VC(t=30,y=14,x=10)
+Agent 1: VC(t=31,y=14,x=10)
+Agent 1: VC(t=32,y=14,x=10)
+Agent 1: VC(t=33,y=14,x=10)
+Agent 1: VC(t=34,y=14,x=10)
+Agent 1: VC(t=35,y=14,x=10)
+Agent 1: VC(t=36,y=14,x=10)
+Agent 1: VC(t=37,y=14,x=10)
+Agent 1: VC(t=38,y=14,x=10)
+Agent 1: VC(t=39,y=14,x=10)
+Agent 1: VC(t=40,y=14,x=10)
+Agent 1: VC(t=41,y=14,x=10)
+Agent 1: VC(t=42,y=14,x=10)
+Agent 1: VC(t=43,y=14,x=10)
+Agent 1: VC(t=44,y=14,x=10)
+Agent 1: VC(t=45,y=14,x=10)
+Agent 1: VC(t=46,y=14,x=10)
+Agent 1: VC(t=47,y=14,x=10)
+Agent 1: VC(t=48,y=14,x=10)
+Agent 1: VC(t=49,y=14,x=10)
+Agent 1: VC(t=50,y=14,x=10)
+Agent 1: VC(t=51,y=14,x=10)
+Agent 1: VC(t=52,y=14,x=10)
+Agent 1: VC(t=53,y=14,x=10)
+Agent 1: VC(t=54,y=14,x=10)
+Agent 1: VC(t=55,y=14,x=10)
+Agent 1: VC(t=56,y=14,x=10)
+Agent 1: VC(t=57,y=14,x=10)
+Agent 1: VC(t=58,y=14,x=10)
+INFO: Lsg: A[4]: 8: (14,10,1) <-> A[1]: 29: (14,10,3);
+INFO: Lsg: A[4]: 7: (14,9,1) <-> A[1]: 30: (14,9,3);
+INFO: Lsg: A[4]: 6: (14,8,1) <-> A[1]: 31: (14,8,3);
+INFO: Found a Critical State A[1]: 31: (14,8,3)
+INFO: Not Same way A[1]: 32: (13,8,0)
+INFO: First time the Solution is different!
+INFO VERTEX: Set A[4]: (y=14, x=8), time: 6 to 31
+Agent 4: VC(t=6,y=14,x=8)
+Agent 4: VC(t=7,y=14,x=8)
+Agent 4: VC(t=8,y=14,x=8)
+Agent 4: VC(t=9,y=14,x=8)
+Agent 4: VC(t=10,y=14,x=8)
+Agent 4: VC(t=11,y=14,x=8)
+Agent 4: VC(t=12,y=14,x=8)
+Agent 4: VC(t=13,y=14,x=8)
+Agent 4: VC(t=14,y=14,x=8)
+Agent 4: VC(t=15,y=14,x=8)
+Agent 4: VC(t=16,y=14,x=8)
+Agent 4: VC(t=17,y=14,x=8)
+Agent 4: VC(t=18,y=14,x=8)
+Agent 4: VC(t=19,y=14,x=8)
+Agent 4: VC(t=20,y=14,x=8)
+Agent 4: VC(t=21,y=14,x=8)
+Agent 4: VC(t=22,y=14,x=8)
+Agent 4: VC(t=23,y=14,x=8)
+Agent 4: VC(t=24,y=14,x=8)
+Agent 4: VC(t=25,y=14,x=8)
+Agent 4: VC(t=26,y=14,x=8)
+Agent 4: VC(t=27,y=14,x=8)
+Agent 4: VC(t=28,y=14,x=8)
+Agent 4: VC(t=29,y=14,x=8)
+Agent 4: VC(t=30,y=14,x=8)
+Agent 4: VC(t=31,y=14,x=8)
+
+Final Constraints:
+Agent 1: VC(t=20,y=17,x=18)
+VC(t=18,y=17,x=18)
+VC(t=21,y=17,x=18)
+VC(t=19,y=17,x=18)
+
+Agent 1: VC(t=20,y=17,x=19)
+VC(t=19,y=17,x=19)
+VC(t=17,y=17,x=19)
+VC(t=18,y=17,x=19)
+
+Agent 1: VC(t=22,y=17,x=22)
+VC(t=15,y=17,x=22)
+VC(t=14,y=17,x=22)
+VC(t=16,y=17,x=22)
+VC(t=17,y=17,x=22)
+VC(t=21,y=17,x=22)
+VC(t=20,y=17,x=22)
+VC(t=18,y=17,x=22)
+VC(t=23,y=17,x=22)
+VC(t=19,y=17,x=22)
+
+Agent 1: VC(t=53,y=16,x=13)
+VC(t=49,y=16,x=13)
+VC(t=48,y=16,x=13)
+VC(t=47,y=16,x=13)
+VC(t=46,y=16,x=13)
+VC(t=43,y=16,x=13)
+VC(t=51,y=16,x=13)
+VC(t=41,y=16,x=13)
+VC(t=40,y=16,x=13)
+VC(t=25,y=16,x=13)
+VC(t=29,y=16,x=13)
+VC(t=26,y=16,x=13)
+VC(t=42,y=16,x=13)
+VC(t=24,y=16,x=13)
+VC(t=37,y=16,x=13)
+VC(t=52,y=16,x=13)
+VC(t=45,y=16,x=13)
+VC(t=28,y=16,x=13)
+VC(t=30,y=16,x=13)
+VC(t=27,y=16,x=13)
+VC(t=31,y=16,x=13)
+VC(t=32,y=16,x=13)
+VC(t=33,y=16,x=13)
+VC(t=38,y=16,x=13)
+VC(t=34,y=16,x=13)
+VC(t=35,y=16,x=13)
+VC(t=44,y=16,x=13)
+VC(t=36,y=16,x=13)
+VC(t=50,y=16,x=13)
+VC(t=39,y=16,x=13)
+
+Agent 1: VC(t=58,y=14,x=10)
+VC(t=57,y=14,x=10)
+VC(t=56,y=14,x=10)
+VC(t=55,y=14,x=10)
+VC(t=53,y=14,x=10)
+VC(t=50,y=14,x=10)
+VC(t=48,y=14,x=10)
+VC(t=47,y=14,x=10)
+VC(t=45,y=14,x=10)
+VC(t=33,y=14,x=10)
+VC(t=51,y=14,x=10)
+VC(t=30,y=14,x=10)
+VC(t=46,y=14,x=10)
+VC(t=42,y=14,x=10)
+VC(t=32,y=14,x=10)
+VC(t=54,y=14,x=10)
+VC(t=31,y=14,x=10)
+VC(t=35,y=14,x=10)
+VC(t=34,y=14,x=10)
+VC(t=36,y=14,x=10)
+VC(t=38,y=14,x=10)
+VC(t=29,y=14,x=10)
+VC(t=37,y=14,x=10)
+VC(t=41,y=14,x=10)
+VC(t=40,y=14,x=10)
+VC(t=52,y=14,x=10)
+VC(t=49,y=14,x=10)
+VC(t=43,y=14,x=10)
+VC(t=39,y=14,x=10)
+VC(t=44,y=14,x=10)
+
+Agent 4: VC(t=21,y=17,x=17)
+VC(t=20,y=17,x=17)
+VC(t=18,y=17,x=17)
+VC(t=19,y=17,x=17)
+
+Agent 4: VC(t=49,y=17,x=14)
+VC(t=46,y=17,x=14)
+VC(t=44,y=17,x=14)
+VC(t=43,y=17,x=14)
+VC(t=42,y=17,x=14)
+VC(t=47,y=17,x=14)
+VC(t=39,y=17,x=14)
+VC(t=38,y=17,x=14)
+VC(t=37,y=17,x=14)
+VC(t=45,y=17,x=14)
+VC(t=36,y=17,x=14)
+VC(t=35,y=17,x=14)
+VC(t=34,y=17,x=14)
+VC(t=32,y=17,x=14)
+VC(t=40,y=17,x=14)
+VC(t=31,y=17,x=14)
+VC(t=17,y=17,x=14)
+VC(t=19,y=17,x=14)
+VC(t=15,y=17,x=14)
+VC(t=48,y=17,x=14)
+VC(t=20,y=17,x=14)
+VC(t=23,y=17,x=14)
+VC(t=41,y=17,x=14)
+VC(t=25,y=17,x=14)
+VC(t=26,y=17,x=14)
+VC(t=28,y=17,x=14)
+VC(t=50,y=17,x=14)
+VC(t=16,y=17,x=14)
+VC(t=33,y=17,x=14)
+VC(t=30,y=17,x=14)
+VC(t=21,y=17,x=14)
+VC(t=27,y=17,x=14)
+VC(t=22,y=17,x=14)
+VC(t=18,y=17,x=14)
+VC(t=24,y=17,x=14)
+VC(t=29,y=17,x=14)
+
+Agent 4: VC(t=27,y=14,x=12)
+VC(t=21,y=14,x=12)
+VC(t=12,y=14,x=12)
+VC(t=16,y=14,x=12)
+VC(t=26,y=14,x=12)
+VC(t=10,y=14,x=12)
+VC(t=17,y=14,x=12)
+VC(t=13,y=14,x=12)
+VC(t=11,y=14,x=12)
+VC(t=18,y=14,x=12)
+VC(t=19,y=14,x=12)
+VC(t=20,y=14,x=12)
+VC(t=22,y=14,x=12)
+VC(t=15,y=14,x=12)
+VC(t=14,y=14,x=12)
+VC(t=23,y=14,x=12)
+VC(t=24,y=14,x=12)
+VC(t=25,y=14,x=12)
+
+Agent 4: VC(t=31,y=14,x=8)
+VC(t=30,y=14,x=8)
+VC(t=28,y=14,x=8)
+VC(t=25,y=14,x=8)
+VC(t=22,y=14,x=8)
+VC(t=29,y=14,x=8)
+VC(t=11,y=14,x=8)
+VC(t=14,y=14,x=8)
+VC(t=17,y=14,x=8)
+VC(t=9,y=14,x=8)
+VC(t=15,y=14,x=8)
+VC(t=8,y=14,x=8)
+VC(t=10,y=14,x=8)
+VC(t=6,y=14,x=8)
+VC(t=24,y=14,x=8)
+VC(t=13,y=14,x=8)
+VC(t=27,y=14,x=8)
+VC(t=26,y=14,x=8)
+VC(t=23,y=14,x=8)
+VC(t=18,y=14,x=8)
+VC(t=7,y=14,x=8)
+VC(t=16,y=14,x=8)
+VC(t=12,y=14,x=8)
+VC(t=19,y=14,x=8)
+VC(t=20,y=14,x=8)
+VC(t=21,y=14,x=8)
+
+
+Vertex Error at: 25: (12,23,0) and 25: (12,23,1)
+INFO: Lsg: A[0]: 25: (12,23,0) <-> A[2]: 25: (12,23,1);
+INFO: Lsg: A[0]: 24: (13,23,0) <-> A[2]: 26: (13,23,2);
+INFO: Lsg: A[0]: 23: (14,23,0) <-> A[2]: 27: (14,23,2);
+INFO: There is a goal constraint with A[0] and B[2]
+INFO VERTEX: Set A[0]: (y=14, x=23), time: 23 to 27
+Agent 0: VC(t=23,y=14,x=23)
+Agent 0: VC(t=24,y=14,x=23)
+Agent 0: VC(t=25,y=14,x=23)
+Agent 0: VC(t=26,y=14,x=23)
+Agent 0: VC(t=27,y=14,x=23)
+
+Vertex Error at: 25: (12,23,1) and 25: (12,23,0)
+INFO: Lsg: A[2]: 25: (12,23,1) <-> A[0]: 25: (12,23,0);
+INFO: Lsg: A[2]: 24: (12,22,1) <-> A[0]: 26: (12,22,3);
+INFO: Lsg: A[2]: 23: (12,21,1) <-> A[0]: 27: (12,21,3);
+INFO: Lsg: A[2]: 22: (12,20,1) <-> A[0]: 28: (12,20,3);
+INFO: Lsg: A[2]: 21: (12,19,1) <-> A[0]: 29: (12,19,3);
+INFO: Lsg: A[2]: 20: (12,18,1) <-> A[0]: 30: (12,18,3);
+INFO: Lsg: A[2]: 19: (12,17,1) <-> A[0]: 31: (12,17,3);
+INFO: Lsg: A[2]: 18: (12,16,1) <-> A[0]: 32: (12,16,3);
+INFO: There is a goal constraint with A[2] and B[0]
+INFO VERTEX: Set A[2]: (y=12, x=16), time: 18 to 32
+Agent 2: VC(t=18,y=12,x=16)
+Agent 2: VC(t=19,y=12,x=16)
+Agent 2: VC(t=20,y=12,x=16)
+Agent 2: VC(t=21,y=12,x=16)
+Agent 2: VC(t=22,y=12,x=16)
+Agent 2: VC(t=23,y=12,x=16)
+Agent 2: VC(t=24,y=12,x=16)
+Agent 2: VC(t=25,y=12,x=16)
+Agent 2: VC(t=26,y=12,x=16)
+Agent 2: VC(t=27,y=12,x=16)
+Agent 2: VC(t=28,y=12,x=16)
+Agent 2: VC(t=29,y=12,x=16)
+Agent 2: VC(t=30,y=12,x=16)
+Agent 2: VC(t=31,y=12,x=16)
+Agent 2: VC(t=32,y=12,x=16)
+
+Final Constraints:
+Agent 0: VC(t=25,y=14,x=23)
+VC(t=26,y=14,x=23)
+VC(t=23,y=14,x=23)
+VC(t=27,y=14,x=23)
+VC(t=24,y=14,x=23)
+
+Agent 2: VC(t=30,y=12,x=16)
+VC(t=32,y=12,x=16)
+VC(t=28,y=12,x=16)
+VC(t=25,y=12,x=16)
+VC(t=24,y=12,x=16)
+VC(t=19,y=12,x=16)
+VC(t=26,y=12,x=16)
+VC(t=22,y=12,x=16)
+VC(t=18,y=12,x=16)
+VC(t=31,y=12,x=16)
+VC(t=29,y=12,x=16)
+VC(t=21,y=12,x=16)
+VC(t=27,y=12,x=16)
+VC(t=23,y=12,x=16)
+VC(t=20,y=12,x=16)
+
+
+Vertex Error at: 14: (17,13,3) and 14: (17,13,2)
+INFO: Lsg: A[3]: 14: (17,13,3) <-> A[4]: 14: (17,13,2);
+ACHTUNG: Inizaler State ist kritische Stelle!!!!
+
+INFO: Lsg: A[3]: 13: (17,14,3) <-> A[4]: 15: (17,14,1);
+INFO: Lsg: A[3]: 12: (17,15,3) <-> A[4]: 16: (17,15,1);
+INFO: Lsg: A[3]: 11: (17,16,2) <-> A[4]: 17: (17,16,1);
+INFO: Found a Critical State A[4]: 17: (17,16,1)
+INFO: Not Same way A[4]: 18: (17,17,1)
+INFO: First time the Solution is different!
+INFO VERTEX: Set A[3]: (y=17, x=16), time: 11 to 17
+Agent 3: VC(t=11,y=17,x=16)
+Agent 3: VC(t=12,y=17,x=16)
+Agent 3: VC(t=13,y=17,x=16)
+Agent 3: VC(t=14,y=17,x=16)
+Agent 3: VC(t=15,y=17,x=16)
+Agent 3: VC(t=16,y=17,x=16)
+Agent 3: VC(t=17,y=17,x=16)
+
+Vertex Error at: 14: (17,13,2) and 14: (17,13,3)
+INFO: Lsg: A[4]: 14: (17,13,2) <-> A[3]: 14: (17,13,3);
+ACHTUNG: Inizaler State ist kritische Stelle!!!!
+
+INFO: First time the Solution is different!
+INFO VERTEX: Set A[4]: (y=17, x=13), time: 14 to 14
+Agent 4: VC(t=14,y=17,x=13)
+
+Final Constraints:
+Agent 3: VC(t=12,y=17,x=16)
+VC(t=16,y=17,x=16)
+VC(t=11,y=17,x=16)
+VC(t=13,y=17,x=16)
+VC(t=17,y=17,x=16)
+VC(t=14,y=17,x=16)
+VC(t=15,y=17,x=16)
+
+Agent 4: VC(t=14,y=17,x=13)
+
+
+Edge Error at: 17: (18,19,1) and 17: (17,19,3)
+INFO: Lsg: A[0]: 17: (18,19,1) <-> A[1]: 18: (18,19,2);
+INFO: Lsg: A[0]: 0: (18,18,1) <-> A[1]: 19: (18,18,3);
+INFO: Found Not-Possible A[1]: 19: (18,18,3)
+
+Edge Error at: 17: (17,19,3) and 17: (18,19,1)
+INFO: Lsg: A[1]: 17: (17,19,3) <-> A[0]: 18: (17,19,0);
+ACHTUNG: Inizaler State ist kritische Stelle!!!!
+
+INFO: Lsg: A[1]: 16: (17,20,3) <-> A[0]: 19: (17,20,1);
+INFO: Found a Critical State A[1]: 16: (17,20,3)
+INFO VERTEX: Set A[0]: (y=17, x=19), time: 17 to 20
+Agent 1: VC(t=17,y=17,x=19)
+Agent 1: VC(t=18,y=17,x=19)
+Agent 1: VC(t=19,y=17,x=19)
+Agent 1: VC(t=20,y=17,x=19)
+INFO: Lsg: A[1]: 15: (17,21,3) <-> A[0]: 20: (17,21,1);
+INFO: Lsg: A[1]: 14: (17,22,3) <-> A[0]: 21: (17,22,1);
+INFO: Lsg: A[1]: 13: (17,23,2) <-> A[0]: 22: (17,23,1);
+INFO: Lsg: A[1]: 12: (16,23,2) <-> A[0]: 23: (16,23,0);
+INFO: Lsg: A[1]: 11: (15,23,2) <-> A[0]: 24: (15,23,0);
+INFO: Lsg: A[1]: 10: (14,23,2) <-> A[0]: 25: (14,23,0);
+INFO: Lsg: A[1]: 9: (13,23,2) <-> A[0]: 26: (13,23,0);
+INFO: Lsg: A[1]: 8: (12,23,1) <-> A[0]: 27: (12,23,0);
+INFO: Lsg: A[1]: 7: (12,22,1) <-> A[0]: 28: (12,22,3);
+INFO: Lsg: A[1]: 6: (12,21,1) <-> A[0]: 29: (12,21,3);
+INFO: Lsg: A[1]: 5: (12,20,1) <-> A[0]: 30: (12,20,3);
+INFO: Lsg: A[1]: 4: (12,19,1) <-> A[0]: 31: (12,19,3);
+INFO: Lsg: A[1]: 3: (12,18,1) <-> A[0]: 32: (12,18,3);
+INFO: Lsg: A[1]: 2: (12,17,1) <-> A[0]: 33: (12,17,3);
+INFO: Lsg: A[1]: 1: (12,16,1) <-> A[0]: 34: (12,16,3);
+INFO: There is a goal constraint with A[1] and B[0]
+INFO VERTEX: Set A[1]: (y=12, x=16), time: 1 to 34
+Agent 1: VC(t=1,y=12,x=16)
+Agent 1: VC(t=2,y=12,x=16)
+Agent 1: VC(t=3,y=12,x=16)
+Agent 1: VC(t=4,y=12,x=16)
+Agent 1: VC(t=5,y=12,x=16)
+Agent 1: VC(t=6,y=12,x=16)
+Agent 1: VC(t=7,y=12,x=16)
+Agent 1: VC(t=8,y=12,x=16)
+Agent 1: VC(t=9,y=12,x=16)
+Agent 1: VC(t=10,y=12,x=16)
+Agent 1: VC(t=11,y=12,x=16)
+Agent 1: VC(t=12,y=12,x=16)
+Agent 1: VC(t=13,y=12,x=16)
+Agent 1: VC(t=14,y=12,x=16)
+Agent 1: VC(t=15,y=12,x=16)
+Agent 1: VC(t=16,y=12,x=16)
+Agent 1: VC(t=17,y=12,x=16)
+Agent 1: VC(t=18,y=12,x=16)
+Agent 1: VC(t=19,y=12,x=16)
+Agent 1: VC(t=20,y=12,x=16)
+Agent 1: VC(t=21,y=12,x=16)
+Agent 1: VC(t=22,y=12,x=16)
+Agent 1: VC(t=23,y=12,x=16)
+Agent 1: VC(t=24,y=12,x=16)
+Agent 1: VC(t=25,y=12,x=16)
+Agent 1: VC(t=26,y=12,x=16)
+Agent 1: VC(t=27,y=12,x=16)
+Agent 1: VC(t=28,y=12,x=16)
+Agent 1: VC(t=29,y=12,x=16)
+Agent 1: VC(t=30,y=12,x=16)
+Agent 1: VC(t=31,y=12,x=16)
+Agent 1: VC(t=32,y=12,x=16)
+Agent 1: VC(t=33,y=12,x=16)
+Agent 1: VC(t=34,y=12,x=16)
+
+Final Constraints:
+Agent 1: VC(t=20,y=17,x=19)
+VC(t=19,y=17,x=19)
+VC(t=17,y=17,x=19)
+VC(t=18,y=17,x=19)
+
+Agent 1: VC(t=34,y=12,x=16)
+VC(t=33,y=12,x=16)
+VC(t=32,y=12,x=16)
+VC(t=31,y=12,x=16)
+VC(t=30,y=12,x=16)
+VC(t=29,y=12,x=16)
+VC(t=28,y=12,x=16)
+VC(t=27,y=12,x=16)
+VC(t=26,y=12,x=16)
+VC(t=25,y=12,x=16)
+VC(t=23,y=12,x=16)
+VC(t=22,y=12,x=16)
+VC(t=21,y=12,x=16)
+VC(t=20,y=12,x=16)
+VC(t=19,y=12,x=16)
+VC(t=17,y=12,x=16)
+VC(t=5,y=12,x=16)
+VC(t=10,y=12,x=16)
+VC(t=1,y=12,x=16)
+VC(t=24,y=12,x=16)
+VC(t=3,y=12,x=16)
+VC(t=2,y=12,x=16)
+VC(t=6,y=12,x=16)
+VC(t=8,y=12,x=16)
+VC(t=9,y=12,x=16)
+VC(t=11,y=12,x=16)
+VC(t=7,y=12,x=16)
+VC(t=16,y=12,x=16)
+VC(t=4,y=12,x=16)
+VC(t=12,y=12,x=16)
+VC(t=13,y=12,x=16)
+VC(t=18,y=12,x=16)
+VC(t=14,y=12,x=16)
+VC(t=15,y=12,x=16)
+
+
+Vertex Error at: 26: (13,23,0) and 26: (13,23,2)
+INFO: Lsg: A[0]: 26: (13,23,0) <-> A[2]: 26: (13,23,2);
+INFO: Lsg: A[0]: 25: (14,23,0) <-> A[2]: 27: (14,23,2);
+INFO: There is a goal constraint with A[0] and B[2]
+INFO VERTEX: Set A[0]: (y=14, x=23), time: 25 to 27
+Agent 0: VC(t=25,y=14,x=23)
+Agent 0: VC(t=26,y=14,x=23)
+Agent 0: VC(t=27,y=14,x=23)
+
+Vertex Error at: 26: (13,23,2) and 26: (13,23,0)
+INFO: Lsg: A[2]: 26: (13,23,2) <-> A[0]: 26: (13,23,0);
+INFO: Lsg: A[2]: 25: (12,23,1) <-> A[0]: 27: (12,23,0);
+INFO: Lsg: A[2]: 24: (12,22,1) <-> A[0]: 28: (12,22,3);
+INFO: Lsg: A[2]: 23: (12,21,1) <-> A[0]: 29: (12,21,3);
+INFO: Lsg: A[2]: 22: (12,20,1) <-> A[0]: 30: (12,20,3);
+INFO: Lsg: A[2]: 21: (12,19,1) <-> A[0]: 31: (12,19,3);
+INFO: Lsg: A[2]: 20: (12,18,1) <-> A[0]: 32: (12,18,3);
+INFO: Lsg: A[2]: 19: (12,17,1) <-> A[0]: 33: (12,17,3);
+INFO: Lsg: A[2]: 18: (12,16,1) <-> A[0]: 34: (12,16,3);
+INFO: There is a goal constraint with A[2] and B[0]
+INFO VERTEX: Set A[2]: (y=12, x=16), time: 18 to 34
+Agent 2: VC(t=18,y=12,x=16)
+Agent 2: VC(t=19,y=12,x=16)
+Agent 2: VC(t=20,y=12,x=16)
+Agent 2: VC(t=21,y=12,x=16)
+Agent 2: VC(t=22,y=12,x=16)
+Agent 2: VC(t=23,y=12,x=16)
+Agent 2: VC(t=24,y=12,x=16)
+Agent 2: VC(t=25,y=12,x=16)
+Agent 2: VC(t=26,y=12,x=16)
+Agent 2: VC(t=27,y=12,x=16)
+Agent 2: VC(t=28,y=12,x=16)
+Agent 2: VC(t=29,y=12,x=16)
+Agent 2: VC(t=30,y=12,x=16)
+Agent 2: VC(t=31,y=12,x=16)
+Agent 2: VC(t=32,y=12,x=16)
+Agent 2: VC(t=33,y=12,x=16)
+Agent 2: VC(t=34,y=12,x=16)
+
+Final Constraints:
+Agent 0: VC(t=27,y=14,x=23)
+VC(t=25,y=14,x=23)
+VC(t=26,y=14,x=23)
+
+Agent 2: VC(t=34,y=12,x=16)
+VC(t=20,y=12,x=16)
+VC(t=23,y=12,x=16)
+VC(t=27,y=12,x=16)
+VC(t=21,y=12,x=16)
+VC(t=29,y=12,x=16)
+VC(t=31,y=12,x=16)
+VC(t=18,y=12,x=16)
+VC(t=22,y=12,x=16)
+VC(t=26,y=12,x=16)
+VC(t=19,y=12,x=16)
+VC(t=24,y=12,x=16)
+VC(t=25,y=12,x=16)
+VC(t=28,y=12,x=16)
+VC(t=32,y=12,x=16)
+VC(t=33,y=12,x=16)
+VC(t=30,y=12,x=16)
+
+done; cost: 144
+Planning Successful! 
+Solution for: 0
+0: 0: (18,18,1)->2(cost: 1)
+1: 1: (18,19,1)->4(cost: 1)
+2: 2: (18,19,1)->4(cost: 1)
+3: 3: (18,19,1)->4(cost: 1)
+4: 4: (18,19,1)->4(cost: 1)
+5: 5: (18,19,1)->4(cost: 1)
+6: 6: (18,19,1)->1(cost: 1)
+7: 7: (17,19,0)->4(cost: 1)
+8: 8: (17,19,0)->4(cost: 1)
+9: 9: (17,19,0)->4(cost: 1)
+10: 10: (17,19,0)->4(cost: 1)
+11: 11: (17,19,0)->4(cost: 1)
+12: 12: (17,19,0)->4(cost: 1)
+13: 13: (17,19,0)->4(cost: 1)
+14: 14: (17,19,0)->4(cost: 1)
+15: 15: (17,19,0)->4(cost: 1)
+16: 16: (17,19,0)->3(cost: 1)
+17: 17: (17,20,1)->2(cost: 1)
+18: 18: (17,21,1)->2(cost: 1)
+19: 19: (17,22,1)->2(cost: 1)
+20: 20: (17,23,1)->1(cost: 1)
+21: 21: (16,23,0)->2(cost: 1)
+22: 22: (15,23,0)->2(cost: 1)
+23: 23: (14,23,0)->2(cost: 1)
+24: 24: (13,23,0)->2(cost: 1)
+25: 25: (12,23,0)->1(cost: 1)
+26: 26: (12,22,3)->2(cost: 1)
+27: 27: (12,21,3)->2(cost: 1)
+28: 28: (12,20,3)->2(cost: 1)
+29: 29: (12,19,3)->2(cost: 1)
+30: 30: (12,18,3)->2(cost: 1)
+31: 31: (12,17,3)->2(cost: 1)
+32: 32: (12,16,3)
+Solution for: 1
+0: 0: (12,15,1)->2(cost: 1)
+1: 1: (12,16,1)->2(cost: 1)
+2: 2: (12,17,1)->2(cost: 1)
+3: 3: (12,18,1)->2(cost: 1)
+4: 4: (12,19,1)->2(cost: 1)
+5: 5: (12,20,1)->2(cost: 1)
+6: 6: (12,21,1)->2(cost: 1)
+7: 7: (12,22,1)->2(cost: 1)
+8: 8: (12,23,1)->3(cost: 1)
+9: 9: (13,23,2)->2(cost: 1)
+10: 10: (14,23,2)->2(cost: 1)
+11: 11: (15,23,2)->2(cost: 1)
+12: 12: (16,23,2)->2(cost: 1)
+13: 13: (17,23,2)->3(cost: 1)
+14: 14: (17,22,3)->2(cost: 1)
+15: 15: (17,21,3)->2(cost: 1)
+16: 16: (17,20,3)->3(cost: 1)
+17: 17: (16,20,0)->1(cost: 1)
+18: 18: (16,19,3)->2(cost: 1)
+19: 19: (16,18,3)->2(cost: 1)
+20: 20: (16,17,3)->2(cost: 1)
+21: 21: (16,16,3)->1(cost: 1)
+22: 22: (17,16,2)->3(cost: 1)
+23: 23: (17,15,3)->2(cost: 1)
+24: 24: (17,14,3)->2(cost: 1)
+25: 25: (17,13,3)->3(cost: 1)
+26: 26: (16,13,0)->2(cost: 1)
+27: 27: (15,13,0)->2(cost: 1)
+28: 28: (14,13,0)->1(cost: 1)
+29: 29: (14,12,3)->2(cost: 1)
+30: 30: (14,11,3)->2(cost: 1)
+31: 31: (14,10,3)->2(cost: 1)
+32: 32: (14,9,3)->2(cost: 1)
+33: 33: (14,8,3)->3(cost: 1)
+34: 34: (13,8,0)
+Solution for: 2
+0: 0: (17,19,3)->2(cost: 1)
+1: 1: (17,18,3)->2(cost: 1)
+2: 2: (17,17,3)->2(cost: 1)
+3: 3: (17,16,3)->2(cost: 1)
+4: 4: (17,15,3)->2(cost: 1)
+5: 5: (17,14,3)->2(cost: 1)
+6: 6: (17,13,3)->2(cost: 1)
+7: 7: (17,12,3)->2(cost: 1)
+8: 8: (17,11,3)->3(cost: 1)
+9: 9: (16,11,0)->2(cost: 1)
+10: 10: (15,11,0)->2(cost: 1)
+11: 11: (14,11,0)->3(cost: 1)
+12: 12: (14,12,1)->2(cost: 1)
+13: 13: (14,13,1)->3(cost: 1)
+14: 14: (15,13,2)->2(cost: 1)
+15: 15: (16,13,2)->2(cost: 1)
+16: 16: (17,13,2)->1(cost: 1)
+17: 17: (17,14,1)->2(cost: 1)
+18: 18: (17,15,1)->2(cost: 1)
+19: 19: (17,16,1)->2(cost: 1)
+20: 20: (17,17,1)->2(cost: 1)
+21: 21: (17,18,1)->2(cost: 1)
+22: 22: (17,19,1)->2(cost: 1)
+23: 23: (17,20,1)->2(cost: 1)
+24: 24: (17,21,1)->2(cost: 1)
+25: 25: (17,22,1)->2(cost: 1)
+26: 26: (17,23,1)->1(cost: 1)
+27: 27: (16,23,0)->2(cost: 1)
+28: 28: (15,23,0)->2(cost: 1)
+29: 29: (14,23,0)
+Solution for: 3
+0: 0: (15,23,2)->2(cost: 1)
+1: 1: (16,23,2)->2(cost: 1)
+2: 2: (17,23,2)->3(cost: 1)
+3: 3: (17,22,3)->2(cost: 1)
+4: 4: (17,21,3)->2(cost: 1)
+5: 5: (17,20,3)->2(cost: 1)
+6: 6: (17,19,3)->2(cost: 1)
+7: 7: (17,18,3)->2(cost: 1)
+8: 8: (17,17,3)->2(cost: 1)
+9: 9: (17,16,3)->2(cost: 1)
+10: 10: (17,15,3)->2(cost: 1)
+11: 11: (17,14,3)->2(cost: 1)
+12: 12: (17,13,3)->2(cost: 1)
+13: 13: (17,12,3)->2(cost: 1)
+14: 14: (17,11,3)->3(cost: 1)
+15: 15: (16,11,0)->2(cost: 1)
+16: 16: (15,11,0)->2(cost: 1)
+17: 17: (14,11,0)->2(cost: 1)
+18: 18: (13,11,0)->2(cost: 1)
+19: 19: (12,11,0)->3(cost: 1)
+20: 20: (12,12,1)->2(cost: 1)
+21: 21: (12,13,1)->2(cost: 1)
+22: 22: (12,14,1)->2(cost: 1)
+23: 23: (12,15,1)->2(cost: 1)
+24: 24: (12,16,1)->2(cost: 1)
+25: 25: (12,17,1)->2(cost: 1)
+26: 26: (12,18,1)
+Solution for: 4
+0: 0: (14,2,1)->2(cost: 1)
+1: 1: (14,3,1)->2(cost: 1)
+2: 2: (14,4,1)->2(cost: 1)
+3: 3: (14,5,1)->2(cost: 1)
+4: 4: (14,6,1)->2(cost: 1)
+5: 5: (14,7,1)->2(cost: 1)
+6: 6: (14,8,1)->2(cost: 1)
+7: 7: (14,9,1)->2(cost: 1)
+8: 8: (14,10,1)->2(cost: 1)
+9: 9: (14,11,1)->2(cost: 1)
+10: 10: (14,12,1)->2(cost: 1)
+11: 11: (14,13,1)->3(cost: 1)
+12: 12: (15,13,2)->2(cost: 1)
+13: 13: (16,13,2)->2(cost: 1)
+14: 14: (17,13,2)->1(cost: 1)
+15: 15: (17,14,1)->2(cost: 1)
+16: 16: (17,15,1)->2(cost: 1)
+17: 17: (17,16,1)->2(cost: 1)
+18: 18: (17,17,1)->2(cost: 1)
+19: 19: (17,18,1)->2(cost: 1)
+20: 20: (17,19,1)->2(cost: 1)
+21: 21: (17,20,1)->2(cost: 1)
+22: 22: (17,21,1)->2(cost: 1)
+23: 23: (17,22,1)
+Created an reseted the Environment in 0.193602sec
+
+Start searching...
+Searching end!

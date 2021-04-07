@@ -6,7 +6,7 @@ agents:
   name: agent0
   start:
   - 18
-  - 19
+  - 18
 - direction: 1
   goal:
   - 13
@@ -15,68 +15,10 @@ agents:
   start:
   - 12
   - 16
-- direction: 3
-  goal:
-  - 14
-  - 23
-  name: agent2
-  start:
-  - 17
-  - 18
-- direction: 2
-  goal:
-  - 12
-  - 18
-  name: agent3
-  start:
-  - 16
-  - 23
-- direction: 1
-  goal:
-  - 17
-  - 22
-  name: agent4
-  start:
-  - 14
-  - 3
-- direction: 1
-  goal:
-  - 18
-  - 13
-  name: agent5
-  start:
-  - 12
-  - 15
-- direction: 3
-  goal:
-  - 17
-  - 21
-  name: agent6
-  start:
-  - 17
-  - 15
-- direction: 1
-  goal:
-  - 18
-  - 1
-  name: agent7
-  start:
-  - 13
-  - 7
-- direction: 1
-  goal:
-  - 19
-  - 4
-  name: agent8
-  start:
-  - 19
-  - 9
 map:
   critical:
   - - 12
     - 16
-  - - 12
-    - 18
   - - 13
     - 8
   - - 14
@@ -89,8 +31,6 @@ map:
     - 8
   - - 14
     - 11
-  - - 14
-    - 23
   - - 17
     - 13
   - - 17
@@ -101,16 +41,6 @@ map:
     - 19
   - - 17
     - 20
-  - - 17
-    - 21
-  - - 17
-    - 22
-  - - 18
-    - 1
-  - - 18
-    - 13
-  - - 19
-    - 4
   dimensions:
   - 25
   - 25
