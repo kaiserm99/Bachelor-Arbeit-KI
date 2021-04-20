@@ -35,6 +35,7 @@ from flatland.envs.schedule_generators import sparse_schedule_generator
 from flatland.utils.rendertools import RenderTool
 from flatland.core.grid.grid4_utils import get_new_position
 from flatland.envs.rail_generators import rail_from_file
+from flatland.envs.malfunction_generators import MalfunctionParameters, ParamMalfunctionGen
 
 
 np.random.seed(100)
@@ -45,7 +46,11 @@ action_to_str = {-1 : "pass...", 0 : "Do nothing", 1: "Left", 2 : "Forward", 3 :
 
 class ActionList:
     def __init__(self, actions):
-        self.actions = actions
+        if actions is None:
+            self.actions = []
+
+        else:
+            self.actions = actions
         
     def pop(self, n=0):
         # If the list is emmpty and there is no more to do, just return the wait action
@@ -61,6 +66,7 @@ class ActionList:
         return str(self.actions)
 
 def get_scheudueles(env, outfilename="out.yaml"):
+    global grid_actions, grid
     
     # Create the file with all the actions by each agent
     grid_actions = get_grid_actions(env)
@@ -213,6 +219,66 @@ def get_grid(env, filename="grid.txt"):
     
     return filename
 
+
+def calculateNewNode(step, replan_handles, timespans, env, filename="replan.yaml", outfilename="out.yaml"):
+    global grid_actions, grid
+
+
+    with open(filename) as output_file:
+        yaml_out = yaml.load(output_file, Loader=yaml.FullLoader)
+
+        for handle, a in enumerate(env.agents):
+
+            print(a.status)
+            
+            if a.status != 1: 
+                
+                y, x = calc_coord(env.agents[handle].target)
+                yaml_out['agents'][handle]['constraints'] = "[]"
+                print(f"Agent {handle} is already in the goal!")
+    
+            else:
+
+                y, x = calc_coord(env.agents[handle].position)
+
+            yaml_out['agents'][handle]['startState'] = {"y" : y, "x" : x, "dir" : int(a.direction)}
+            
+
+    
+
+        for n, handle in enumerate(replan_handles):
+
+            next_cells = calc_next_cell(env, env.agents[handle].position, env.agents[handle].direction)
+            print(f"Agent {handle} is malfunctioning and needs to wait for {timespans[n]} steps!")
+
+            for nc in next_cells:
+
+                y, x = nc.position
+
+                for time in range(1, timespans[n]+1):
+
+                    yaml_out['agents'][handle]['constraints'].append({'t' : time, 'y' : y, 'x' : x})
+                    print({'t' : time, 'y' : y, 'x' : x})
+
+        f = open(filename, "w")
+        yaml.dump(yaml_out, f)
+        f.close()
+
+
+        # Run the C++ file with the created 
+        subprocess.run(["./../../libMultiRobotPlanning-master/build/cbs", "-i", grid_actions, "-g", grid, "-o", outfilename, "-r", filename], check=True)
+
+        with open(outfilename) as output_file:
+              yaml_out = yaml.load(output_file, Loader=yaml.FullLoader)
+
+
+        action_dict = dict()
+        for handle, agent in enumerate(yaml_out["schedule"]):
+            action_dict[handle] = ActionList(yaml_out["schedule"][str(agent)])            
+            
+        return action_dict
+
+
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
@@ -220,20 +286,30 @@ def main():
     render = True
     print_more_info = False
 
+    current_malfunctioning = []
+
     try:
 
         time_start = time.time()
+
+        stochastic_data = MalfunctionParameters(
+                  malfunction_rate=1/200,
+                  min_duration=3,
+                  max_duration=10
+        )
+
         env = RailEnv(
             width=0,
             height=0,
-            rail_generator=rail_from_file("../scratch/test-envs/Test_6/Level_0.pkl"),
-            number_of_agents=9
+            rail_generator=rail_from_file("../scratch/test-envs/Test_8/Level_0.pkl"),
+            number_of_agents=13,
+            #malfunction_generator=ParamMalfunctionGen(stochastic_data)
         )
 
         _, info = env.reset()
 
         for _ in range(1):
-        	env.step({i : 2 for i in range(env.get_num_agents())})
+            env.step({i : 2 for i in range(env.get_num_agents())})
 
         # env.step({0 : 4, 1 : 2})
 
@@ -249,26 +325,60 @@ def main():
             env_renderer = RenderTool(env, screen_width=2000, screen_height=2000)
             env_renderer.render_env(show=True, frames=False, show_observations=False, show_predictions=False)
         
-        # time.sleep(100000)
-        # time.sleep(100000)
+        
+        #time.sleep(100000)
+
+
         # Empty action dictionary which has the predicted actions in it for each step
         action_dict = dict()
         
         # For Loop with all the steps predicted by the agent
         for step in range(2000):
-            
+
+            current_malfunctioning = [(handle, steps-1) for handle, steps in current_malfunctioning if steps > 0 ]
+
+            print("Current actions:")
+
             for handle in range(env.get_num_agents()):
             
                 actions = res[handle]
-                
-                if not actions.is_empty() and info['action_required'][handle]:
+
+                print(f"Agent {handle}: {actions}")
+
+                if not actions.is_empty():
                     action_dict[handle] = actions.pop(0)
 
                 else:
                     action_dict[handle] = 0
-            
-            # Do the actual step in the Enviroment based on the action_dict computed previously 
+
             obs, all_rewards, done, info = env.step(action_dict)
+
+
+            replan_handles = []
+            timespans = []
+            for handle in range(env.get_num_agents()):
+
+                mal_value = info["malfunction"][handle]
+
+                if (mal_value > 0 and handle not in [handle for handle, _ in current_malfunctioning] and env.agents[handle].status == 1):
+
+                    replan_handles.append(handle)
+                    timespans.append(mal_value)
+
+                    current_malfunctioning.append((handle, mal_value))
+
+
+            print("Current malfunction:", current_malfunctioning)
+            print(replan_handles)
+            print(timespans)
+            if len(replan_handles) > 0:
+
+                res = calculateNewNode(step, replan_handles, timespans, env)
+
+
+
+
+
             
             # Print the current status of the agents in each iteration
             print(f"[{step+1:3}] In goal: {[handle for handle, status in done.items() if status]}")
@@ -280,11 +390,14 @@ def main():
 
             if render:
                 env_renderer.render_env(show=True, frames=False, show_observations=False, show_predictions=False)
-                time.sleep(0.3)
+                #time.sleep(0.2)
+                input("Weiter?")
 
+    
             if done["__all__"]:
                 print(f"\nAll Agents are in their targets! After {step+1} iterations.")
                 break
+       
             
     finally:
         if render : env_renderer.close_window()
