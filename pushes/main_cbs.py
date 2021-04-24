@@ -68,6 +68,8 @@ class ActionList:
 def get_scheudueles(env, outfilename="out.yaml"):
     global grid_actions, grid
     
+    print("Start searching...")
+
     # Create the file with all the actions by each agent
     grid_actions = get_grid_actions(env)
     
@@ -84,8 +86,8 @@ def get_scheudueles(env, outfilename="out.yaml"):
     action_dict = dict()
     for handle, agent in enumerate(yaml_out["schedule"]):
         action_dict[handle] = ActionList(yaml_out["schedule"][str(agent)])
-        
-        
+
+    print("Searching end!")
     return action_dict
 
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -220,7 +222,7 @@ def get_grid(env, filename="grid.txt"):
     return filename
 
 
-def calculateNewNode(step, replan_handles, timespans, env, filename="replan.yaml", outfilename="out.yaml"):
+def calculateNewNode(step, malfunctioning_steps, replan_handles, current_malfunctioning, timespans, env, filename="replan.yaml", outfilename="out.yaml"):
     global grid_actions, grid
 
 
@@ -229,20 +231,55 @@ def calculateNewNode(step, replan_handles, timespans, env, filename="replan.yaml
 
         for handle, a in enumerate(env.agents):
 
-            print(a.status)
-            
+            print(f"Agent {handle}:" )
+
+
+            # 1 is the enumerate for RailAgentStatus.ACTIVE
             if a.status != 1: 
                 
-                y, x = calc_coord(env.agents[handle].target)
-                yaml_out['agents'][handle]['constraints'] = "[]"
-                print(f"Agent {handle} is already in the goal!")
+                yaml_out['agents'][handle]['constraints'] = []
+                print(" Is already in the goal!")
+                yaml_out['agents'][handle]['startState'] = {"t" : -1, "y" : -1, "x" : -1, "dir" : int(0)}
     
             else:
 
                 y, x = calc_coord(env.agents[handle].position)
 
-            yaml_out['agents'][handle]['startState'] = {"y" : y, "x" : x, "dir" : int(a.direction)}
             
+                yaml_out['agents'][handle]['startState'] = {"t" : 0, "y" : y, "x" : x, "dir" : int(a.direction)}
+
+
+
+            steps_remaining = 0
+            # If the Agent is already in a malfunction, then sub the times of the previous steps and let the other steps in
+            for h, r in current_malfunctioning:
+
+                if handle == h: 
+                    steps_remaining = r
+                    break
+
+
+                
+
+            acc_constraints = []
+            for con in yaml_out['agents'][handle]['constraints']:
+
+
+                if con['t'] > malfunctioning_steps:
+
+                    acc_constraints.append({'t' : con['t'] - malfunctioning_steps, 'y' : con['y'], 'x' : con['x']})
+                    print(" Changed: ", con)
+                    print(" To:", {'t' : con['t'] - malfunctioning_steps, 'y' : con['y'], 'x' : con['x']})
+
+                elif steps_remaining != 0 and con['t'] <= steps_remaining and (con['y'] != y or con['x'] != x):
+
+                    acc_constraints.append(con)
+
+                else:
+
+                    print(" Pruned:", con)
+
+            yaml_out['agents'][handle]['constraints'] = acc_constraints
 
     
 
@@ -255,10 +292,15 @@ def calculateNewNode(step, replan_handles, timespans, env, filename="replan.yaml
 
                 y, x = nc.position
 
-                for time in range(1, timespans[n]+1):
+                for t in range(1, timespans[n]+1):
 
-                    yaml_out['agents'][handle]['constraints'].append({'t' : time, 'y' : y, 'x' : x})
-                    print({'t' : time, 'y' : y, 'x' : x})
+                    yaml_out['agents'][handle]['constraints'].append({'t' : t, 'y' : y, 'x' : x})
+                    print({'t' : t, 'y' : y, 'x' : x})
+
+
+
+        print(yaml_out)
+
 
         f = open(filename, "w")
         yaml.dump(yaml_out, f)
@@ -284,16 +326,14 @@ def calculateNewNode(step, replan_handles, timespans, env, filename="replan.yaml
 
 def main():
     render = True
-    print_more_info = False
-
-    current_malfunctioning = []
+    
 
     try:
 
         time_start = time.time()
 
         stochastic_data = MalfunctionParameters(
-                  malfunction_rate=1/200,
+                  malfunction_rate=1/40,
                   min_duration=3,
                   max_duration=10
         )
@@ -301,9 +341,9 @@ def main():
         env = RailEnv(
             width=0,
             height=0,
-            rail_generator=rail_from_file("../scratch/test-envs/Test_20/Level_0.pkl"),
-            number_of_agents=9,
-            #malfunction_generator=ParamMalfunctionGen(stochastic_data)
+            rail_generator=rail_from_file("../scratch/test-envs/Test_8/Level_0.pkl"),
+            number_of_agents=13,
+            malfunction_generator=ParamMalfunctionGen(stochastic_data)
         )
 
         _, info = env.reset()
@@ -311,15 +351,12 @@ def main():
         for _ in range(1):
             env.step({i : 2 for i in range(env.get_num_agents())})
 
-        # env.step({0 : 4, 1 : 2})
 
         print(f"Created an reseted the Environment in {time.time()-time_start:5f}sec\n")
 
-        print("Start searching...")
-    
+        
         res = get_scheudueles(env)
-        print("Searching end!")
-
+        
         # For rendering the Environment and the steps done by the agents
         if render: 
             env_renderer = RenderTool(env, screen_width=2000, screen_height=2000)
@@ -328,14 +365,16 @@ def main():
         
         #time.sleep(100000)
 
-
-        # Empty action dictionary which has the predicted actions in it for each step
         action_dict = dict()
-        
+        current_malfunctioning = []
+        malfunctioning_steps = 0
+
         # For Loop with all the steps predicted by the agent
         for step in range(2000):
 
             current_malfunctioning = [(handle, steps-1) for handle, steps in current_malfunctioning if steps > 0 ]
+            print("Current malfunction:", current_malfunctioning)
+            print("Steps last malfunction:", malfunctioning_steps)
 
             print("Current actions:")
 
@@ -343,6 +382,7 @@ def main():
             
                 actions = res[handle]
 
+                print(info["malfunction"][handle])
                 print(f"Agent {handle}: {actions}")
 
                 if not actions.is_empty():
@@ -354,6 +394,7 @@ def main():
             obs, all_rewards, done, info = env.step(action_dict)
 
 
+
             replan_handles = []
             timespans = []
             for handle in range(env.get_num_agents()):
@@ -363,35 +404,29 @@ def main():
                 if (mal_value > 0 and handle not in [handle for handle, _ in current_malfunctioning] and env.agents[handle].status == 1):
 
                     replan_handles.append(handle)
-                    timespans.append(mal_value)
+                    timespans.append(mal_value-1)
 
-                    current_malfunctioning.append((handle, mal_value))
+                    current_malfunctioning.append((handle, mal_value-1))
+
+                    malfunctioning_steps = step - malfunctioning_steps
 
 
-            print("Current malfunction:", current_malfunctioning)
+
             print(replan_handles)
             print(timespans)
             if len(replan_handles) > 0:
 
-                res = calculateNewNode(step, replan_handles, timespans, env)
-
-
-
-
+                res = calculateNewNode(step, malfunctioning_steps, replan_handles, current_malfunctioning, timespans, env)
 
             
             # Print the current status of the agents in each iteration
             print(f"[{step+1:3}] In goal: {[handle for handle, status in done.items() if status]}")
             
-            if print_more_info:
-                print("Iteration:", step)
-                for handle, action in action_dict.items():
-                    print(f"<{handle}> Action: |{action}|, Position: {env.agents[handle].position}, Target: {env.agents[handle].target}, Direction: {direction_to_str[env.agents[handle].direction]}")
 
             if render:
                 env_renderer.render_env(show=True, frames=False, show_observations=False, show_predictions=False)
-                #time.sleep(0.2)
-                input("Weiter?")
+                time.sleep(0.2)
+                # input("Weiter?")
 
     
             if done["__all__"]:
