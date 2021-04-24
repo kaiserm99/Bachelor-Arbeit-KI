@@ -435,7 +435,7 @@ def main():
        
             
     finally:
-        if render : env_renderer.close_window()
+        if reder : env_renderer.close_window()
 
 
 
