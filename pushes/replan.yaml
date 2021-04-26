@@ -1,90 +1,263 @@
 agents: 
 - handle: 0
   constraints:
-     - t : 4
-       y : 23
-       x : 8
+     - t : 6
+       y : 14
+       x : 23
+       sf : 2
+     - t : 8
+       y : 14
+       x : 23
+       sf : 2
+     - t : 7
+       y : 14
+       x : 23
+       sf : 2
+     - t : 9
+       y : 14
+       x : 23
+       sf : 2
+     - t : 5
+       y : 14
+       x : 23
+       sf : 2
+     - t : 10
+       y : 14
+       x : 23
+       sf : 2
      - t : 3
-       y : 23
-       x : 8
-     - t : 1
-       y : 23
-       x : 8
+       y : 14
+       x : 23
+       sf : -1
      - t : 2
-       y : 23
-       x : 8
+       y : 14
+       x : 23
+       sf : -1
+     - t : 4
+       y : 14
+       x : 23
+       sf : -1
 - handle: 1
   constraints: []
 - handle: 2
-  constraints: []
+  constraints:
+     - t : 6
+       y : 12
+       x : 22
+       sf : -1
+     - t : 5
+       y : 12
+       x : 22
+       sf : -1
+     - t : 4
+       y : 12
+       x : 22
+       sf : -1
+     - t : 3
+       y : 12
+       x : 22
+       sf : -1
+     - t : 1
+       y : 12
+       x : 22
+       sf : -1
+     - t : 2
+       y : 12
+       x : 22
+       sf : -1
 - handle: 3
   constraints: []
 - handle: 4
-  constraints: []
+  constraints:
+     - t : 16
+       y : 17
+       x : 17
+       sf : -1
+     - t : 5
+       y : 17
+       x : 17
+       sf : -1
+     - t : 19
+       y : 17
+       x : 17
+       sf : -1
+     - t : 5
+       y : 17
+       x : 18
+       sf : -1
+     - t : 18
+       y : 17
+       x : 18
+       sf : -1
+     - t : 17
+       y : 17
+       x : 17
+       sf : -1
+     - t : 7
+       y : 17
+       x : 17
+       sf : -1
+     - t : 12
+       y : 17
+       x : 18
+       sf : -1
+     - t : 3
+       y : 17
+       x : 18
+       sf : -1
+     - t : 13
+       y : 17
+       x : 17
+       sf : -1
+     - t : 7
+       y : 17
+       x : 18
+       sf : -1
+     - t : 20
+       y : 17
+       x : 18
+       sf : -1
+     - t : 10
+       y : 17
+       x : 18
+       sf : -1
+     - t : 9
+       y : 17
+       x : 17
+       sf : -1
+     - t : 16
+       y : 17
+       x : 18
+       sf : -1
+     - t : 14
+       y : 17
+       x : 18
+       sf : -1
+     - t : 14
+       y : 17
+       x : 17
+       sf : -1
+     - t : 13
+       y : 17
+       x : 18
+       sf : -1
+     - t : 8
+       y : 17
+       x : 17
+       sf : -1
+     - t : 9
+       y : 17
+       x : 18
+       sf : -1
+     - t : 4
+       y : 17
+       x : 18
+       sf : -1
+     - t : 6
+       y : 17
+       x : 17
+       sf : -1
+     - t : 1
+       y : 17
+       x : 18
+       sf : -1
+     - t : 4
+       y : 17
+       x : 17
+       sf : -1
+     - t : 11
+       y : 17
+       x : 17
+       sf : -1
+     - t : 8
+       y : 17
+       x : 18
+       sf : -1
+     - t : 15
+       y : 17
+       x : 17
+       sf : -1
+     - t : 12
+       y : 17
+       x : 17
+       sf : -1
+     - t : 20
+       y : 17
+       x : 17
+       sf : -1
+     - t : 3
+       y : 17
+       x : 17
+       sf : -1
+     - t : 2
+       y : 17
+       x : 17
+       sf : -1
+     - t : 18
+       y : 17
+       x : 17
+       sf : -1
+     - t : 19
+       y : 17
+       x : 18
+       sf : -1
+     - t : 6
+       y : 17
+       x : 18
+       sf : -1
+     - t : 17
+       y : 17
+       x : 18
+       sf : -1
+     - t : 1
+       y : 17
+       x : 17
+       sf : -1
+     - t : 10
+       y : 17
+       x : 17
+       sf : -1
+     - t : 15
+       y : 17
+       x : 18
+       sf : -1
+     - t : 2
+       y : 17
+       x : 18
+       sf : -1
+     - t : 11
+       y : 17
+       x : 18
+       sf : -1
 - handle: 5
   constraints: []
 - handle: 6
-  constraints:
-     - t : 8
-       y : 0
-       x : 10
-     - t : 7
-       y : 0
-       x : 10
-     - t : 2
-       y : 0
-       x : 10
-     - t : 1
-       y : 0
-       x : 10
-     - t : 3
-       y : 0
-       x : 10
-     - t : 4
-       y : 0
-       x : 10
-     - t : 6
-       y : 0
-       x : 10
-     - t : 5
-       y : 0
-       x : 10
+  constraints: []
 - handle: 7
-  constraints: []
-- handle: 8
-  constraints: []
-- handle: 9
-  constraints: []
-- handle: 10
-  constraints: []
-- handle: 11
   constraints:
-     - t : 6
-       y : 22
-       x : 9
-- handle: 12
-  constraints:
-     - t : 6
-       y : 23
-       x : 9
      - t : 3
-       y : 23
-       x : 9
-     - t : 4
-       y : 23
-       x : 9
-     - t : 5
-       y : 23
-       x : 9
+       y : 19
+       x : 7
+       sf : -1
      - t : 2
-       y : 23
-       x : 9
-     - t : 4
-       y : 23
+       y : 19
        x : 7
+       sf : -1
      - t : 1
-       y : 23
-       x : 9
-     - t : 3
-       y : 23
+       y : 19
        x : 7
+       sf : -1
+- handle: 8
+  constraints:
+     - t : 3
+       y : 19
+       x : 8
+       sf : -1
+     - t : 1
+       y : 19
+       x : 8
+       sf : -1
+     - t : 2
+       y : 19
+       x : 8
+       sf : -1

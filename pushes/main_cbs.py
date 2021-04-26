@@ -264,6 +264,7 @@ def calculateNewNode(step, malfunctioning_steps, replan_handles, current_malfunc
             acc_constraints = []
             for con in yaml_out['agents'][handle]['constraints']:
 
+                if con['sf'] == handle: continue
 
                 if con['t'] > malfunctioning_steps:
 
@@ -333,7 +334,7 @@ def main():
         time_start = time.time()
 
         stochastic_data = MalfunctionParameters(
-                  malfunction_rate=1/40,
+                  malfunction_rate=1/100,
                   min_duration=3,
                   max_duration=10
         )
@@ -341,8 +342,8 @@ def main():
         env = RailEnv(
             width=0,
             height=0,
-            rail_generator=rail_from_file("../scratch/test-envs/Test_8/Level_0.pkl"),
-            number_of_agents=13,
+            rail_generator=rail_from_file("../scratch/test-envs/Test_6/Level_0.pkl"),
+            number_of_agents=9,
             malfunction_generator=ParamMalfunctionGen(stochastic_data)
         )
 
@@ -425,7 +426,7 @@ def main():
 
             if render:
                 env_renderer.render_env(show=True, frames=False, show_observations=False, show_predictions=False)
-                time.sleep(0.2)
+                time.sleep(0.5)
                 # input("Weiter?")
 
     
