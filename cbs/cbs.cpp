@@ -244,10 +244,12 @@ struct Conflict {
 };
 
 struct VertexConstraint {
-  VertexConstraint(int time, int y, int x) : time(time), y(y), x(x) {}
+  VertexConstraint(int time, int y, int x, int setFrom=-1, int otherSetFrom=-1) : time(time), y(y), x(x), setFrom(setFrom), otherSetFrom(otherSetFrom) {}
   int time;
   int y;
   int x;
+  int setFrom;
+  int otherSetFrom;
 
   bool operator<(const VertexConstraint& other) const {
     return std::tie(time, x, y) < std::tie(other.time, other.x, other.y);
@@ -258,7 +260,12 @@ struct VertexConstraint {
   }
 
   friend std::ostream& operator<<(std::ostream& os, const VertexConstraint& c) {
-    return os << "VC(t=" << c.time << ",y=" << c.y << ",x=" << c.x << ")";
+    if (c.setFrom == -1 && c.otherSetFrom != -1) return os << "VC(t=" << c.time << ",y=" << c.y << ",x=" << c.x << ",osf=" << c.otherSetFrom << ")"; 
+
+    else if (c.setFrom != -1 && c.otherSetFrom == -1) return os << "VC(t=" << c.time << ",y=" << c.y << ",x=" << c.x << ",sf=" << c.setFrom << ")"; 
+
+    else return os << "VC(t=" << c.time << ",y=" << c.y << ",x=" << c.x << ")";
+
   }
 };
 
@@ -275,78 +282,28 @@ struct hash<VertexConstraint> {
 };
 }  // namespace std
 
-struct EdgeConstraint {
-  EdgeConstraint(int time, int y1, int x1, int y2, int x2)
-      : time(time), y1(y1), x1(x1), y2(y2), x2(x2) {}
-  int time;
-  int y1;
-  int x1;
-  int y2;
-  int x2;
-
-  bool operator<(const EdgeConstraint& other) const {
-    return std::tie(time, x1, y1, x2, y2) <
-           std::tie(other.time, other.x1, other.y1, other.x2, other.y2);
-  }
-
-  bool operator==(const EdgeConstraint& other) const {
-    return std::tie(time, x1, y1, x2, y2) ==
-           std::tie(other.time, other.x1, other.y1, other.x2, other.y2);
-  }
-
-  friend std::ostream& operator<<(std::ostream& os, const EdgeConstraint& c) {
-    return os << "EC(" << c.time << "," << c.y1 << "," << c.x1 << "," << c.y2
-              << "," << c.x2 << ")";
-  }
-};
-
-namespace std {
-template <>
-struct hash<EdgeConstraint> {
-  size_t operator()(const EdgeConstraint& s) const {
-    size_t seed = 0;
-    boost::hash_combine(seed, s.time);
-    boost::hash_combine(seed, s.x1);
-    boost::hash_combine(seed, s.y1);
-    boost::hash_combine(seed, s.x2);
-    boost::hash_combine(seed, s.y2);
-    return seed;
-  }
-};
-}  // namespace std
-
 struct Constraints {
   std::unordered_set<VertexConstraint> vertexConstraints;
-  std::unordered_set<EdgeConstraint> edgeConstraints;
 
   void add(const Constraints& other) {
     vertexConstraints.insert(other.vertexConstraints.begin(),
                              other.vertexConstraints.end());
-    edgeConstraints.insert(other.edgeConstraints.begin(),
-                           other.edgeConstraints.end());
   }
 
-  bool overlap(const Constraints& other) const {
-    for (const auto& vc : vertexConstraints) {
-      if (other.vertexConstraints.count(vc) > 0) {
-        return true;
-      }
+  void del(const Constraints& other) {
+
+    for (const auto& c : other.vertexConstraints) {
+      vertexConstraints.erase(c);
     }
-    for (const auto& ec : edgeConstraints) {
-      if (other.edgeConstraints.count(ec) > 0) {
-        return true;
-      }
-    }
-    return false;
+
   }
+
 
   friend std::ostream& operator<<(std::ostream& os, const Constraints& c) {
     for (const auto& vc : c.vertexConstraints) {
       os << vc << std::endl;
     }
-    for (const auto& ec : c.edgeConstraints) {
-      os << ec << std::endl;
-    }
+
     return os;
   }
 };
@@ -412,13 +369,19 @@ struct hash<Location> {
 class Environment {
  public:
   Environment(size_t dimy, size_t dimx, std::unordered_map<Location, std::vector<NewLocation>>  edges,
-              std::vector<Location> goals, Map map, std::vector<Location> critical)
+              std::vector<Location> goals, Map map, std::vector<Location> critical, std::vector<int> speeds,
+              std::vector<Constraints>& startingConstraints, bool replanning)
       : m_dimy(dimy),
         m_dimx(dimx),
         m_edges(std::move(edges)),
         m_goals(std::move(goals)),
         m_map(map),
         m_critical(critical),
+        m_speeds(speeds),
+        m_startingConstraints(startingConstraints),
+        m_replanning(replanning),
+
+        // Local variables
         m_agentIdx(0),
         m_constraints(nullptr),
         m_lastGoalConstraint(-1),
@@ -429,9 +392,11 @@ class Environment {
   Environment(const Environment&) = delete;
   Environment& operator=(const Environment&) = delete;
 
-  void setLowLevelContext(size_t agentIdx, const Constraints* constraints) {
+  void setLowLevelContext(size_t agentIdx, int speed, int replannigSize, const Constraints* constraints) {
     assert(constraints);  // NOLINT
     m_agentIdx = agentIdx;
+    m_agentSpeed = speed;
+    m_agentReplanningSize = replannigSize;
     m_constraints = constraints;
     m_lastGoalConstraint = -1;
     for (const auto& vc : constraints->vertexConstraints) {
@@ -446,16 +411,10 @@ class Environment {
   }
 
   bool isSolution(const State& s) {
-    if (s.x == m_goals[m_agentIdx].x && s.y == m_goals[m_agentIdx].y && s.time > m_lastGoalConstraint) {
-      // std::cout << "Goal reached! Agent: "<< m_agentIdx << std::endl;
-    }
-
-    return s.x == m_goals[m_agentIdx].x && s.y == m_goals[m_agentIdx].y &&
-           s.time > m_lastGoalConstraint;
+    return s.x == m_goals[m_agentIdx].x && s.y == m_goals[m_agentIdx].y && s.time > m_lastGoalConstraint;
   }
 
-  void getNeighbors(const State& s,
-                    std::vector<Neighbor<State, Action, int> >& neighbors) {
+  void getNeighbors(const State& s, std::vector<Neighbor<State, Action, int> >& neighbors) {
 
     neighbors.clear();
 
@@ -463,7 +422,7 @@ class Environment {
       // Always append the do_nothing (4) State if valid
       State n(s.time + 1, s.y, s.x, s.dir);
 
-      if (stateValid(n) && transitionValid(s, n)) {
+      if (stateValid(n)) {
         neighbors.emplace_back(Neighbor<State, Action, int>(n, Action::Wait, 1));
       }
 
@@ -480,7 +439,7 @@ class Environment {
         State n(s.time + 1, next_action.y, next_action.x, next_action.new_dir);
 
 
-        if (stateValid(n) && transitionValid(s, n)) {
+        if (stateValid(n)) {
 
           // std::cout << "Agent: " << m_agentIdx << " Von: " << s << std::endl;
           // std::cout << "Zu : " << next_action << std::endl;
@@ -511,7 +470,20 @@ class Environment {
     return false;
   }
 
-  State getCriticalState(int t, size_t handle1, size_t handle2, const std::vector<PlanResult<State, Action, int> >& solution) {
+  int getDirectionCritical(int errorTime, const State searchingState, const size_t handle, const auto& solution) {
+
+  
+    for (int t = errorTime; (unsigned)t < solution[handle].states.size(); t++) {
+
+      State checkState = getState(handle, solution, t);
+
+      if (searchingState.y == checkState.y && searchingState.x == checkState.x) return checkState.dir;
+    }
+
+    return -1;
+  }
+
+  State getCriticalState(int t, size_t handle1, size_t handle2, const auto& solution) {
 
     int t_back;
 
@@ -524,18 +496,19 @@ class Environment {
       }
 
       // If the critical Point is the goal of the other agent, then return this one
-      if (checkState.x == m_goals[handle2].x && checkState.y == m_goals[handle2].y && t_back != 0) {
-        std::cout << "TEST: Agent " << handle1 << " lässt Agent "<< handle2 << " durch" << std::endl;
+      if (checkState.x == m_goals[handle2].x && checkState.y == m_goals[handle2].y && t_back > 0) {
         return checkState;
       }
 
       // If it is a critical state, then check if minimum one of the agents can use it
       if (m_edges[Location(checkState.y, checkState.x, checkState.dir)].size() >= 2) {
-        return checkState;  
+        return checkState;
       }
 
+      int dir = getDirectionCritical(t, checkState, handle2, solution);
+      if (dir == -1) continue;
 
-      if (m_edges[Location(checkState.y, checkState.x, (checkState.dir + 2) % 4)].size() >= 2) {
+      if (m_edges[Location(checkState.y, checkState.x, dir)].size() >= 2) {
         return checkState;  
       }
 
@@ -547,50 +520,205 @@ class Environment {
   }
 
 
-  // type = 1 --> the found critical cell, can be used otherwise by the agent
-  // type = 0 --> not
-  void addConstraints(int t, size_t handle, State& state, const std::vector<PlanResult<State, Action, int>>& solution, Constraints& cons, Constraints& consOther, int type, int edge = 0) {
+  void addConstraints(int errorTime, size_t handle1, size_t handle2, State& criticalState, auto& solution, auto& resultConstraints, auto& resultDoubleConstraints, auto& resultDeleteConstraints, int type, int edge, auto& conflicts) {
 
-    // Teste, ob der jeweilige Fehler und die gefundene kritische Zelle die gleichen sind
-    if (t == state.time) {
+    Constraints accConstraints1;
+    Constraints accConstraints2;
 
-      consOther.vertexConstraints.emplace(VertexConstraint(t + edge, state.y, state.x));
+    bool deleteConstraints;
 
-      if (edge == 1 && type == 0) {
-        consOther.vertexConstraints.emplace(VertexConstraint(t, state.y, state.x));
+    if (type == 1) handleApplicableJunction(errorTime, criticalState, handle1, handle2, edge, accConstraints1, accConstraints2, solution);
+
+
+    else if (type == 0) deleteConstraints = handleNotApplicableJunction(errorTime, criticalState, handle1, handle2, edge, accConstraints1, accConstraints2, solution, conflicts);
+
+
+    if (deleteConstraints) {
+
+      resultDeleteConstraints[std::make_pair(handle1, handle2)] = std::make_pair(accConstraints1, accConstraints2);
+      return;
+    }
+
+
+    // If both of the agents got constrained
+    if (accConstraints1.vertexConstraints.size() > 0 && accConstraints2.vertexConstraints.size() > 0) resultDoubleConstraints[std::make_pair(handle1, handle2)] = std::make_pair(accConstraints1, accConstraints2);
+
+    else if (accConstraints1.vertexConstraints.size() > 0) resultConstraints.emplace_back(std::make_pair(handle1, accConstraints1));
+
+    else if (accConstraints2.vertexConstraints.size() > 0) resultConstraints.emplace_back(std::make_pair(handle2, accConstraints2));
+
+
+    return;
+  }
+
+
+  void handleConflicts(const State& errorState1, const State& errorState2, const int errorTime, const size_t handle1, const size_t handle2, const auto& solution, auto& resultConstraints, auto& resultDoubleConstraints, auto& resultDeleteConstraints, int edge, auto& conflicts) {
+
+
+    if (edge == 0) {
+      if (m_debug) std::cout << std::endl << "[t=" << errorTime << "] Vertex Error at: " << errorState1 << " and " << errorState2 << std::endl;
+    } else {
+      if (m_debug) std::cout << std::endl << "[t=" << errorTime << "] Edge Error at: " << errorState1 << " and " << errorState2 << std::endl;
+    }
+
+    // Get to the critical states
+    State criticalState1 = getCriticalState(errorTime, handle1, handle2, solution);
+
+    State criticalState2 = getCriticalState(errorTime, handle2, handle1, solution);
+
+    if (m_debug) std::cout << "Agent: " << handle1 << ", Critical State: " << criticalState1 << std::endl;
+    if (m_debug) std::cout << "Agent: " << handle2 << ", Critical State: " << criticalState2 << std::endl;
+
+
+    // Check if the the error states of the Agents is a Vertex error and if they have the same direction, then one have to wait for the other
+    if (errorState1.dir == errorState2.dir && edge == 0) {
+
+      
+      
+
+      if (m_debug) std::cout << "Aufgefahren!" << std::endl;
+
+      /*
+      std::cout << "Solution Handle: " << handle1 << std::endl;
+
+      for (const auto& c : solution[handle1].states) {
+        std::cout << c.first << std::endl;
       }
 
-      // for (std::unordered_set<VertexConstraint> :: iterator itr = consOther.vertexConstraints.begin(); itr != consOther.vertexConstraints.end(); itr++) {
-      //   std::cout << "Agent Other: " << (*itr) << std::endl;
-      // }
+      std::cout << "Solution Handle: " << handle2 << std::endl;
+
+      for (const auto& c : solution[handle2].states) {
+        std::cout << c.first << std::endl;
+      }
+      */
+
+
+      // Agent1 is waiting for another so, the previous agent has to wait
+      if (errorState1.equalExceptTime(solution[handle1].states[errorState1.time-1].first)) {
+        
+        Constraints accConstraints2;
+
+        // Loop troth the vertex error time and check how long the agent has to wait and add the constraints to the other agents
+        for (int waitTime = errorTime; (unsigned)waitTime < solution[handle1].states.size(); waitTime++) {
+
+          if (!solution[handle1].states[waitTime].first.equalExceptTime(errorState2)) break;
+
+          accConstraints2.vertexConstraints.insert(VertexConstraint(waitTime, errorState1.y, errorState1.x, handle1, -1));
+        }
+
+        resultConstraints.emplace_back(std::make_pair(handle2, accConstraints2));
+      }
+
+              
+      else if (errorState2.equalExceptTime(solution[handle2].states[errorState2.time-1].first)) {
+
+        Constraints accConstraints1;
+
+        for (int waitTime = errorTime; (unsigned)waitTime < solution[handle2].states.size(); waitTime++) {
+
+          if (!solution[handle2].states[waitTime].first.equalExceptTime(errorState1)) break;
+
+          accConstraints1.vertexConstraints.insert(VertexConstraint(waitTime, errorState2.y, errorState2.x, handle2, -1));
+        }
+
+        resultConstraints.emplace_back(std::make_pair(handle1, accConstraints1));
+      }
 
       return;
     }
 
 
-    int timeAgentToWait = t + (t - state.time) - type + edge;
-    std::cout << "Set VertexConstraint from " << state.time + type << " to " << timeAgentToWait << std::endl;
+    // There is no way the agent can get over each other, so return true and don't expand this HighLevelNode further
+    else if (criticalState1.time == -1 && criticalState2.time == -1) {
+      if (m_debug) std::cout << "Agent: "<<  handle1 << " & Agent: " <<  handle2 << " can't pass each other!" << std::endl;
+      return;
+    }
 
-    State passCritical = solution[handle].states[state.time+type].first;
+    // Agent 1 cant get out of the situation 
+    else if (criticalState1.time == -1) {
 
-    for (int timeVertex = state.time + type; timeVertex <= timeAgentToWait; timeVertex++) {
-
-      cons.vertexConstraints.emplace(VertexConstraint(timeVertex, passCritical.y, passCritical.x));
+      addConstraints(errorTime, handle2, handle1, criticalState2, solution, resultConstraints, resultDoubleConstraints, resultDeleteConstraints, m_edges[Location(criticalState2.y, criticalState2.x, criticalState2.dir)].size() >= 2, edge, conflicts);
 
     }
- 
-    for (std::unordered_set<VertexConstraint> :: iterator itr = cons.vertexConstraints.begin(); itr != cons.vertexConstraints.end(); itr++) {
-      std::cout << "Agent " << handle << ": " << (*itr) << std::endl;
+
+    // Agent 2 cant get out of the situation 
+    else if (criticalState2.time == -1) {
+      
+      addConstraints(errorTime, handle1, handle2, criticalState1, solution, resultConstraints, resultDoubleConstraints, resultDeleteConstraints, m_edges[Location(criticalState1.y, criticalState1.x, criticalState1.dir)].size() >= 2, edge, conflicts);
+
+    } 
+
+    // Both Agents can get out of the situation
+    else {  
+
+      // Constrain Agent 1
+      addConstraints(errorTime, handle1, handle2, criticalState1, solution, resultConstraints, resultDoubleConstraints, resultDeleteConstraints, m_edges[Location(criticalState1.y, criticalState1.x, criticalState1.dir)].size() >= 2, edge, conflicts);
+
+      // Constrain Agent 2
+      addConstraints(errorTime, handle2, handle1, criticalState2, solution, resultConstraints, resultDoubleConstraints, resultDeleteConstraints, m_edges[Location(criticalState2.y, criticalState2.x, criticalState2.dir)].size() >= 2, edge, conflicts);
+
     }
   }
 
 
+  bool checkHeadError(const State& errorState1, const State& errorState2, const size_t handle1, const size_t handle2, const auto& solution, auto& resultConstraints) {
 
-  // Diese Funktion vergelicht paarweise alle states mit einander und ob diese einen Konflikt aufweisen oder nicht
+    // If this is true, it is not an head error, it is an rear-end collision
+    if (errorState1.dir == errorState2.dir) return false;
 
-  // bool getFirstConflict(const std::vector<PlanResult<State, Action, int> >& solution, std::vector<Conflict>& result) {
-  bool getFirstConflict(const std::vector<PlanResult<State, Action, int> >& solution, std::map<size_t, Constraints>& resultConstraints) {
+    if (m_debug) std::cout << "Check for Head" << std::endl << errorState1 << std::endl;
+
+    // If there is no prev state, then the other agent want to go trough the starting state
+    std::pair<State, int> resultAgent1 = getPrevPosition(errorState1, handle1, solution);
+    if (m_debug) std::cout << "Prev: " << resultAgent1.first << std::endl;
+
+    std::pair<State, int> resultAgent2 = getNextPosition(errorState2, handle2, solution);
+    if (m_debug) std::cout << "Next: " << resultAgent2.first << std::endl;
     
+    if (resultAgent1.second == -1) {
+
+      // If there is no Prev state, then both of the agents started on the same spot
+      std::pair<State, int> resultPrevAgent2 = getPrevPosition(errorState2, handle2, solution);
+      if (resultPrevAgent2.second == -1) return false;
+
+
+      // The time Agent 2 would have entered the cell of the agent 1
+      const int startingTime = resultPrevAgent2.second+1;
+
+      // The time Agent 1 would leave the cell
+      // If there is no next state, then the goal is the starting point (not possible)
+      const int endingTime   = getNextPosition(errorState1, handle1, solution).second-1;
+
+      Constraints accConstraints2;
+      setConstrains(errorState1, startingTime, endingTime, handle2, accConstraints2);
+      resultConstraints.emplace_back(std::make_pair(handle2, accConstraints2));
+
+
+      return true;
+    }
+
+    
+    if (resultAgent2.second == -1) return false;
+
+    
+    
+
+    if (resultAgent1.first.y != resultAgent2.first.y || resultAgent1.first.x != resultAgent2.first.x) {
+      if (m_debug) std::cout << "INFO: Head Error! Agent: "<< handle1 << ", Agent: " << handle2 << ", at: " << errorState1 << std::endl;
+
+      Constraints accConstraints1;
+      setConstrains(errorState1, getPrevPosition(errorState1, handle1, solution).second + 1, getNextPosition(errorState2, handle2, solution).second - 1, handle1, accConstraints1);
+      resultConstraints.emplace_back(std::make_pair(handle1, accConstraints1));
+
+      return true;
+    }
+
+    return false;
+  }
+
+
+  bool getFirstConflict(const auto& solution, auto& resultConstraints, auto& resultDoubleConstraints, auto& resultDeleteConstraints, auto& conflicts) {
+
     // Calculate the max time
     int max_t = 0;
     for (const auto& sol : solution) {
@@ -614,142 +742,26 @@ class Environment {
 
           if (stateInizial1.equalExceptTime(stateInizial2)) {
 
-            std::cout << "Vertex Error at: " << stateInizial1 << " and " << stateInizial2 << std::endl;
+            // Check at first if there is an head error and then constrain agent 1 so he has to wait
+            if (!checkHeadError(stateInizial1, stateInizial2, handle1, handle2, solution, resultConstraints)) {
 
-            // Get to the critical states
-            State state1 = getCriticalState(t, handle1, handle2, solution);
+              handleConflicts(stateInizial1, stateInizial2, t, handle1, handle2, solution, resultConstraints, resultDoubleConstraints, resultDeleteConstraints, 0, conflicts);
 
-            State state2 = getCriticalState(t, handle2, handle1, solution);
-
-
-            Constraints accConstraints1;
-            Constraints accConstraints2;
-
-
-            if (stateInizial1.dir == stateInizial2.dir) {
-              std::cout << "Aufgefahren!" << std::endl;
-
-              // Agent1 is waiting for another so, the previous agent has to wait
-              if (stateInizial1.equalExceptTime(solution[handle1].states[stateInizial1.time-1].first)) {
-                std::cout << "Ficker 1!" << stateInizial1 << " und " << solution[handle1].states[stateInizial1.time-1].first << std::endl;
-
-                // Loop troth the vertex error time and check how long the agent has to wait and add the constraints to the other agents
-                for (int waitTime = t; (unsigned)waitTime < solution[handle1].states.size(); waitTime++) {
-
-                  if (!solution[handle1].states[waitTime].first.equalExceptTime(stateInizial2)) break;
-
-                  accConstraints2.vertexConstraints.emplace(VertexConstraint(waitTime, stateInizial1.y, stateInizial1.x));
-                }
-              }
-
-              
-              if (stateInizial2.equalExceptTime(solution[handle2].states[stateInizial2.time-1].first)) {
-                std::cout << "Ficker 2!" << stateInizial2 << " und " << solution[handle2].states[stateInizial2.time-1].first << std::endl;
-
-                for (int waitTime = t; (unsigned)waitTime < solution[handle2].states.size(); waitTime++) {
-
-                  if (!solution[handle2].states[waitTime].first.equalExceptTime(stateInizial1)) break;
-
-                  accConstraints1.vertexConstraints.emplace(VertexConstraint(waitTime, stateInizial2.y, stateInizial2.x));
-                }
-              }
-            }
-
-            // There is no way the agent can get over each other, so return true and don't expand this HighLevelNode further
-            else if (state1.time == -1 && state2.time == -1) {
-              std::cout << "Agent: "<<  handle1 << " & Agent: " <<  handle2 << " can't pass each other!" << std::endl;
-            }
-
-            else if (state1.time == -1) {  // Agent 1 cant get out of the situation 
-
-              if (m_edges[Location(state2.y, state2.x, state2.dir)].size() >= 2) {
-
-                std::cout << "TEST 1a" << std::endl;
-
-                addConstraints(t, handle2, state2, solution, accConstraints2, accConstraints1, 0);
-
-
-              } else {
-
-                std::cout << "TEST 1b" << std::endl;
-
-                addConstraints(t, handle2, state2, solution, accConstraints2, accConstraints2, 0);
-
-              }
-
-            }
-
-
-            else if (state2.time == -1) {  // Agent 2 cant get out of the situation 
-
-
-              if (m_edges[Location(state1.y, state1.x, state1.dir)].size() >= 2) {
-
-                std::cout << "TEST 2a" << std::endl;
-                addConstraints(t, handle1, state1, solution, accConstraints1, accConstraints2, 1);
-
-              } else {
-
-                std::cout << "TEST 2b" << std::endl;
-                addConstraints(t, handle1, state1, solution, accConstraints1, accConstraints1, 0);
-              }
-
-
-            } else {  // Both Agents can get out of the situation
-
-
-              if (m_edges[Location(state1.y, state1.x, state1.dir)].size() >= 2) {
-
-                std::cout << "TEST 3a" << std::endl;
-                addConstraints(t, handle1, state1, solution, accConstraints1, accConstraints2, 1);
-
-
-              } else {
-
-                std::cout << "TEST 3b" << std::endl;
-                addConstraints(t, handle1, state1, solution, accConstraints1, accConstraints1, 0);
-
-              }
-
-
-              if (m_edges[Location(state2.y, state2.x, state2.dir)].size() >= 2) {
-
-                std::cout << "TEST 4a" << std::endl;
-                addConstraints(t, handle2, state2, solution, accConstraints2, accConstraints1, 1);
-
-
-              } else {
-
-                std::cout << "TEST 4b" << std::endl;
-                addConstraints(t, handle2, state2, solution, accConstraints2, accConstraints2, 0);
-
-              }
-
-            }
-
-
-            resultConstraints[handle1] = accConstraints1;
-            resultConstraints[handle2] = accConstraints2;
-
-
-            std::cout << "Agent: " << handle1 << " Conflict State1: " << state1 << std::endl;
-            std::cout << "Agent: " << handle2 << " Conflict State2: " << state2 << std::endl;
-
-
-            std::cout << "Critical 0: " << state1 << std::endl;
-            std::cout << "Critical 1: " << state2 << std::endl;
-            std::cout << std::endl;
+            } 
 
             return true;
           }
         }
       }
+
+
       // drive-drive edge (swap)
       for (size_t handle1 = 0; handle1 < solution.size(); ++handle1) {
         if ((unsigned)t >= solution[handle1].states.size()) continue;
 
         State state1a = getState(handle1, solution, t);
         State state1b = getState(handle1, solution, t + 1);
+
         for (size_t handle2 = handle1 + 1; handle2 < solution.size(); ++handle2) {
           if ((unsigned)t >= solution[handle2].states.size()) continue;
 
@@ -760,101 +772,11 @@ class Environment {
           // If there is a Edge Conflict
           if (state1a.equalExceptTime(state2b) && state1b.equalExceptTime(state2a)) {
 
-            std::cout << "Edge Error at: " << state1a << " and " << state2a << std::endl; 
-
-
-            // Get to the critical states
-            State state1 = getCriticalState(t, handle1, handle2, solution);
-
-            State state2 = getCriticalState(t, handle2, handle1, solution);
-
-            std::cout << "Agent: " << handle1 << " Conflict State1: " << state1 << std::endl;
-            std::cout << "Agent: " << handle2 << " Conflict State2: " << state2 << std::endl;
-
-            Constraints accConstraints1;
-            Constraints accConstraints2;
-
-            // There is no way the agent can get over each other, so return true and don't expand this HighLevelNode further
-            if (state1.time == -1 && state2.time == -1) {
-              std::cout << "Agent: "<<  handle1 << " & Agent: " <<  handle2 << " can't pass each other!" << std::endl;
-            }
-
-
-            else if (state1.time == -1) {  // Agent 1 cant get out of the situation 
-
-              if (m_edges[Location(state2.y, state2.x, state2.dir)].size() >= 2) { 
-                std::cout << "TEST 10a" << std::endl;
-                addConstraints(t, handle2, state2, solution, accConstraints2, accConstraints1, 1, 1);
-              } else {
-                std::cout << "TEST 10b" << std::endl;
-                addConstraints(t, handle2, state2, solution, accConstraints2, accConstraints2, 0, 1);
-              }
-
-            }
-
-
-            else if (state2.time == -1) {  // Agent 2 cant get out of the situation 
-
-              if (m_edges[Location(state1.y, state1.x, state1.dir)].size() >= 2) {
-                std::cout << "TEST 11a" << std::endl;
-                addConstraints(t, handle1, state1, solution, accConstraints1, accConstraints2, 1, 1);
-              } else {
-                std::cout << "TEST 11b" << std::endl;
-                addConstraints(t, handle1, state1, solution, accConstraints1, accConstraints1, 0, 1);
-              }
-
-            } else {  // Both Agents can get out of the situation
-
-              if (m_edges[Location(state1.y, state1.x, state1.dir)].size() >= 2) {
-                std::cout << "TEST 12a" << std::endl;
-                addConstraints(t, handle1, state1, solution, accConstraints1, accConstraints2, 1, 1);
-              } else {
-                std::cout << "TEST 12b" << std::endl;
-                addConstraints(t, handle1, state1, solution, accConstraints1, accConstraints1, 0, 1);
-              }
-
-
-              if (m_edges[Location(state2.y, state2.x, state2.dir)].size() >= 2) {
-                std::cout << "TEST 13a" << std::endl;
-                addConstraints(t, handle2, state2, solution, accConstraints2, accConstraints1, 1, 1);
-              } else {
-                std::cout << "TEST 13b" << std::endl;
-                addConstraints(t, handle2, state2, solution, accConstraints2, accConstraints2, 0, 1);
-              }
-
-            }
-
-
-            resultConstraints[handle1] = accConstraints1;
-            resultConstraints[handle2] = accConstraints2;
-
-
-            std::cout << "Agent: " << handle1 << " Conflict State1: " << state1 << std::endl;
-            std::cout << "Agent: " << handle2 << " Conflict State2: " << state2 << std::endl;
-
-
-            std::cout << "Critical 0: " << state1 << std::endl;
-            std::cout << "Critical 1: " << state2 << std::endl;
-            std::cout << std::endl;
-
+            handleConflicts(state1b, state2b, t+1, handle1, handle2, solution, resultConstraints, resultDoubleConstraints, resultDeleteConstraints, 1, conflicts);
 
             return true;
           }
 
-          // If there is a Edge Conflict
-          /*
-          if (state1a.equalExceptTime(state2b) && state1b.equalExceptTime(state2a)) {
-            result.time = t;
-            result.agent1 = handle1;
-            result.agent2 = handle2;
-            result.type = Conflict::Edge;
-            result.x1 = state1a.x;
-            result.y1 = state1a.y;
-            result.x2 = state1b.x;
-            result.y2 = state1b.y;
-            return true;
-          }
-          */
         }
       }
     }
@@ -862,65 +784,417 @@ class Environment {
     return false;
   }
 
-  void createConstraintsFromConflict(
-      const Conflict& conflict, std::map<size_t, Constraints>& constraints) {
-    if (conflict.type == Conflict::Vertex) {
-      Constraints c1;
-      c1.vertexConstraints.emplace(
-          VertexConstraint(conflict.time, conflict.y1, conflict.x1));
-      constraints[conflict.agent1] = c1;
-      constraints[conflict.agent2] = c1;
-    } else if (conflict.type == Conflict::Edge) {
-      Constraints c1;
-      c1.edgeConstraints.emplace(EdgeConstraint(
-          conflict.time, conflict.y1, conflict.x1, conflict.y2, conflict.x2));
-      constraints[conflict.agent1] = c1;
-      Constraints c2;
-      c2.edgeConstraints.emplace(EdgeConstraint(
-          conflict.time, conflict.y2, conflict.x2, conflict.y1, conflict.x1));
-      constraints[conflict.agent2] = c2;
+
+  std::pair<State, int> getNextPosition(const State& state, const int handle, const auto& solution) {
+
+    // Start at the State in the next timestep and loop trough it, until there was another position
+    for (int currTime = state.time+1; (unsigned)currTime < solution[handle].states.size(); currTime++) {
+
+      State currState = solution[handle].states[currTime].first;
+
+      if (state.y != currState.y || state.x != currState.x) return std::make_pair(currState, currTime);
+    }
+
+    // Return the goal, because the given State was already the goal
+    return std::make_pair(solution[handle].states.back().first, -1);
+  }
+
+
+  std::pair<State, int> getPrevPosition(const int stateTime, const int handle, const auto& solution) {
+
+    const State state = solution[handle].states[stateTime].first;
+
+    for (int currTime = state.time-1; currTime >= 0; currTime--) {
+
+      State currState = solution[handle].states[currTime].first;
+
+      if (state.y != currState.y || state.x != currState.x) return std::make_pair(currState, currTime);
+    }
+
+    // Return the first (initial State) because we were already in this state
+    return std::make_pair(solution[handle].states[0].first, -1);
+  }
+
+
+  std::pair<State, int> getPrevPosition(const State& state, const int handle, const auto& solution) {
+
+    for (int currTime = state.time-1; currTime >= 0; currTime--) {
+
+      State currState = solution[handle].states[currTime].first;
+
+      if (state.y != currState.y || state.x != currState.x) return std::make_pair(currState, currTime);
+    }
+
+    // Return the first (initial State) because we were already in this state
+    return std::make_pair(solution[handle].states[0].first, -1);
+  }
+
+
+  void setConstrains (const State& constrainedState, const int startingTime, const int endingTime, const size_t handle, Constraints& cons, const size_t handleOther=-1, const bool otherSetFrom = false) {
+
+    if (m_debug) std::cout << "Constrain Agent: " << handle << " from: " << startingTime << ", to: " << endingTime << ", at: " << constrainedState << std::endl;
+
+
+    for (int timeVertex = startingTime; timeVertex <= endingTime; timeVertex++) {
+
+      if (otherSetFrom) cons.vertexConstraints.emplace(VertexConstraint(timeVertex, constrainedState.y, constrainedState.x, -1, handleOther));
+
+      else cons.vertexConstraints.emplace(VertexConstraint(timeVertex, constrainedState.y, constrainedState.x, handleOther, -1));
+
     }
   }
 
+
+  void calculateUniqueSolution(const int startTime, const auto& solution, auto& uniqueSolution, bool reverse=false) {
+    // Assuming these have the same size and every state corresponds to the action
+    const auto states = solution.states;
+    const auto actions = solution.actions;
+
+
+    // Make sure to get the initial state in the unique solution
+    uniqueSolution.emplace_back(states[startTime].first);
+    int acc = 0;
+
+    if (m_debug) std::cout << states[startTime].first << std::endl;
+
+    if (!reverse)
+
+      for (int time = startTime+1; (unsigned) time < states.size(); time++) {
+
+        State currState = states[time].first;
+
+        if (uniqueSolution[acc].y == currState.y && uniqueSolution[acc].x == currState.x) continue;
+
+        uniqueSolution.emplace_back(currState);
+        acc++;
+
+        if (m_debug) std::cout << currState << std::endl;
+
+    }
+
+    else {
+
+      for (int time = startTime-1; time >= 0; time--) {
+
+        State currState = states[time].first;
+
+        if (uniqueSolution[acc].y == currState.y && uniqueSolution[acc].x == currState.x) continue;
+
+        uniqueSolution.emplace_back(currState);
+        acc++;
+
+        if (m_debug) std::cout << currState << std::endl;
+
+      }
+
+    }
+  }
+
+
+  bool isGoalOfAgent(const State s, const int handle) {
+    return s.x == m_goals[handle].x && s.y == m_goals[handle].y;
+  }
+
+  int calculateJunctionHeuristics(const int handle, const State& criticalState, const State& nextSolutionState) {
+
+    const auto& next_actions = m_edges[Location(criticalState.y, criticalState.x, criticalState.dir)];
+
+    for (const auto& na : next_actions) {
+
+      if (m_debug) std::cout << na << ", value: " << m_map.getHeuristicValue(handle, na.y, na.x, na.new_dir) << std::endl;
+      if (nextSolutionState.y == na.y && nextSolutionState.x == na.x) continue;
+      
+      return m_map.getHeuristicValue(handle, na.y, na.x, na.new_dir);
+    }
+
+    // If there is no action, which has other coordinates than the current solution, there is no way out of this situation
+    return -1;
+  }
+
+  void handleApplicableJunction(const int errorTime, const State& criticalState, const size_t handle1, const size_t handle2, const int edge, auto& cons, auto& consOther, const auto& solution) {
+
+    if (m_debug) std::cout << std::endl << "Handle applicable:" << std::endl;
+
+    std::vector<State> uniqueSolutionHandle1;
+    std::vector<State> uniqueSolutionHandle2;
+
+    if (m_debug) std::cout << "UniqueSolution (reverse) handle " << handle1 << std::endl;
+    calculateUniqueSolution(errorTime, solution[handle1], uniqueSolutionHandle1, true);
+
+    if (m_debug) std::cout << "UniqueSolution handle " << handle2 << std::endl;
+    calculateUniqueSolution(errorTime - edge, solution[handle2], uniqueSolutionHandle2);
+
+    const size_t sizeUniqueSolutionHandle1 = uniqueSolutionHandle1.size();
+    const size_t sizeUniqueSolutionHandle2 = uniqueSolutionHandle2.size();
+
+
+    
+    int endingTime = -1;
+    int stepTime;
+    int stepCriticalState;
+
+    for (stepTime = 0; (unsigned) stepTime < std::min(sizeUniqueSolutionHandle1, sizeUniqueSolutionHandle2); stepTime++) {
+
+      State state1 = uniqueSolutionHandle1[stepTime];
+      State state2 = uniqueSolutionHandle2[stepTime];
+
+      // The other Agent needs to pass at least the critical state, so stepCriticalState is never 0
+      if (state1.y == criticalState.y && state1.x == criticalState.x ) stepCriticalState = stepTime;
+
+      // To this time, the other agent is the last time in the state, he should leave
+      if (state1.y != state2.y || state1.x != state2.x) {
+        endingTime = state2.time - 1;
+        break;
+      }
+
+    }
+
+
+    // Here to constrain the other Agent
+    if (errorTime == criticalState.time) {
+
+      std::pair<State, int> resPrevHandle2 = getPrevPosition(errorTime - edge, handle2, solution);
+
+      if (resPrevHandle2.second == -1) return;
+
+      // If +1 the time, agent 1 would enter the error cell
+      std::pair<State, int> resPrevHandle1 = getPrevPosition(errorTime, handle1, solution);
+
+      if (resPrevHandle1.second == -1) return;
+
+      
+      // From: Where Agent 2 normally got into the error cell
+      // To:   The time of the error
+      setConstrains(criticalState, resPrevHandle2.second+1, resPrevHandle1.second+m_speeds[handle1], handle2, consOther, handle1, true);
+
+      // If the criticalState is the goal of Agent 1, then let Agent 1 drive into the goal and don't constrain further
+      if (isGoalOfAgent(criticalState, handle1)) return;
+    }
+
+
+    bool isNoGoalConstraint = true;
+    // If the endingTime is still -1 then, the solution of both agents are identical 
+    if (endingTime == -1) {
+
+      // Constrain the critical and the next cell for the time of the time of the last state form agent 2
+      if (sizeUniqueSolutionHandle1 > sizeUniqueSolutionHandle2) {
+        isNoGoalConstraint = false;
+        endingTime = uniqueSolutionHandle2.back().time - 1;  // Lower cost with -1
+      }
+
+      else {
+
+        const State nextSolutionState = getNextPosition(criticalState, handle1, solution).first;
+
+        const int resInitialHeuristics =  calculateJunctionHeuristics(handle1, criticalState, nextSolutionState);
+
+        // There is no way to come out of this situation, so return that this node can't get expanded further
+        if (resInitialHeuristics == -1) return;
+
+        if (m_debug) std::cout << "Heuristic Constraints:" << std:: endl;
+
+        endingTime = resInitialHeuristics;
+
+        // TODO: Look for the steps which get added
+      }
+
+    }
+
+    // The count from the critical state to the position, where both agents has to last common point
+    if (isNoGoalConstraint) endingTime += (stepTime - stepCriticalState - 1) * m_speeds[handle1];
+
+    // Prev time, time the agent needs in the cell, +1 so it can escape
+    const int startingTime = getPrevPosition(criticalState, handle1, solution).second + m_speeds[handle1] + 1;
+
+    State nextSolutionState = getNextPosition(criticalState, handle1, solution).first;  // Already took care of in errorTime == criticalState.time
+
+    // Block the cell after the criticalState, so Agent 1 won't take this path
+    setConstrains(nextSolutionState, startingTime, endingTime, handle1, cons, handle2);
+
+    // Block the cell of the critical cell, so if will get detected in the next iteration better
+    setConstrains(criticalState    , startingTime, endingTime, handle1, cons, handle2);
+  }
+
+
+  bool handleNotApplicableJunction(const int errorTime, const State& criticalState, const size_t handle1, const size_t handle2, const int edge, auto& cons, auto& consOther, const auto& solution, auto& conflicts) {
+
+    if (errorTime == criticalState.time) {
+      
+      // If this the criticalState is the goal of the Agent 2, then constrain until the end
+      if (isGoalOfAgent(criticalState, handle2)) {
+
+        // Agent 1 would enter the error goal cell
+        std::pair<State, int> resPrevHandle1 = getPrevPosition(errorTime, handle1, solution);
+
+        if (resPrevHandle1.second == -1) return false;
+
+        const int endingTime = solution[handle2].states.back().first.time;
+
+        setConstrains(criticalState, resPrevHandle1.second+1, endingTime, handle1, cons, handle2);
+      }
+
+      return false;
+    }
+
+    if (m_debug) std::cout << std::endl << "Handle not applicable:" << std::endl;
+
+    const auto solutionHandle1 = solution[handle1];
+    const auto solutionHandle2 = solution[handle2];
+
+    std::vector<State> uniqueSolutionHandle1;
+    std::vector<State> uniqueSolutionHandle2;
+
+    if (m_debug) std::cout << "UniqueSolution (reverse) handle " << handle1 << std::endl;
+    calculateUniqueSolution(errorTime, solutionHandle1, uniqueSolutionHandle1, true);
+
+    if (m_debug) std::cout << "UniqueSolution handle " << handle2 << std::endl;
+    calculateUniqueSolution(errorTime - edge, solutionHandle2, uniqueSolutionHandle2);
+
+    const size_t sizeUniqueSolutionHandle1 = uniqueSolutionHandle1.size();
+    const size_t sizeUniqueSolutionHandle2 = uniqueSolutionHandle2.size();
+
+    int deleteSteps = 0;
+
+
+    // At the error time there is the same position, so we can start with the next state
+    
+    int stepTime;
+    int endingTime = -1;
+    int stepCriticalState;
+
+    for (stepTime = 0; (unsigned) stepTime < std::min(sizeUniqueSolutionHandle1, sizeUniqueSolutionHandle2); stepTime++) {
+
+      State state1 = uniqueSolutionHandle1[stepTime];
+      State state2 = uniqueSolutionHandle2[stepTime];
+
+      // Get the step of the critical state of Agent 2, so we can use it later
+      if (state2.y == criticalState.y && state2.x == criticalState.x ) stepCriticalState = stepTime;
+
+      // The time where agent 2 has for the first time another position
+      if (state1.y != state2.y || state1.x != state2.x) {
+        
+        endingTime = state2.time-1;
+        break;
+
+      }
+
+    }
+
+
+    if (endingTime == -1) {
+
+      // The Agent 1 needs to wait in front of the Goal to let the other agent trough
+
+      if (sizeUniqueSolutionHandle1 > sizeUniqueSolutionHandle2) endingTime = solution[handle2].states.back().first.time;
+
+
+      // The other Agent found no other way but now he have to 
+      else {
+
+        // If true, the goal and the critical cell are the same. There is no way out in this situation
+        if ((unsigned) stepCriticalState+1 == sizeUniqueSolutionHandle2) return false;
+
+        // The critical state from Agent 2. IMPORTANT because of direction
+        const State criticalStateHandle2 = uniqueSolutionHandle2[stepCriticalState];
+
+        // The state after the critical state of Agent 2
+        const State nextSolutionState = uniqueSolutionHandle2[stepCriticalState+1];
+
+        const int resInitialHeuristics =  calculateJunctionHeuristics(handle2, criticalStateHandle2, nextSolutionState);
+
+        // There is no way to come out of this situation, so return that this node can't get expanded further
+        if (resInitialHeuristics == -1) return false;
+
+        if (m_debug) std::cout << "Heuristic Constraints (not applicable):" << std:: endl;
+
+        // Constrain the agent from from one timestep after entering the critical cell
+        const int startingTimeHandle2 = getPrevPosition(criticalStateHandle2, handle2, solution).second;
+
+        if (startingTimeHandle2 == -1) return false;
+
+        setConstrains(criticalStateHandle2, startingTimeHandle2+2, resInitialHeuristics, handle2, consOther, handle1, true);
+
+        setConstrains(nextSolutionState   , startingTimeHandle2+2, resInitialHeuristics, handle2, consOther, handle1, true);
+
+
+        endingTime = startingTimeHandle2+2;
+      }
+    }
+
+    else {
+
+      for (const auto& c : conflicts[handle2].vertexConstraints) {
+        if ((unsigned) c.otherSetFrom == handle1) {
+          if (m_debug) std::cout << "Pruned: " << c << std::endl;
+          consOther.vertexConstraints.emplace(c);
+          deleteSteps++;
+        }
+      }      
+    }
+
+
+
+    std::pair<State, int> resPrevHandle1 = getPrevPosition(criticalState, handle1, solution);
+
+    if (resPrevHandle1.second == -1) return false; // Should never trigger
+
+    // The time, Agent 1 would normally enter the critical cell
+    const int startingTime = resPrevHandle1.second+1;
+
+
+
+    if (m_edges[Location(resPrevHandle1.first.y, resPrevHandle1.first.x, resPrevHandle1.first.dir)].size() >= 2 && (unsigned) stepCriticalState+1 < sizeUniqueSolutionHandle2) {
+
+      setConstrains(criticalState, startingTime, uniqueSolutionHandle2[stepCriticalState+1].time-1, handle1, cons, handle2);
+
+    }
+
+    else setConstrains(criticalState, startingTime, endingTime-deleteSteps, handle1, cons, handle2);
+
+    return deleteSteps > 0;
+  }
+
+
   void onExpandHighLevelNode(int /*cost*/) { m_highLevelExpanded++; }
 
-  void onExpandLowLevelNode(const State& /*s*/, int /*fScore*/,
-                            int /*gScore*/) {
-    m_lowLevelExpanded++;
-  }
+  void onExpandLowLevelNode(const State& /*s*/, int /*fScore*/, int /*gScore*/) {m_lowLevelExpanded++;}
 
   int highLevelExpanded() { return m_highLevelExpanded; }
 
   int lowLevelExpanded() const { return m_lowLevelExpanded; }
 
  private:
-  State getState(size_t agentIdx,
-                 const std::vector<PlanResult<State, Action, int> >& solution,
-                 size_t t) {
-    // assert(agentIdx < solution.size());
-    // if (t < solution[agentIdx].states.size()) {
-    
+  
+  State getState(size_t agentIdx, const std::vector<PlanResult<State, Action, int> >& solution, size_t t) {
     return solution[agentIdx].states[t].first;
-    // }
-    // assert(!solution[agentIdx].states.empty());
-    // return solution[agentIdx].states.back().first;
   }
 
   bool stateValid(const State& s) {
     assert(m_constraints);
+    
+
+    // std::cout << m_speeds[m_agentIdx] << std::endl;
+    if (m_replanning) {
+      const auto& startCon = m_startingConstraints[m_agentIdx].vertexConstraints;
+
+      if ((unsigned) s.time <= startCon.size()) return startCon.find(VertexConstraint(s.time, s.y, s.x)) == startCon.end();
+    }
+
     const auto& con = m_constraints->vertexConstraints;
 
-    // It is true, when the current state has not the same time and same position
-    bool test_constraint = con.find(VertexConstraint(s.time, s.y, s.x)) == con.end();
+    bool isValid = true;
+    int starting = (s.time - m_agentReplanningSize) * m_agentSpeed + m_agentReplanningSize;
+    int ending = starting + m_agentSpeed;
 
-    // Also check if the States are in the dimension of the given grid and return the truth value
-    return s.x >= 0 && s.x < m_dimx && s.y >= 0 && s.y < m_dimy && test_constraint;
-  }
+    for (int time = starting; starting < ending; starting++) {
 
-  bool transitionValid(const State& s1, const State& s2) {
-    assert(m_constraints);
-    const auto& con = m_constraints->edgeConstraints;
-    return con.find(EdgeConstraint(s1.time, s1.y, s1.x, s2.y, s2.x)) == con.end();
+      if (con.find(VertexConstraint(time, s.y, s.x)) != con.end()) {
+        isValid = false;
+        break;
+      }
+    }
+
+    return isValid;
   }
 
  private:
@@ -930,12 +1204,22 @@ class Environment {
   std::vector<Location> m_goals;
   Map m_map;
   std::vector<Location> m_critical;
+  std::vector<int> m_speeds;
+  const std::vector<Constraints> m_startingConstraints;
+  bool m_replanning;
+
+  // Local variables
   size_t m_agentIdx;
+  size_t m_agentSpeed;
+  size_t m_agentReplanningSize;
   const Constraints* m_constraints;
   int m_lastGoalConstraint;
   int m_highLevelExpanded;
   int m_lowLevelExpanded;
+  bool m_debug = true;
 };
+
+
 
 int main(int argc, char* argv[]) {
   namespace po = boost::program_options;
@@ -944,10 +1228,13 @@ int main(int argc, char* argv[]) {
   std::string inputFile;
   std::string inputGridFile;
   std::string outputFile;
+  std::string replanFile;
+
   desc.add_options()("help", "produce help message")
     ("input,i", po::value<std::string>(&inputFile)->required(), "input file (YAML)")
     ("inputGrid,g", po::value<std::string>(&inputGridFile)->required(), "inputGrid file (txt)")
-    ("output,o", po::value<std::string>(&outputFile)->required(), "output file (YAML)");
+    ("output,o", po::value<std::string>(&outputFile)->required(), "output file (YAML)")
+    ("replan,r", po::value<std::string>(&replanFile)->default_value(""), "the informations based on the replanning file (YAML)");
 
   try {
     po::variables_map vm;
@@ -965,6 +1252,40 @@ int main(int argc, char* argv[]) {
   }
 
 
+
+  std::vector<State> startStates;
+  std::vector<Location> goals;
+
+  std::vector<Constraints> replanConstraints;
+  std::vector<int> replanNextAssignment;
+
+
+  // If there is a file provided, then use this file as an the starting HighLevelNode
+  if (replanFile != "") {
+
+    YAML::Node highLevelNode = YAML::LoadFile(replanFile);
+
+    const auto& agents = highLevelNode["agents"];
+
+    for (const auto& a : agents) {
+
+      startStates.emplace_back(State(a["startState"]["t"].as<int>(), a["startState"]["y"].as<int>(), a["startState"]["x"].as<int>(), a["startState"]["dir"].as<int>()));
+      
+      Constraints constraints;
+      for (const auto& con : a["constraints"]) {
+        constraints.vertexConstraints.emplace(VertexConstraint(con["t"].as<int>(), con["y"].as<int>(), con["x"].as<int>()));
+        std::cout << " " << VertexConstraint(con["t"].as<int>(), con["y"].as<int>(), con["x"].as<int>()) << std::endl;
+      }
+
+      replanConstraints.emplace_back(constraints);
+
+      replanNextAssignment.emplace_back(a["next_replanning"].as<int>());
+
+      std::cout << "Next replanning: " << a["next_replanning"] << std::endl;
+    }
+  }
+
+
   // Loading and initializing the Map with its grind and the grid actions (TODO)
   Map map(inputFile, inputGridFile);
   map.inizialize();
@@ -974,9 +1295,8 @@ int main(int argc, char* argv[]) {
 
   std::unordered_map<Location, std::vector<NewLocation>> edges;
   std::vector<Location> critical;
+  std::vector<int> speeds;
 
-  std::vector<Location> goals;
-  std::vector<State> startStates;
 
   // Make sure that there is dimy at first and then there is dimx
   const auto& dim = config["map"]["dimensions"];
@@ -1001,24 +1321,37 @@ int main(int argc, char* argv[]) {
   }
 
   // Make sure to initialize all the agents with its starting values
-  for (const auto& node : config["agents"]) {
-    const auto& start = node["start"];
+  for (const auto& agent : config["agents"]) {
+    
 
-    const auto& direction = node["direction"];
+    // If there is no replan file, then take the states and directions of the given file. When not there was already took care of
+    if (replanFile == "") {
+      const auto& start = agent["start"];
+      const auto& direction = agent["direction"];
+      startStates.emplace_back(State(0, start[0].as<int>(), start[1].as<int>(), direction.as<int>()));
+    }
 
-    const auto& goal = node["goal"];
-    startStates.emplace_back(State(0, start[0].as<int>(), start[1].as<int>(), direction.as<int>()));
-
+    const auto& goal = agent["goal"];
     goals.emplace_back(Location(goal[0].as<int>(), goal[1].as<int>()));
+
+
+    // Also get the speed of the agents
+    speeds.emplace_back(agent["speed"].as<int>());
+
   }
 
   // Create the Environment based on the collected parameters and search with CBS
-  Environment mapf(dimy, dimx, edges, goals, map, critical);
+  Environment mapf(dimy, dimx, edges, goals, map, critical, speeds, replanConstraints, replanFile != "");
   CBS<State, Action, int, Conflict, Constraints, Environment> cbs(mapf);
+
+  bool success;
+
   std::vector<PlanResult<State, Action, int> > solution;
 
   Timer timer;
-  bool success = cbs.search(startStates, solution);
+
+  success = cbs.search(startStates, speeds, solution, replanConstraints, replanNextAssignment, replanFile != "");
+
   timer.stop();
 
   if (success) {
@@ -1040,15 +1373,14 @@ int main(int argc, char* argv[]) {
     out << "schedule:" << std::endl;
     for (size_t a = 0; a < solution.size(); ++a) {
 
-      // Only for printing the output of the agents in a nice way to the terminal
-      std::cout << "Solution for: " << a << std::endl;
-      for (size_t i = 0; i < solution[a].actions.size(); ++i) {
-        std::cout << solution[a].states[i].second << ": " <<
-        solution[a].states[i].first << "->" << solution[a].actions[i].first
-        << "(cost: " << solution[a].actions[i].second << ")" << std::endl;
+      if (true) {
+        // Only for printing the output of the agents in a nice way to the terminal
+        std::cout << "Solution for: " << a << std::endl;
+        for (size_t i = 0; i < solution[a].actions.size(); ++i) {
+          std::cout << solution[a].states[i].first << std::endl;
+        }
+        std::cout << std::string(30, '*') << std::endl;
       }
-      std::cout << solution[a].states.back().second << ": " <<
-      solution[a].states.back().first << std::endl;
 
 
       // Creating the output by writing all actions of the certain agent into the file
@@ -1056,17 +1388,6 @@ int main(int argc, char* argv[]) {
       for (const auto& state : solution[a].actions) {
         out << "    - " << state.first << std::endl;
       }
-
-
-      // Use this for visualizing in the python tool
-      /*
-      out << "  agent" << a << ":" << std::endl;
-      for (const auto& state : solution[a].states) {
-        out << "    - x: " << state.first.x << std::endl
-            << "      y: " << state.first.y << std::endl
-            << "      t: " << state.second << std::endl;
-      }
-      */
 
       
     }
