@@ -44,16 +44,16 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/marco/Bachelor-Arbeit-KI/cbs
+CMAKE_SOURCE_DIR = /home/marco/Bachelor-Arbeit-KI/own_cbs
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/marco/Bachelor-Arbeit-KI/cbs/build
+CMAKE_BINARY_DIR = /home/marco/Bachelor-Arbeit-KI/own_cbs/build
 
 #=============================================================================
 # Directory level rules for the build root directory
 
 # The main recursive "all" target.
-all: CMakeFiles/cbs.dir/all
+all: CMakeFiles/FlatlandCBS.dir/all
 
 .PHONY : all
 
@@ -63,36 +63,36 @@ preinstall:
 .PHONY : preinstall
 
 # The main recursive "clean" target.
-clean: CMakeFiles/cbs.dir/clean
+clean: CMakeFiles/FlatlandCBS.dir/clean
 
 .PHONY : clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/cbs.dir
+# Target rules for target CMakeFiles/FlatlandCBS.dir
 
 # All Build rule for target.
-CMakeFiles/cbs.dir/all:
-	$(MAKE) -f CMakeFiles/cbs.dir/build.make CMakeFiles/cbs.dir/depend
-	$(MAKE) -f CMakeFiles/cbs.dir/build.make CMakeFiles/cbs.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/marco/Bachelor-Arbeit-KI/cbs/build/CMakeFiles --progress-num=1,2 "Built target cbs"
-.PHONY : CMakeFiles/cbs.dir/all
+CMakeFiles/FlatlandCBS.dir/all:
+	$(MAKE) -f CMakeFiles/FlatlandCBS.dir/build.make CMakeFiles/FlatlandCBS.dir/depend
+	$(MAKE) -f CMakeFiles/FlatlandCBS.dir/build.make CMakeFiles/FlatlandCBS.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/marco/Bachelor-Arbeit-KI/own_cbs/build/CMakeFiles --progress-num=1,2,3 "Built target FlatlandCBS"
+.PHONY : CMakeFiles/FlatlandCBS.dir/all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/cbs.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/marco/Bachelor-Arbeit-KI/cbs/build/CMakeFiles 2
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/cbs.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/marco/Bachelor-Arbeit-KI/cbs/build/CMakeFiles 0
-.PHONY : CMakeFiles/cbs.dir/rule
+CMakeFiles/FlatlandCBS.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/marco/Bachelor-Arbeit-KI/own_cbs/build/CMakeFiles 3
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/FlatlandCBS.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/marco/Bachelor-Arbeit-KI/own_cbs/build/CMakeFiles 0
+.PHONY : CMakeFiles/FlatlandCBS.dir/rule
 
 # Convenience name for target.
-cbs: CMakeFiles/cbs.dir/rule
+FlatlandCBS: CMakeFiles/FlatlandCBS.dir/rule
 
-.PHONY : cbs
+.PHONY : FlatlandCBS
 
 # clean rule for target.
-CMakeFiles/cbs.dir/clean:
-	$(MAKE) -f CMakeFiles/cbs.dir/build.make CMakeFiles/cbs.dir/clean
-.PHONY : CMakeFiles/cbs.dir/clean
+CMakeFiles/FlatlandCBS.dir/clean:
+	$(MAKE) -f CMakeFiles/FlatlandCBS.dir/build.make CMakeFiles/FlatlandCBS.dir/clean
+.PHONY : CMakeFiles/FlatlandCBS.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

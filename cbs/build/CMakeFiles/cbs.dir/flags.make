@@ -6,5 +6,5 @@ CXX_FLAGS =  -Wall -Wextra -fconcepts   -std=c++14
 
 CXX_DEFINES = -DBOOST_ALL_NO_LIB -DBOOST_PROGRAM_OPTIONS_DYN_LINK
 
-CXX_INCLUDES = -I/home/marco/Bachelor-Arbeit-KI/Bachelor-Arbeit-KI/cbs/include 
+CXX_INCLUDES = -I/home/marco/Bachelor-Arbeit-KI/cbs/include 
 

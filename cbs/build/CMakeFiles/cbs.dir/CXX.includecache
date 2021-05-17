@@ -32,7 +32,7 @@ a_star.hpp
 vector
 -
 
-/home/marco/Bachelor-Arbeit-KI/Bachelor-Arbeit-KI/cbs/cbs.cpp
+/home/marco/Bachelor-Arbeit-KI/cbs/cbs.cpp
 fstream
 -
 iostream
@@ -48,9 +48,9 @@ yaml-cpp/yaml.h
 libMultiRobotPlanning/cbs.hpp
 -
 timer.hpp
-/home/marco/Bachelor-Arbeit-KI/Bachelor-Arbeit-KI/cbs/timer.hpp
+/home/marco/Bachelor-Arbeit-KI/cbs/timer.hpp
 
-/home/marco/Bachelor-Arbeit-KI/Bachelor-Arbeit-KI/cbs/timer.hpp
+/home/marco/Bachelor-Arbeit-KI/cbs/timer.hpp
 chrono
 -
 iostream

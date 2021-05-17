@@ -1,0 +1,46 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../include/cbs.hpp
+main_includes.hpp
+-
+
+../include/main_includes.hpp
+unordered_map
+-
+boost/python/numpy.hpp
+-
+boost/python.hpp
+-
+
+/home/marco/Bachelor-Arbeit-KI/own_cbs/main.cpp
+fstream
+-
+iostream
+-
+sstream
+-
+unordered_map
+-
+unordered_set
+-
+boost/lexical_cast.hpp
+-
+boost/python/numpy.hpp
+-
+boost/functional/hash.hpp
+-
+boost/program_options.hpp
+-
+boost/python.hpp
+-
+main_includes.hpp
+-
+cbs.hpp
+-
+

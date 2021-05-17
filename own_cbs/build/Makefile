@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/marco/Bachelor-Arbeit-KI/cbs
+CMAKE_SOURCE_DIR = /home/marco/Bachelor-Arbeit-KI/own_cbs
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/marco/Bachelor-Arbeit-KI/cbs/build
+CMAKE_BINARY_DIR = /home/marco/Bachelor-Arbeit-KI/own_cbs/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,9 +80,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/marco/Bachelor-Arbeit-KI/cbs/build/CMakeFiles /home/marco/Bachelor-Arbeit-KI/cbs/build/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/marco/Bachelor-Arbeit-KI/own_cbs/build/CMakeFiles /home/marco/Bachelor-Arbeit-KI/own_cbs/build/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/marco/Bachelor-Arbeit-KI/cbs/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/marco/Bachelor-Arbeit-KI/own_cbs/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -111,44 +111,71 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named cbs
+# Target rules for targets named FlatlandCBS
 
 # Build rule for target.
-cbs: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 cbs
-.PHONY : cbs
+FlatlandCBS: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 FlatlandCBS
+.PHONY : FlatlandCBS
 
 # fast build rule for target.
-cbs/fast:
-	$(MAKE) -f CMakeFiles/cbs.dir/build.make CMakeFiles/cbs.dir/build
-.PHONY : cbs/fast
+FlatlandCBS/fast:
+	$(MAKE) -f CMakeFiles/FlatlandCBS.dir/build.make CMakeFiles/FlatlandCBS.dir/build
+.PHONY : FlatlandCBS/fast
 
-cbs.o: cbs.cpp.o
+include/cbs.o: include/cbs.cpp.o
 
-.PHONY : cbs.o
+.PHONY : include/cbs.o
 
 # target to build an object file
-cbs.cpp.o:
-	$(MAKE) -f CMakeFiles/cbs.dir/build.make CMakeFiles/cbs.dir/cbs.cpp.o
-.PHONY : cbs.cpp.o
+include/cbs.cpp.o:
+	$(MAKE) -f CMakeFiles/FlatlandCBS.dir/build.make CMakeFiles/FlatlandCBS.dir/include/cbs.cpp.o
+.PHONY : include/cbs.cpp.o
 
-cbs.i: cbs.cpp.i
+include/cbs.i: include/cbs.cpp.i
 
-.PHONY : cbs.i
+.PHONY : include/cbs.i
 
 # target to preprocess a source file
-cbs.cpp.i:
-	$(MAKE) -f CMakeFiles/cbs.dir/build.make CMakeFiles/cbs.dir/cbs.cpp.i
-.PHONY : cbs.cpp.i
+include/cbs.cpp.i:
+	$(MAKE) -f CMakeFiles/FlatlandCBS.dir/build.make CMakeFiles/FlatlandCBS.dir/include/cbs.cpp.i
+.PHONY : include/cbs.cpp.i
 
-cbs.s: cbs.cpp.s
+include/cbs.s: include/cbs.cpp.s
 
-.PHONY : cbs.s
+.PHONY : include/cbs.s
 
 # target to generate assembly for a file
-cbs.cpp.s:
-	$(MAKE) -f CMakeFiles/cbs.dir/build.make CMakeFiles/cbs.dir/cbs.cpp.s
-.PHONY : cbs.cpp.s
+include/cbs.cpp.s:
+	$(MAKE) -f CMakeFiles/FlatlandCBS.dir/build.make CMakeFiles/FlatlandCBS.dir/include/cbs.cpp.s
+.PHONY : include/cbs.cpp.s
+
+main.o: main.cpp.o
+
+.PHONY : main.o
+
+# target to build an object file
+main.cpp.o:
+	$(MAKE) -f CMakeFiles/FlatlandCBS.dir/build.make CMakeFiles/FlatlandCBS.dir/main.cpp.o
+.PHONY : main.cpp.o
+
+main.i: main.cpp.i
+
+.PHONY : main.i
+
+# target to preprocess a source file
+main.cpp.i:
+	$(MAKE) -f CMakeFiles/FlatlandCBS.dir/build.make CMakeFiles/FlatlandCBS.dir/main.cpp.i
+.PHONY : main.cpp.i
+
+main.s: main.cpp.s
+
+.PHONY : main.s
+
+# target to generate assembly for a file
+main.cpp.s:
+	$(MAKE) -f CMakeFiles/FlatlandCBS.dir/build.make CMakeFiles/FlatlandCBS.dir/main.cpp.s
+.PHONY : main.cpp.s
 
 # Help Target
 help:
@@ -158,10 +185,13 @@ help:
 	@echo "... depend"
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
-	@echo "... cbs"
-	@echo "... cbs.o"
-	@echo "... cbs.i"
-	@echo "... cbs.s"
+	@echo "... FlatlandCBS"
+	@echo "... include/cbs.o"
+	@echo "... include/cbs.i"
+	@echo "... include/cbs.s"
+	@echo "... main.o"
+	@echo "... main.i"
+	@echo "... main.s"
 .PHONY : help
 
 
