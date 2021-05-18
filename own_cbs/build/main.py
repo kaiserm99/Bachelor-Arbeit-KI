@@ -13,7 +13,7 @@ env = RailEnv(
     width=0,
     height=0,
     rail_generator=rail_from_file("../../scratch/test-envs/Test_8/Level_0.pkl"),
-    number_of_agents=13
+    number_of_agents=1
 )
 
 

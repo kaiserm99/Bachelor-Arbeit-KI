@@ -123,33 +123,6 @@ FlatlandCBS/fast:
 	$(MAKE) -f CMakeFiles/FlatlandCBS.dir/build.make CMakeFiles/FlatlandCBS.dir/build
 .PHONY : FlatlandCBS/fast
 
-include/cbs.o: include/cbs.cpp.o
-
-.PHONY : include/cbs.o
-
-# target to build an object file
-include/cbs.cpp.o:
-	$(MAKE) -f CMakeFiles/FlatlandCBS.dir/build.make CMakeFiles/FlatlandCBS.dir/include/cbs.cpp.o
-.PHONY : include/cbs.cpp.o
-
-include/cbs.i: include/cbs.cpp.i
-
-.PHONY : include/cbs.i
-
-# target to preprocess a source file
-include/cbs.cpp.i:
-	$(MAKE) -f CMakeFiles/FlatlandCBS.dir/build.make CMakeFiles/FlatlandCBS.dir/include/cbs.cpp.i
-.PHONY : include/cbs.cpp.i
-
-include/cbs.s: include/cbs.cpp.s
-
-.PHONY : include/cbs.s
-
-# target to generate assembly for a file
-include/cbs.cpp.s:
-	$(MAKE) -f CMakeFiles/FlatlandCBS.dir/build.make CMakeFiles/FlatlandCBS.dir/include/cbs.cpp.s
-.PHONY : include/cbs.cpp.s
-
 main.o: main.cpp.o
 
 .PHONY : main.o
@@ -186,9 +159,6 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... FlatlandCBS"
-	@echo "... include/cbs.o"
-	@echo "... include/cbs.i"
-	@echo "... include/cbs.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

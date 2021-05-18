@@ -1,15 +1,13 @@
 cmake_minimum_required (VERSION 3.8)
 project (libFlatlandCBS)
 
-# Make sure that the YAML-Extension is present
-find_package(PkgConfig)
-pkg_check_modules(YamlCpp yaml-cpp)
-
 
 # Add all the files to the library so it can get created
 ADD_LIBRARY(FlatlandCBS SHARED
 				main.cpp
-				include/cbs.cpp
+				include/flatland.hpp
+				include/a_star.hpp
+				include/agent.hpp
 				include/cbs.hpp
 				include/main_includes.hpp)
 
@@ -38,7 +36,7 @@ FIND_PACKAGE(Boost REQUIRED COMPONENTS system program_options numpy ${boostPytho
 if(Boost_FOUND)
 
 	include_directories(${Boost_INCLUDE_DIRS})
-	target_link_libraries(FlatlandCBS ${Boost_LIBRARIES} ${PYTHON_LIBRARIES} yaml-cpp)
+	target_link_libraries(FlatlandCBS ${Boost_LIBRARIES} ${PYTHON_LIBRARIES})
 
 else()
 	message(FATAL_ERROR "Could not find boost.")

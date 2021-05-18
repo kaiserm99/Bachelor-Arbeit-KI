@@ -1,12 +1,7 @@
 #pragma once
 
 #include <unordered_map>
-
-#include <boost/python/numpy.hpp>
-#include <boost/python.hpp>
-
-namespace p = boost::python;
-namespace np = boost::python::numpy;
+#include <boost/functional/hash.hpp>
 
 
 enum class Action {
@@ -95,35 +90,15 @@ namespace std {
   };
 }
 
+template <typename Action>
 struct Neighbor {
   Neighbor(const State& state, const Action& action, const int cost) : state(state), action(action), cost(cost) {}
 
   State state;
   Action action;
   int cost;
-};
 
-
-class FlatlandCBS {
-  public:
-    FlatlandCBS(p::object railEnv);
-    void getNeighbors(const State& s, std::vector<Neighbor>& neighbors);
-    std::vector<NewGridLocation> getNextGridLocations(const GridLocation& loc, const int& direction, std::vector<int>& possibleTransitions);
-    GridLocation getGridLocation(const int& y, const int& x, const int& direction);
-    std::vector<int> getTransitions(const GridLocation& loc, const int& direction);
-    bool all(const std::vector<int>& v);
-    void search();
-
-  private:
-    p::object m_railEnv;
-    p::object m_rail;
-    int m_dimy;
-    int m_dimx;
-
-    std::vector<State> m_start;
-    std::vector<GridLocation> m_goals;
-
-    std::unordered_map<GridLocation, std::vector<NewGridLocation>> m_edges;
-
-    np::ndarray m_map;
+  friend std::ostream& operator<<(std::ostream& os, const Neighbor& n) {
+    return os << "New:" << n.state << ", a=" << n.action << ", c=" << n.cost;
+  }
 };

@@ -1,5 +1,4 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/FlatlandCBS.dir/include/cbs.cpp.o"
   "CMakeFiles/FlatlandCBS.dir/main.cpp.o"
   "libFlatlandCBS.pdb"
   "libFlatlandCBS.so"
