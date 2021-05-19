@@ -5,6 +5,9 @@ CMakeFiles/FlatlandCBS.dir/main.cpp.o
  ../include/a_star.hpp
  ../include/agent.hpp
  ../include/cbs.hpp
+ ../include/constraint.hpp
  ../include/flatland.hpp
  ../include/main_includes.hpp
+ ../include/neighbor.hpp
+ ../include/planresult.hpp
  /home/marco/Bachelor-Arbeit-KI/own_cbs/main.cpp

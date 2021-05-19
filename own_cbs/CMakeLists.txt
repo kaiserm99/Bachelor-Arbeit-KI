@@ -9,6 +9,9 @@ ADD_LIBRARY(FlatlandCBS SHARED
 				include/a_star.hpp
 				include/agent.hpp
 				include/cbs.hpp
+				include/constraint.hpp
+				include/planresult.hpp
+				include/neighbor.hpp
 				include/main_includes.hpp)
 
 

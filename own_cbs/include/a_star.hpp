@@ -1,19 +1,20 @@
 #pragma once
 
-#include <unordered_map>
 #include <boost/heap/fibonacci_heap.hpp>
+#include <boost/heap/d_ary_heap.hpp>
+
+#include <neighbor.hpp>
+#include <planresult.hpp>
+
 
 template <typename FlatlandCBS, typename State, typename Agent, typename Action, typename StateHasher = std::hash<State> >
 class AStar {
   public:
-    AStar(FlatlandCBS& flatlandCBS) : m_flatlandCBS(flatlandCBS) {}
+    AStar(FlatlandCBS& flatlandCBS, const Constraints* constraints) : m_flatlandCBS(flatlandCBS) {
+      m_flatlandCBS.setConstraints(constraints);
+    }
     
-    bool search(Agent& agent, int initialCost = 0) {
-      // Clear the current solution and insert the initial state to the solution
-      agent.solution.clear();
-      agent.solution.emplace_back(agent.initialState);
-
-      agent.soulutionCost = 0;
+    bool search(Agent& agent, PlanResult<Action, State>& solution, int initialCost = 0) {
 
       // Create all the needed Data Structures
       openSet_t openSet;
@@ -27,7 +28,7 @@ class AStar {
       stateToHeap.insert(std::make_pair<>(agent.initialState, handle));
       (*handle).handle = handle;
 
-      std::vector<Neighbor <Action> > neighbors;
+      std::vector<Neighbor <Action, State> > neighbors;
       neighbors.reserve(10);
 
 
@@ -38,18 +39,43 @@ class AStar {
         m_flatlandCBS.onExpandNode();
 
         if (agent.isSolution(current.state)) {
-          agent.solution.clear();
+          solution.states.clear();
+          solution.actions.clear();
 
           auto iter = cameFrom.find(current.state);
 
+          std::vector<State> tmpStates;
+
           while (iter != cameFrom.end()) {
-            agent.solution.emplace_back(iter->first);
+          
+            tmpStates.emplace_back(iter->first);
+            solution.actions.push_back(std::make_pair<>(std::get<1>(iter->second), std::get<2>(iter->second)));
             iter = cameFrom.find(std::get<0>(iter->second));
           }
 
-          agent.solution.emplace_back(agent.initialState);
-          std::reverse(agent.solution.begin(), agent.solution.end());
-          agent.soulutionCost = current.gScore;
+          tmpStates.emplace_back(agent.initialState);
+
+          std::reverse(tmpStates.begin(), tmpStates.end());
+
+          int time = 0;
+          for (const auto& state : tmpStates) {
+            
+            if (&state == &tmpStates.back()) break;
+
+            solution.states.emplace_back(state.setTime(time));
+
+            for (int i = 1; i < agent.speed; i++) {
+              solution.states.emplace_back(solution.states.back().timePlusT(1));
+            }
+            time += agent.speed;
+          }
+
+
+
+          
+          std::reverse(solution.actions.begin(), solution.actions.end());
+
+          solution.cost = solution.states.size();
 
           return true;
         }
@@ -58,9 +84,9 @@ class AStar {
         stateToHeap.erase(current.state);
         closedSet.insert(current.state);
 
-        m_flatlandCBS.getNeighbors(current.state, neighbors);
+        m_flatlandCBS.getNeighbors(current.state, agent.speed, neighbors);
 
-        for (const Neighbor <Action>& neighbor : neighbors) {
+        for (const Neighbor <Action, State>& neighbor : neighbors) {
           if (closedSet.find(neighbor.state) == closedSet.end()) {
             int tentative_gScore = current.gScore + neighbor.cost;
             auto iter = stateToHeap.find(neighbor.state);

@@ -1,8 +1,5 @@
 #pragma once
 
-#include <unordered_map>
-#include <boost/functional/hash.hpp>
-
 
 enum class Action {
   Up,
@@ -11,6 +8,17 @@ enum class Action {
   Wait,
 };
 
+std::ostream& operator<<(std::ostream& os, const Action& a) {
+  switch (a) {
+    case Action::Up:    os << "2"; break;
+    case Action::Left:  os << "1"; break;
+    case Action::Right: os << "3"; break;
+    case Action::Wait:  os << "4"; break;
+  }
+  return os;
+}
+
+// ---------------------- Action End -----------------------------------
 
 struct GridLocation {
   GridLocation(int y, int x, int dir = -1) : y(y), x(x), dir(dir) {}
@@ -40,7 +48,7 @@ namespace std {
 	};
 }
 
-
+// ---------------------- GridLocation End -----------------------------------
 
 struct NewGridLocation {
   NewGridLocation(int y, int x, int dir, int action) : y(y), x(x), dir(dir), action(action) {}
@@ -54,7 +62,7 @@ struct NewGridLocation {
   }
 };
 
-
+// ---------------------- NewGridLocation End -----------------------------------
 
 struct State {
   State(int time, int y, int x, int dir) : time(time), y(y), x(x), dir(dir) {}
@@ -64,6 +72,9 @@ struct State {
   int x;
   int dir;
 
+  State setTime(const int t) const { return State(t, y, x, dir); }
+
+  State timePlusT(const int t) const { return State(time+t, y, x, dir); }
 
   bool operator==(const State& s) const {
     return time == s.time && x == s.x && y == s.y;
@@ -90,15 +101,4 @@ namespace std {
   };
 }
 
-template <typename Action>
-struct Neighbor {
-  Neighbor(const State& state, const Action& action, const int cost) : state(state), action(action), cost(cost) {}
-
-  State state;
-  Action action;
-  int cost;
-
-  friend std::ostream& operator<<(std::ostream& os, const Neighbor& n) {
-    return os << "New:" << n.state << ", a=" << n.action << ", c=" << n.cost;
-  }
-};
+// ---------------------- State End -----------------------------------

@@ -7,38 +7,32 @@
 #IncludeRegexTransform: 
 
 ../include/a_star.hpp
-unordered_map
--
 boost/heap/fibonacci_heap.hpp
+-
+boost/heap/d_ary_heap.hpp
+-
+neighbor.hpp
+-
+planresult.hpp
 -
 
 ../include/agent.hpp
-iostream
--
-boost/python/numpy.hpp
--
-boost/python.hpp
--
 
 ../include/cbs.hpp
 a_star.hpp
 -
 
-../include/flatland.hpp
-main_includes.hpp
--
-agent.hpp
--
-boost/python/numpy.hpp
--
-boost/python.hpp
--
-
-../include/main_includes.hpp
-unordered_map
--
+../include/constraint.hpp
 boost/functional/hash.hpp
 -
+
+../include/flatland.hpp
+
+../include/main_includes.hpp
+
+../include/neighbor.hpp
+
+../include/planresult.hpp
 
 /home/marco/Bachelor-Arbeit-KI/own_cbs/main.cpp
 fstream
@@ -55,11 +49,15 @@ boost/lexical_cast.hpp
 -
 boost/program_options.hpp
 -
+boost/functional/hash.hpp
+-
 boost/python/numpy.hpp
 -
 boost/python.hpp
 -
 main_includes.hpp
+-
+constraint.hpp
 -
 cbs.hpp
 -

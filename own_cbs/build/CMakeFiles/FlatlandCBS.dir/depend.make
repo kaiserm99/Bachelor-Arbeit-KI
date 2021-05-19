@@ -4,7 +4,10 @@
 CMakeFiles/FlatlandCBS.dir/main.cpp.o: ../include/a_star.hpp
 CMakeFiles/FlatlandCBS.dir/main.cpp.o: ../include/agent.hpp
 CMakeFiles/FlatlandCBS.dir/main.cpp.o: ../include/cbs.hpp
+CMakeFiles/FlatlandCBS.dir/main.cpp.o: ../include/constraint.hpp
 CMakeFiles/FlatlandCBS.dir/main.cpp.o: ../include/flatland.hpp
 CMakeFiles/FlatlandCBS.dir/main.cpp.o: ../include/main_includes.hpp
+CMakeFiles/FlatlandCBS.dir/main.cpp.o: ../include/neighbor.hpp
+CMakeFiles/FlatlandCBS.dir/main.cpp.o: ../include/planresult.hpp
 CMakeFiles/FlatlandCBS.dir/main.cpp.o: ../main.cpp
 

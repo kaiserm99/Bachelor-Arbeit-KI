@@ -1,10 +1,5 @@
 #pragma once
 
-#include <iostream>
-
-#include <boost/python/numpy.hpp>
-#include <boost/python.hpp>
-
 namespace p = boost::python;
 namespace np = boost::python::numpy;
 
@@ -12,10 +7,11 @@ namespace np = boost::python::numpy;
 template <typename State, typename GridLocation>
 class Agent {
   public:
-    Agent(int handle, State initialState, GridLocation targetLocation, p::object heuristics) : 
+    Agent(int handle, State& initialState, GridLocation& targetLocation, int speed, p::object heuristics) : 
                 handle(handle),
                 initialState(initialState),
                 targetLocation(targetLocation),
+                speed(speed),
                 m_heuristics(p::extract<np::ndarray>(heuristics)) {}
 
 
@@ -34,11 +30,10 @@ class Agent {
     int handle;
     State initialState;
     GridLocation targetLocation;
-    std::vector<State> solution;
-    int soulutionCost;
+    int speed;
 
     friend std::ostream& operator<<(std::ostream& os, const Agent& other) {
-      return os << "Agent " << other.handle << " , init=" << other.initialState << ", target=" << other.targetLocation;
+      return os << "Agent " << other.handle << ", start=(" << other.initialState.y << "," << other.initialState.x << "), target=" << other.targetLocation;
     }
 
   private:
