@@ -1,3 +1,13 @@
+/* Copyright 2021, University of Freiburg
+ * Bachelorarbeit - Foundations of Artificial Intelligence
+ *
+ * Author: Marco Kaiser <kaiserm@informatik.uni-freiburg.de>
+ *
+ * Description: 
+ *
+ * Usage: 
+ */
+
 #include <fstream>
 #include <iostream>
 #include <sstream>
@@ -184,32 +194,39 @@ int mainSearch(FlatlandCBS& f) {
 
 	SearchCBS_t cbs(f);
 
-  std::vector<PlanResult<Action, State> > solution;
-	cbs.search(solution);
+	bool status = cbs.search(f.solution);
 
-  int agentSpeed;
-  for (size_t handle = 0; handle < solution.size(); handle++) {
+  if (!status) return 1;
+
+  for (size_t handle = 0; handle < f.solution.size(); handle++) {
+    p::list handleSolution;
     std::cout << "Solution for: " << handle << std::endl;
-    for (size_t i = 0; i < solution[handle].states.size(); i++) {
-      std::cout << solution[handle].states[i];
+    for (size_t i = 0; i < f.solution[handle].states.size(); i++) {
+      std::cout << f.solution[handle].states[i];
 
-      agentSpeed = f.agents[handle].speed;
+      int agentSpeed = f.agents[handle].speed;
       if (i % agentSpeed == 0) { 
-        std::cout << "->" << solution[handle].actions[i / agentSpeed].first << "(cost: " << solution[handle].actions[i / agentSpeed].second << ")";
+        std::cout << "->" << f.solution[handle].actions[i / agentSpeed].first << "(cost: " << f.solution[handle].actions[i / agentSpeed].second << ")";
       }
       std::cout << std::endl;
     }
-
-    std::cout << "[";
-    for (const auto& a : solution[handle].actions) {
-      std::cout << a.first << ", ";
-    }
-    std::cout << "]" << std::endl;
   }
 
 	return 0;
 }
 
+p::dict getActions(FlatlandCBS& f) {
+  p::dict result;
+  for (int handle = 0; (unsigned) handle < f.solution.size(); handle++) {
+    p::list tmp;
+    for (const auto& a : f.solution[handle].actions) {
+      tmp.append(toInt(a.first));
+    }
+    result[handle] = tmp;
+  }
+  
+  return result;
+}
 
 
 
@@ -220,7 +237,7 @@ BOOST_PYTHON_MODULE(libFlatlandCBS)
   np::initialize();
   using namespace boost::python;
     
-    
   class_<FlatlandCBS>("FlatlandCBS", init<object>());
   def("mainSearch", &mainSearch);
+  def("getActions", &getActions);
 }

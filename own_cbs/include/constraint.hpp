@@ -1,3 +1,13 @@
+/* Copyright 2021, University of Freiburg
+ * Bachelorarbeit - Foundations of Artificial Intelligence
+ *
+ * Author: Marco Kaiser <kaiserm@informatik.uni-freiburg.de>
+ *
+ * Description: 
+ *
+ * Usage: 
+ */
+
 #pragma once
 
 #include <boost/functional/hash.hpp>

@@ -1,5 +1,14 @@
-#pragma once
+/* Copyright 2021, University of Freiburg
+ * Bachelorarbeit - Foundations of Artificial Intelligence
+ *
+ * Author: Marco Kaiser <kaiserm@informatik.uni-freiburg.de>
+ *
+ * Description: 
+ *
+ * Usage: 
+ */
 
+#pragma once
 
 enum class Action {
   Up,
@@ -16,6 +25,16 @@ std::ostream& operator<<(std::ostream& os, const Action& a) {
     case Action::Wait:  os << "4"; break;
   }
   return os;
+}
+
+int toInt(const Action& a) {
+  switch (a) {
+    case Action::Up:    return 2;
+    case Action::Left:  return 1;
+    case Action::Right: return 3;
+    case Action::Wait:  return 4;
+  }
+  assert(0);
 }
 
 // ---------------------- Action End -----------------------------------

@@ -1,0 +1,6 @@
+make all --dry-run --keep-going --print-directory
+make: Entering directory '/home/marco/Bachelor-Arbeit-KI/own_cbs'
+make: Leaving directory '/home/marco/Bachelor-Arbeit-KI/own_cbs'
+ 
+make: *** No rule to make target 'all'.
+ 

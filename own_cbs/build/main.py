@@ -28,7 +28,7 @@ env = RailEnv(
     width=0,
     height=0,
     rail_generator=rail_from_file("../../scratch/test-envs/Test_8/Level_0.pkl"),
-    number_of_agents=1
+    number_of_agents=11
 )
 
 
@@ -39,7 +39,10 @@ cbs = FlatlandCBS.FlatlandCBS(env)
 print(f"Created an reseted the Environment in {time.time()-time_start:5f}sec\n")
 
 
-FlatlandCBS.mainSearch(cbs)
+status = FlatlandCBS.mainSearch(cbs)
+
+print(status)
+print(FlatlandCBS.getActions(cbs))
 
 
 """

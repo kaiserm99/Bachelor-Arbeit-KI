@@ -1,3 +1,13 @@
+/* Copyright 2021, University of Freiburg
+ * Bachelorarbeit - Foundations of Artificial Intelligence
+ *
+ * Author: Marco Kaiser <kaiserm@informatik.uni-freiburg.de>
+ *
+ * Description: 
+ *
+ * Usage: 
+ */
+
 #pragma once
 
 namespace p = boost::python;
@@ -18,6 +28,9 @@ class FlatlandCBS {
     std::unordered_map<GridLocation, std::vector<NewGridLocation>> possibleActions;
 
     void onExpandNode();
+
+    // The final actions get saved here
+    std::vector<PlanResult<Action, State> > solution;
 
   private:
     p::object m_railEnv;
