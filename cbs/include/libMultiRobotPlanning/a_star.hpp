@@ -86,6 +86,7 @@ class AStar {
       Node current = openSet.top();
 
       m_env.onExpandNode(current.state, current.fScore, current.gScore);
+      std::cout << current << std::endl;
 
       if (m_env.isSolution(current.state)) {
         solution.states.clear();

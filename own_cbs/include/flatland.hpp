@@ -27,10 +27,21 @@ class FlatlandCBS {
     std::vector<Agent <State, GridLocation> > agents;
     std::unordered_map<GridLocation, std::vector<NewGridLocation>> possibleActions;
 
+    // Methodes for the CBS search
+    bool getFirstConflict(std::vector<PlanResult <Action, State> >& solution, std::vector<std::pair<size_t, Constraints>>& resultConstraints, std::vector<Constraints>& constraints);
+    void handleConflicts(const State& conflictState1, const State& conflictState2, const int errorTime, const size_t handle1, const size_t handle2, std::vector<PlanResult <Action, State> >& solution, std::vector<std::pair<size_t, Constraints>>& resultConstraints, std::vector<Constraints>& constraints, bool edge);
+    State getCriticalState(int conflictTime, size_t handle1, size_t handle2, const std::vector<PlanResult <Action, State> >& solution);
+
+
+    // Statistics methodes
     void onExpandNode();
+    void onExpandHighLevelNode();
+    p::dict getStatistic();
 
     // The final actions get saved here
     std::vector<PlanResult<Action, State> > solution;
+
+    
 
   private:
     p::object m_railEnv;
@@ -41,5 +52,7 @@ class FlatlandCBS {
     np::ndarray m_map;
     const Constraints* m_constraints;
 
-    size_t nodeExpandCount;
+    // Statistic variables
+    size_t nodeExpandCount = 0;
+    size_t highLevelNodeExpandCount = 0;
 };

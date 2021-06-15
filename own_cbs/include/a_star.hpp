@@ -55,6 +55,7 @@ class AStar {
           auto iter = cameFrom.find(current.state);
 
           std::vector<State> tmpStates;
+          std::vector<std::pair <Action, int> > tmpActions;
 
           while (iter != cameFrom.end()) {
           
@@ -66,25 +67,34 @@ class AStar {
           tmpStates.emplace_back(agent.initialState);
 
           std::reverse(tmpStates.begin(), tmpStates.end());
+          std::reverse(solution.actions.begin(), solution.actions.end());
 
           int time = 0;
+          int index = 0;
           for (const auto& state : tmpStates) {
             
             if (&state == &tmpStates.back()) break;
 
             solution.states.emplace_back(state.setTime(time));
+            tmpActions.emplace_back(solution.actions[index]);
 
+            // If there is a wait action at this state, we do not replicate it
+            if (solution.actions[index].first == Action::Wait) {
+              for (int i = 1; i < agent.speed; i++) {
+                tmpActions.emplace_back(solution.actions[index]);
+              } 
+            }
+            
+            // Add more states, based on the agent speed
             for (int i = 1; i < agent.speed; i++) {
               solution.states.emplace_back(solution.states.back().timePlusT(1));
-            }
+            } 
+
             time += agent.speed;
+            index++;
           }
 
-
-
-          
-          std::reverse(solution.actions.begin(), solution.actions.end());
-
+          solution.actions = tmpActions;
           solution.cost = solution.states.size();
 
           return true;
@@ -136,6 +146,11 @@ class AStar {
 
       Node(const State& state, int fScore, int gScore) : state(state), fScore(fScore), gScore(gScore) {}
 
+      friend std::ostream& operator<<(std::ostream& os, const Node& node) {
+        os << "state: " << node.state << " fScore: " << node.fScore << " gScore: " << node.gScore;
+        return os;
+      }
+
       State state;
       int fScore;
       int gScore;
@@ -146,8 +161,10 @@ class AStar {
       }
 
       typename boost::heap::fibonacci_heap<Node>::handle_type handle;
+      // typename boost::heap::d_ary_heap<Node, boost::heap::arity<2>, boost::heap::mutable_<true> >::handle_type handle;
     };
 
     typedef typename boost::heap::fibonacci_heap<Node> openSet_t;
+    // typedef typename boost::heap::d_ary_heap<Node, boost::heap::arity<2>, boost::heap::mutable_<true> > openSet_t;
     typedef typename openSet_t::handle_type fibHeapHandle_t;
 };

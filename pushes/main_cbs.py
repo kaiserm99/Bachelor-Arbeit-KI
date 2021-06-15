@@ -402,9 +402,9 @@ def main():
                   max_duration=10
         )
 
-        speed_ration_map = {1.: 1/2,
-                            1. / 2.: 1/2,
-                            1. / 3.: 0.,
+        speed_ration_map = {1.: 0,
+                            1. / 2.: 0,
+                            1. / 3.: 1.,
                             1. / 4.: 0.}
 
         env = RailEnv(
@@ -416,7 +416,7 @@ def main():
         )
 
         _, info = env.reset()
-        # set_speed(env, speed_ration_map)
+        set_speed(env, speed_ration_map)
 
         print(info)
 

@@ -96,10 +96,10 @@ struct State {
   State timePlusT(const int t) const { return State(time+t, y, x, dir); }
 
   bool operator==(const State& s) const {
-    return time == s.time && x == s.x && y == s.y;
+    return time == s.time && y == s.y && x == s.x;
   }
 
-  bool equalExceptTime(const State& s) const { return x == s.x && y == s.y; }
+  bool equalExceptTime(const State& s) const { return y == s.y && x == s.x; }
 
   friend std::ostream& operator<<(std::ostream& os, const State& s) {
     return os << s.time << ": (" << s.y << "," << s.x << "," << s.dir << ")";
@@ -120,4 +120,5 @@ namespace std {
   };
 }
 
+State defaultState = State(-1, -1, -1, -1);
 // ---------------------- State End -----------------------------------

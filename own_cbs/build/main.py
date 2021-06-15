@@ -18,31 +18,40 @@ def set_speed(env, speed_ration_map):
 
 
 
-speed_ration_map = {1. / 1.: 0.,
+speed_ration_map = {1. / 1.: 1.,
                     1. / 2.: 0.,
-                    1. / 3.: 1.,
+                    1. / 3.: 0.,
                     1. / 4.: 0.}
 
 time_start = time.time()
 env = RailEnv(
     width=0,
     height=0,
-    rail_generator=rail_from_file("../../scratch/test-envs/Test_8/Level_0.pkl"),
-    number_of_agents=11
+    rail_generator=rail_from_file("../../scratch/test-envs/Test_6/Level_0.pkl"),
+    number_of_agents=2
 )
 
 
 _, info = env.reset()
-set_speed(env, speed_ration_map)
+#set_speed(env, speed_ration_map)
 
 cbs = FlatlandCBS.FlatlandCBS(env)
 print(f"Created an reseted the Environment in {time.time()-time_start:5f}sec\n")
 
-
+time_start = time.time()
 status = FlatlandCBS.mainSearch(cbs)
 
-print(status)
+if status == 0:
+    print(f"\nFound a solution in {time.time()-time_start:5f}sec\n")
+    print(cbs.getStatistic())
+
+else:
+    exit(1)
+
+
 print(FlatlandCBS.getActions(cbs))
+
+
 
 
 """
