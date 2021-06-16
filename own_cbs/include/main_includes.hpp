@@ -86,6 +86,10 @@ struct NewGridLocation {
 struct State {
   State(int time, int y, int x, int dir) : time(time), y(y), x(x), dir(dir) {}
 
+  State(int time, GridLocation loc, int dir = -1) : time(time), y(loc.y), x(loc.x), dir(dir) {}
+
+  State(int time, State s) : time(time), y(s.y), x(s.x), dir(s.dir) {}
+
   int time;
   int y;
   int x;

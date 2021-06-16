@@ -5,6 +5,7 @@ CMakeFiles/FlatlandCBS.dir/main.cpp.o
  ../include/a_star.hpp
  ../include/agent.hpp
  ../include/cbs.hpp
+ ../include/cbs_functions.hpp
  ../include/constraint.hpp
  ../include/flatland.hpp
  ../include/main_includes.hpp

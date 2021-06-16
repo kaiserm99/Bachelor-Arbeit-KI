@@ -30,6 +30,7 @@ namespace np = boost::python::numpy;
 #include <cbs.hpp>
 #include <agent.hpp>
 #include <flatland.hpp>
+#include <cbs_functions.hpp>
 
 
 
@@ -189,28 +190,8 @@ void FlatlandCBS::onExpandNode() { nodeExpandCount++; }
 void FlatlandCBS::onExpandHighLevelNode() { highLevelNodeExpandCount++; }
 
 
-State FlatlandCBS::getCriticalState(int conflictTime, size_t handle1, size_t handle2, const std::vector<PlanResult <Action, State> >& solution) {
 
-  for (size_t t_back = conflictTime; t_back >= 0; t_back--) {
-
-    State checkState = solution[handle1].states[t_back];
-
-    if (m_edges[Location(checkState.y, checkState.x, checkState.dir)].size() < 2) continue;
-
-  }
-
-  return defaultState;
-}
-
-
-void FlatlandCBS::handleConflicts(const State& conflictState1, const State& conflictState2, const int conflictTime, const size_t handle1, const size_t handle2, std::vector<PlanResult <Action, State> >& solution, std::vector<std::pair<size_t, Constraints>>& resultConstraints, std::vector<Constraints>& constraints, bool edge) {
-
-  if (!edge) std::cout << std::endl << "[t=" << conflictTime << "] Vertex conflict at: " << conflictState1 << ", " << conflictState2 << std::endl;
-  else std::cout << std::endl << "[t=" << conflictTime << "] Edge conflict at: " << conflictState1 << ", " << conflictState2 << std::endl;
-}
-
-
-bool FlatlandCBS::getFirstConflict(std::vector<PlanResult <Action, State> >& solution, std::vector<std::pair<size_t, Constraints>>& resultConstraints, std::vector<Constraints>& constraints) {
+bool FlatlandCBS::getFirstConflict(std::vector<PlanResult <Action, State> >& solution, std::vector<std::pair<size_t, Constraint>>& resultConstraints) {
 
   size_t max_t = 0;
   for (const auto& sol : solution) {
@@ -239,7 +220,7 @@ bool FlatlandCBS::getFirstConflict(std::vector<PlanResult <Action, State> >& sol
         if (conflictState1.equalExceptTime(conflictState2)) {
 
           // TODO: Check for an head error
-          handleConflicts(conflictState1, conflictState2, time, handle1, handle2, solution, resultConstraints, constraints, 0);
+          handleConflicts(conflictState1, conflictState2, time, handle1, handle2, solution, resultConstraints, 0);
 
           return true;
         }
@@ -266,7 +247,7 @@ bool FlatlandCBS::getFirstConflict(std::vector<PlanResult <Action, State> >& sol
         // Found a Edge error
         if (conflictState1a.equalExceptTime(conflictState2b) && conflictState1b.equalExceptTime(conflictState2a)) {
 
-          handleConflicts(conflictState1b, conflictState2b, time, handle1, handle2, solution, resultConstraints, constraints, 1);
+          handleConflicts(conflictState1b, conflictState2a, time, handle1, handle2, solution, resultConstraints, 1);
 
           return true;
         }

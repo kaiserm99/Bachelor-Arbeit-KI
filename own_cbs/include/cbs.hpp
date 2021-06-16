@@ -26,7 +26,7 @@ class SearchCBS {
       start.cost = 0;
       start.id = 0;
     
-      // Constraints tst; tst.add(Constraint(0, 9, 17, 8));
+      // Constraints tst; tst.add(Constraint(0, 9, 18, 19)); start.constraints[0] = tst;
 
 
       // Compute the initial search and check if every solution is somehow possigle
@@ -52,16 +52,15 @@ class SearchCBS {
       int id = 1;
       while (!open.empty()) {
 
-        // Get the high level node with the lowest costs
-        HighLevelNode P = open.top();
+        HighLevelNode P = open.top();  // Get the high level node with the lowest costs
 
         m_flatlandCBS.onExpandHighLevelNode();  // Statistics
 
         open.pop();
 
-        std::vector<std::pair<size_t, Constraints>> resultConstraints;
+        std::vector<std::pair<size_t, Constraint>> resultConstraints;
 
-        if (!m_flatlandCBS.getFirstConflict(P.solution, resultConstraints, P.constraints)) {
+        if (!m_flatlandCBS.getFirstConflict(P.solution, resultConstraints)) {
 
           // std::cout << "Final HighLevelNode:" << std::endl << P << std::endl << std::endl;
 

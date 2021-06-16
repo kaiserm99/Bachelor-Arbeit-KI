@@ -28,9 +28,12 @@ class FlatlandCBS {
     std::unordered_map<GridLocation, std::vector<NewGridLocation>> possibleActions;
 
     // Methodes for the CBS search
-    bool getFirstConflict(std::vector<PlanResult <Action, State> >& solution, std::vector<std::pair<size_t, Constraints>>& resultConstraints, std::vector<Constraints>& constraints);
-    void handleConflicts(const State& conflictState1, const State& conflictState2, const int errorTime, const size_t handle1, const size_t handle2, std::vector<PlanResult <Action, State> >& solution, std::vector<std::pair<size_t, Constraints>>& resultConstraints, std::vector<Constraints>& constraints, bool edge);
-    State getCriticalState(int conflictTime, size_t handle1, size_t handle2, const std::vector<PlanResult <Action, State> >& solution);
+    bool getFirstConflict(std::vector<PlanResult <Action, State> >& solution, std::vector<std::pair<size_t, Constraint>>& resultConstraints);
+    void handleConflicts(const State& conflictState1, const State& conflictState2, const int conflictTime, const size_t handle1, const size_t handle2, std::vector<PlanResult <Action, State> >& solution, std::vector<std::pair<size_t, Constraint>>& resultConstraints, bool edge);
+    
+    std::pair<int, State> getCriticalState(const State& conflictState1, const State& conflictState2, size_t handle1, size_t handle2, const std::vector<PlanResult <Action, State> >& solution);
+    std::pair<bool, State> getNextState(const State& state, const int handle, const std::vector<PlanResult <Action, State> >& solution);
+    std::pair<bool, State> getPrevState(const State& state, const int handle, const std::vector<PlanResult <Action, State> >& solution);
 
 
     // Statistics methodes

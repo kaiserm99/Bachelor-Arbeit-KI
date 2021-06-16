@@ -22,6 +22,8 @@ planresult.hpp
 a_star.hpp
 -
 
+../include/cbs_functions.hpp
+
 ../include/constraint.hpp
 boost/functional/hash.hpp
 -
@@ -64,5 +66,7 @@ cbs.hpp
 agent.hpp
 -
 flatland.hpp
+-
+cbs_functions.hpp
 -
 
