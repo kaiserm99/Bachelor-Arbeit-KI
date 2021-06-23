@@ -1,0 +1,22 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=normal] (0) at (2, 0) {3};
+		\node [style=normal] (1) at (4, 0) {2};
+		\node [style=normal] (3) at (6, 0) {1};
+		\node [style=normal] (4) at (8, 0) {0};
+		\node [style=normal] (6) at (-2, -2.5) {7};
+		\node [style=normal] (7) at (0, -2.5) {8};
+		\node [style=normal] (8) at (2, -2.5) {9};
+		\node [style=normal] (9) at (4, -2.5) {10};
+		\node [style=red] (10) at (-4, 0) {6};
+		\node [style=red] (11) at (-4, -2.5) {6};
+		\node [style=green] (12) at (0, 0) {4};
+		\node [style=normal] (13) at (0, 2) {};
+		\node [style=normal] (14) at (-2, 0) {5};
+		\node [style=normal] (15) at (6, -2.5) {11};
+		\node [style=normal] (16) at (8, -2.5) {12};
+		\node [style=normal] (17) at (6, -4.5) {};
+		\node [style=none] (18) at (-7, 0) {Agent 1:};
+		\node [style=none] (19) at (-7, -2.5) {Agent 2:};
+	\end{pgfonlayer}
+\end{tikzpicture}

@@ -15,6 +15,13 @@
 
 struct Constraint {
 
+  Constraint() {
+    startingTime = -1;
+    endingTime = -1;
+    y = -1;
+    x = -1;
+  }
+
   Constraint(int startingTime, int endingTime, int y, int x) : startingTime(startingTime), endingTime(endingTime), y(y), x(x)  {}
   int startingTime;
   int endingTime;
@@ -30,7 +37,9 @@ struct Constraint {
   }
 
   friend std::ostream& operator<<(std::ostream& os, const Constraint& c) {
-    return os << "C(" << c.startingTime << "-" << c.endingTime << ": y=" << c.y << ", x=" << c.x << ")";
+    if (c.startingTime > 0) return os << "C(" << c.startingTime << "->" << c.endingTime << ": y=" << c.y << ", x=" << c.x << ")";
+
+    return os << "I(" << c.startingTime << "->" << c.endingTime << ": y=" << c.y << ", x=" << c.x << ")";
   }
 };
 
@@ -39,10 +48,17 @@ struct Constraint {
 struct Constraints {
 
   std::vector<Constraint> constraints;
+  int initialConstraintEndTime = -1;
 
   // Add a constraint to the list
   void add(const Constraint& other) {
     constraints.emplace_back(other);
+  }
+
+  void addInitial(const int endingTime) {
+    if (initialConstraintEndTime < endingTime) {
+      initialConstraintEndTime = endingTime;
+    }
   }
 
   // See: C++ extend a vector with another vector, (https://stackoverflow.com/questions/313432/c-extend-a-vector-with-another-vector)
@@ -51,14 +67,16 @@ struct Constraints {
     constraints.insert(constraints.end(), other.constraints.begin(), other.constraints.end());
   }
 
+  bool checkInitial() const {
+    return initialConstraintEndTime != -1;
+  }
+
   // If there is a Constraint where the current state is bewtween the timestamp and the same position, return false
   bool checkState(const State& s, const int speed) const {
     for (const auto& c : constraints) {
 
       
       if (s.y != c.y || s.x != c.x) continue;  // If the Constraint and the State has not the same Position --> no need to check
-      std::cout << c << std::endl;
-      std::cout << s.time << std::endl;
 
       // Check all the States with depending on the speed afterwards
       for (int offset = 0; offset < speed; offset++) {
@@ -69,6 +87,8 @@ struct Constraints {
   }
 
   friend std::ostream& operator<<(std::ostream& os, const Constraints& c) {
+    if (c.checkInitial()) os << "I(0->" << c.initialConstraintEndTime << ")" << std::endl;
+
     for (const auto& vc : c.constraints) { os << vc << std::endl; }
 
     return os;

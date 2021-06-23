@@ -1,197 +1,48 @@
 agents:
-- direction: 0
+- direction: 1
   goal:
-  - 22
-  - 10
+  - 12
+  - 16
   name: agent0
-  speed: 3
+  speed: 1
   start:
   - 18
-  - 8
-- direction: 0
+  - 18
+- direction: 1
   goal:
-  - 9
-  - 6
+  - 13
+  - 8
   name: agent1
-  speed: 3
+  speed: 1
   start:
-  - 18
-  - 11
-- direction: 0
-  goal:
-  - 18
-  - 11
-  name: agent2
-  speed: 3
-  start:
-  - 16
-  - 9
-- direction: 2
-  goal:
-  - 17
-  - 10
-  name: agent3
-  speed: 3
-  start:
-  - 11
-  - 6
-- direction: 2
-  goal:
-  - 10
-  - 9
-  name: agent4
-  speed: 3
-  start:
+  - 12
   - 15
-  - 4
-- direction: 0
-  goal:
-  - 5
-  - 6
-  name: agent5
-  speed: 3
-  start:
-  - 13
-  - 10
-- direction: 2
-  goal:
-  - 0
-  - 11
-  name: agent6
-  speed: 3
-  start:
-  - 21
-  - 4
-- direction: 0
-  goal:
-  - 16
-  - 10
-  name: agent7
-  speed: 3
-  start:
-  - 7
-  - 7
-- direction: 3
-  goal:
-  - 11
-  - 4
-  name: agent8
-  speed: 3
-  start:
-  - 20
-  - 9
-- direction: 1
-  goal:
-  - 18
-  - 8
-  name: agent9
-  speed: 3
-  start:
-  - 0
-  - 7
-- direction: 1
-  goal:
-  - 2
-  - 11
-  name: agent10
-  speed: 3
-  start:
-  - 23
-  - 10
-- direction: 1
-  goal:
-  - 13
-  - 8
-  name: agent11
-  speed: 3
-  start:
-  - 3
-  - 7
-- direction: 2
-  goal:
-  - 11
-  - 5
-  name: agent12
-  speed: 3
-  start:
-  - 6
-  - 6
 map:
   critical:
-  - - 0
-    - 11
-  - - 2
-    - 6
-  - - 2
-    - 11
-  - - 3
-    - 6
-  - - 3
-    - 7
-  - - 5
-    - 6
-  - - 7
-    - 6
-  - - 7
-    - 7
-  - - 8
-    - 6
-  - - 9
-    - 6
-  - - 10
-    - 5
-  - - 10
-    - 6
-  - - 10
-    - 9
-  - - 11
-    - 4
-  - - 11
-    - 5
-  - - 11
-    - 6
   - - 12
-    - 8
-  - - 12
-    - 9
+    - 16
   - - 13
+    - 8
+  - - 14
     - 4
-  - - 13
+  - - 14
+    - 5
+  - - 14
+    - 7
+  - - 14
     - 8
-  - - 13
-    - 9
-  - - 15
-    - 9
-  - - 15
-    - 10
-  - - 16
-    - 9
-  - - 16
-    - 10
-  - - 17
-    - 9
-  - - 17
-    - 10
-  - - 18
-    - 8
-  - - 18
+  - - 14
     - 11
-  - - 19
-    - 9
-  - - 19
-    - 10
-  - - 20
-    - 9
-  - - 20
-    - 10
-  - - 21
-    - 9
-  - - 21
-    - 10
-  - - 22
-    - 10
-  - - 23
-    - 9
+  - - 17
+    - 13
+  - - 17
+    - 16
+  - - 17
+    - 17
+  - - 17
+    - 19
+  - - 17
+    - 20
   dimensions:
   - 25
   - 25
@@ -199,2304 +50,1728 @@ map:
   - action: 3
     direction: 0
     from:
-    - 0
-    - 6
+    - 12
+    - 11
     new_direction: 1
     to:
-    - 0
-    - 7
+    - 12
+    - 12
   - action: 1
     direction: 3
     from:
-    - 0
-    - 6
+    - 12
+    - 11
     new_direction: 2
     to:
+    - 13
+    - 11
+  - action: 2
+    direction: 1
+    from:
+    - 12
+    - 12
+    new_direction: 1
+    to:
+    - 12
+    - 13
+  - action: 2
+    direction: 3
+    from:
+    - 12
+    - 12
+    new_direction: 3
+    to:
+    - 12
+    - 11
+  - action: 2
+    direction: 1
+    from:
+    - 12
+    - 13
+    new_direction: 1
+    to:
+    - 12
+    - 14
+  - action: 2
+    direction: 3
+    from:
+    - 12
+    - 13
+    new_direction: 3
+    to:
+    - 12
+    - 12
+  - action: 2
+    direction: 1
+    from:
+    - 12
+    - 14
+    new_direction: 1
+    to:
+    - 12
+    - 15
+  - action: 2
+    direction: 3
+    from:
+    - 12
+    - 14
+    new_direction: 3
+    to:
+    - 12
+    - 13
+  - action: 2
+    direction: 1
+    from:
+    - 12
+    - 15
+    new_direction: 1
+    to:
+    - 12
+    - 16
+  - action: 2
+    direction: 3
+    from:
+    - 12
+    - 15
+    new_direction: 3
+    to:
+    - 12
+    - 14
+  - action: 2
+    direction: 1
+    from:
+    - 12
+    - 16
+    new_direction: 1
+    to:
+    - 12
+    - 17
+  - action: 2
+    direction: 3
+    from:
+    - 12
+    - 16
+    new_direction: 3
+    to:
+    - 12
+    - 15
+  - action: 2
+    direction: 1
+    from:
+    - 12
+    - 17
+    new_direction: 1
+    to:
+    - 12
+    - 18
+  - action: 2
+    direction: 3
+    from:
+    - 12
+    - 17
+    new_direction: 3
+    to:
+    - 12
+    - 16
+  - action: 2
+    direction: 1
+    from:
+    - 12
+    - 18
+    new_direction: 1
+    to:
+    - 12
+    - 19
+  - action: 2
+    direction: 3
+    from:
+    - 12
+    - 18
+    new_direction: 3
+    to:
+    - 12
+    - 17
+  - action: 2
+    direction: 1
+    from:
+    - 12
+    - 19
+    new_direction: 1
+    to:
+    - 12
+    - 20
+  - action: 2
+    direction: 3
+    from:
+    - 12
+    - 19
+    new_direction: 3
+    to:
+    - 12
+    - 18
+  - action: 2
+    direction: 1
+    from:
+    - 12
+    - 20
+    new_direction: 1
+    to:
+    - 12
+    - 21
+  - action: 2
+    direction: 3
+    from:
+    - 12
+    - 20
+    new_direction: 3
+    to:
+    - 12
+    - 19
+  - action: 2
+    direction: 1
+    from:
+    - 12
+    - 21
+    new_direction: 1
+    to:
+    - 12
+    - 22
+  - action: 2
+    direction: 3
+    from:
+    - 12
+    - 21
+    new_direction: 3
+    to:
+    - 12
+    - 20
+  - action: 2
+    direction: 1
+    from:
+    - 12
+    - 22
+    new_direction: 1
+    to:
+    - 12
+    - 23
+  - action: 2
+    direction: 3
+    from:
+    - 12
+    - 22
+    new_direction: 3
+    to:
+    - 12
+    - 21
+  - action: 1
+    direction: 0
+    from:
+    - 12
+    - 23
+    new_direction: 3
+    to:
+    - 12
+    - 22
+  - action: 3
+    direction: 1
+    from:
+    - 12
+    - 23
+    new_direction: 2
+    to:
+    - 13
+    - 23
+  - action: 3
+    direction: 0
+    from:
+    - 13
+    - 4
+    new_direction: 1
+    to:
+    - 13
+    - 5
+  - action: 1
+    direction: 3
+    from:
+    - 13
+    - 4
+    new_direction: 2
+    to:
+    - 14
+    - 4
+  - action: 2
+    direction: 1
+    from:
+    - 13
+    - 5
+    new_direction: 1
+    to:
+    - 13
+    - 6
+  - action: 2
+    direction: 3
+    from:
+    - 13
+    - 5
+    new_direction: 3
+    to:
+    - 13
+    - 4
+  - action: 2
+    direction: 1
+    from:
+    - 13
+    - 6
+    new_direction: 1
+    to:
+    - 13
+    - 7
+  - action: 2
+    direction: 3
+    from:
+    - 13
+    - 6
+    new_direction: 3
+    to:
+    - 13
+    - 5
+  - action: 2
+    direction: 1
+    from:
+    - 13
+    - 7
+    new_direction: 1
+    to:
+    - 13
+    - 8
+  - action: 2
+    direction: 3
+    from:
+    - 13
+    - 7
+    new_direction: 3
+    to:
+    - 13
+    - 6
+  - action: 1
+    direction: 0
+    from:
+    - 13
+    - 8
+    new_direction: 3
+    to:
+    - 13
+    - 7
+  - action: 3
+    direction: 1
+    from:
+    - 13
+    - 8
+    new_direction: 2
+    to:
+    - 14
+    - 8
+  - action: 2
+    direction: 0
+    from:
+    - 13
+    - 11
+    new_direction: 0
+    to:
+    - 12
+    - 11
+  - action: 2
+    direction: 2
+    from:
+    - 13
+    - 11
+    new_direction: 2
+    to:
+    - 14
+    - 11
+  - action: 2
+    direction: 0
+    from:
+    - 13
+    - 23
+    new_direction: 0
+    to:
+    - 12
+    - 23
+  - action: 2
+    direction: 2
+    from:
+    - 13
+    - 23
+    new_direction: 2
+    to:
+    - 14
+    - 23
+  - action: 3
+    direction: 0
+    from:
+    - 14
     - 1
-    - 6
-  - action: 2
-    direction: 1
-    from:
-    - 0
-    - 7
     new_direction: 1
     to:
-    - 0
-    - 8
-  - action: 2
-    direction: 3
-    from:
-    - 0
-    - 7
-    new_direction: 3
-    to:
-    - 0
-    - 6
-  - action: 2
-    direction: 1
-    from:
-    - 0
-    - 8
-    new_direction: 1
-    to:
-    - 0
-    - 9
-  - action: 2
-    direction: 3
-    from:
-    - 0
-    - 8
-    new_direction: 3
-    to:
-    - 0
-    - 7
-  - action: 2
-    direction: 1
-    from:
-    - 0
-    - 9
-    new_direction: 1
-    to:
-    - 0
-    - 10
-  - action: 2
-    direction: 3
-    from:
-    - 0
-    - 9
-    new_direction: 3
-    to:
-    - 0
-    - 8
-  - action: 2
-    direction: 1
-    from:
-    - 0
-    - 10
-    new_direction: 1
-    to:
-    - 0
-    - 11
-  - action: 2
-    direction: 3
-    from:
-    - 0
-    - 10
-    new_direction: 3
-    to:
-    - 0
-    - 9
+    - 14
+    - 2
   - action: 1
-    direction: 0
+    direction: 3
     from:
-    - 0
-    - 11
-    new_direction: 3
-    to:
-    - 0
-    - 10
-  - action: 3
-    direction: 1
-    from:
-    - 0
-    - 11
-    new_direction: 2
-    to:
+    - 14
     - 1
-    - 11
-  - action: 2
-    direction: 0
-    from:
+    new_direction: 2
+    to:
+    - 15
     - 1
-    - 6
-    new_direction: 0
-    to:
-    - 0
-    - 6
   - action: 2
-    direction: 2
+    direction: 1
     from:
+    - 14
+    - 2
+    new_direction: 1
+    to:
+    - 14
+    - 3
+  - action: 2
+    direction: 3
+    from:
+    - 14
+    - 2
+    new_direction: 3
+    to:
+    - 14
     - 1
+  - action: 2
+    direction: 1
+    from:
+    - 14
+    - 3
+    new_direction: 1
+    to:
+    - 14
+    - 4
+  - action: 2
+    direction: 3
+    from:
+    - 14
+    - 3
+    new_direction: 3
+    to:
+    - 14
+    - 2
+  - action: 1
+    direction: 1
+    from:
+    - 14
+    - 4
+    new_direction: 0
+    to:
+    - 13
+    - 4
+  - action: 2
+    direction: 1
+    from:
+    - 14
+    - 4
+    new_direction: 1
+    to:
+    - 14
+    - 5
+  - action: 3
+    direction: 2
+    from:
+    - 14
+    - 4
+    new_direction: 3
+    to:
+    - 14
+    - 3
+  - action: 2
+    direction: 3
+    from:
+    - 14
+    - 4
+    new_direction: 3
+    to:
+    - 14
+    - 3
+  - action: 1
+    direction: 0
+    from:
+    - 14
+    - 5
+    new_direction: 3
+    to:
+    - 14
+    - 4
+  - action: 2
+    direction: 1
+    from:
+    - 14
+    - 5
+    new_direction: 1
+    to:
+    - 14
     - 6
+  - action: 3
+    direction: 1
+    from:
+    - 14
+    - 5
     new_direction: 2
     to:
-    - 2
+    - 15
+    - 5
+  - action: 2
+    direction: 3
+    from:
+    - 14
+    - 5
+    new_direction: 3
+    to:
+    - 14
+    - 4
+  - action: 2
+    direction: 1
+    from:
+    - 14
     - 6
+    new_direction: 1
+    to:
+    - 14
+    - 7
+  - action: 2
+    direction: 3
+    from:
+    - 14
+    - 6
+    new_direction: 3
+    to:
+    - 14
+    - 5
+  - action: 3
+    direction: 0
+    from:
+    - 14
+    - 7
+    new_direction: 1
+    to:
+    - 14
+    - 8
+  - action: 2
+    direction: 1
+    from:
+    - 14
+    - 7
+    new_direction: 1
+    to:
+    - 14
+    - 8
+  - action: 1
+    direction: 3
+    from:
+    - 14
+    - 7
+    new_direction: 2
+    to:
+    - 15
+    - 7
+  - action: 2
+    direction: 3
+    from:
+    - 14
+    - 7
+    new_direction: 3
+    to:
+    - 14
+    - 6
+  - action: 2
+    direction: 1
+    from:
+    - 14
+    - 8
+    new_direction: 1
+    to:
+    - 14
+    - 9
+  - action: 1
+    direction: 2
+    from:
+    - 14
+    - 8
+    new_direction: 1
+    to:
+    - 14
+    - 9
+  - action: 2
+    direction: 3
+    from:
+    - 14
+    - 8
+    new_direction: 3
+    to:
+    - 14
+    - 7
+  - action: 3
+    direction: 3
+    from:
+    - 14
+    - 8
+    new_direction: 0
+    to:
+    - 13
+    - 8
+  - action: 2
+    direction: 1
+    from:
+    - 14
+    - 9
+    new_direction: 1
+    to:
+    - 14
+    - 10
+  - action: 2
+    direction: 3
+    from:
+    - 14
+    - 9
+    new_direction: 3
+    to:
+    - 14
+    - 8
+  - action: 2
+    direction: 1
+    from:
+    - 14
+    - 10
+    new_direction: 1
+    to:
+    - 14
+    - 11
+  - action: 2
+    direction: 3
+    from:
+    - 14
+    - 10
+    new_direction: 3
+    to:
+    - 14
+    - 9
   - action: 2
     direction: 0
     from:
+    - 14
+    - 11
+    new_direction: 0
+    to:
+    - 13
+    - 11
+  - action: 3
+    direction: 0
+    from:
+    - 14
+    - 11
+    new_direction: 1
+    to:
+    - 14
+    - 12
+  - action: 1
+    direction: 1
+    from:
+    - 14
+    - 11
+    new_direction: 0
+    to:
+    - 13
+    - 11
+  - action: 2
+    direction: 1
+    from:
+    - 14
+    - 11
+    new_direction: 1
+    to:
+    - 14
+    - 12
+  - action: 2
+    direction: 2
+    from:
+    - 14
+    - 11
+    new_direction: 2
+    to:
+    - 15
+    - 11
+  - action: 3
+    direction: 2
+    from:
+    - 14
+    - 11
+    new_direction: 3
+    to:
+    - 14
+    - 10
+  - action: 1
+    direction: 3
+    from:
+    - 14
+    - 11
+    new_direction: 2
+    to:
+    - 15
+    - 11
+  - action: 2
+    direction: 3
+    from:
+    - 14
+    - 11
+    new_direction: 3
+    to:
+    - 14
+    - 10
+  - action: 2
+    direction: 1
+    from:
+    - 14
+    - 12
+    new_direction: 1
+    to:
+    - 14
+    - 13
+  - action: 2
+    direction: 3
+    from:
+    - 14
+    - 12
+    new_direction: 3
+    to:
+    - 14
+    - 11
+  - action: 1
+    direction: 0
+    from:
+    - 14
+    - 13
+    new_direction: 3
+    to:
+    - 14
+    - 12
+  - action: 3
+    direction: 1
+    from:
+    - 14
+    - 13
+    new_direction: 2
+    to:
+    - 15
+    - 13
+  - action: 2
+    direction: 0
+    from:
+    - 14
+    - 23
+    new_direction: 0
+    to:
+    - 13
+    - 23
+  - action: 2
+    direction: 2
+    from:
+    - 14
+    - 23
+    new_direction: 2
+    to:
+    - 15
+    - 23
+  - action: 2
+    direction: 0
+    from:
+    - 15
     - 1
-    - 11
     new_direction: 0
     to:
-    - 0
-    - 11
-  - action: 2
-    direction: 2
-    from:
+    - 14
     - 1
-    - 11
-    new_direction: 2
-    to:
-    - 2
-    - 11
   - action: 2
-    direction: 0
+    direction: 2
     from:
-    - 2
-    - 6
-    new_direction: 0
-    to:
+    - 15
     - 1
-    - 6
-  - action: 1
-    direction: 2
-    from:
-    - 2
-    - 6
-    new_direction: 1
-    to:
-    - 2
-    - 7
-  - action: 2
-    direction: 2
-    from:
-    - 2
-    - 6
     new_direction: 2
     to:
-    - 3
-    - 6
-  - action: 3
-    direction: 3
-    from:
-    - 2
-    - 6
-    new_direction: 0
-    to:
+    - 16
     - 1
-    - 6
   - action: 1
-    direction: 0
+    direction: 2
     from:
-    - 2
+    - 15
+    - 5
+    new_direction: 1
+    to:
+    - 15
+    - 6
+  - action: 3
+    direction: 3
+    from:
+    - 15
+    - 5
+    new_direction: 0
+    to:
+    - 14
+    - 5
+  - action: 2
+    direction: 1
+    from:
+    - 15
+    - 6
+    new_direction: 1
+    to:
+    - 15
+    - 7
+  - action: 2
+    direction: 3
+    from:
+    - 15
+    - 6
+    new_direction: 3
+    to:
+    - 15
+    - 5
+  - action: 1
+    direction: 1
+    from:
+    - 15
+    - 7
+    new_direction: 0
+    to:
+    - 14
+    - 7
+  - action: 3
+    direction: 2
+    from:
+    - 15
     - 7
     new_direction: 3
     to:
-    - 2
+    - 15
     - 6
-  - action: 3
-    direction: 1
-    from:
-    - 2
-    - 7
-    new_direction: 2
-    to:
-    - 3
-    - 7
   - action: 2
     direction: 0
     from:
-    - 2
+    - 15
     - 11
     new_direction: 0
     to:
+    - 14
+    - 11
+  - action: 2
+    direction: 2
+    from:
+    - 15
+    - 11
+    new_direction: 2
+    to:
+    - 16
+    - 11
+  - action: 2
+    direction: 0
+    from:
+    - 15
+    - 13
+    new_direction: 0
+    to:
+    - 14
+    - 13
+  - action: 2
+    direction: 2
+    from:
+    - 15
+    - 13
+    new_direction: 2
+    to:
+    - 16
+    - 13
+  - action: 2
+    direction: 0
+    from:
+    - 15
+    - 23
+    new_direction: 0
+    to:
+    - 14
+    - 23
+  - action: 2
+    direction: 2
+    from:
+    - 15
+    - 23
+    new_direction: 2
+    to:
+    - 16
+    - 23
+  - action: 2
+    direction: 0
+    from:
+    - 16
     - 1
+    new_direction: 0
+    to:
+    - 15
+    - 1
+  - action: 2
+    direction: 2
+    from:
+    - 16
+    - 1
+    new_direction: 2
+    to:
+    - 17
+    - 1
+  - action: 2
+    direction: 0
+    from:
+    - 16
+    - 11
+    new_direction: 0
+    to:
+    - 15
     - 11
   - action: 2
     direction: 2
     from:
+    - 16
+    - 11
+    new_direction: 2
+    to:
+    - 17
+    - 11
+  - action: 2
+    direction: 0
+    from:
+    - 16
+    - 13
+    new_direction: 0
+    to:
+    - 15
+    - 13
+  - action: 2
+    direction: 2
+    from:
+    - 16
+    - 13
+    new_direction: 2
+    to:
+    - 17
+    - 13
+  - action: 3
+    direction: 0
+    from:
+    - 16
+    - 16
+    new_direction: 1
+    to:
+    - 16
+    - 17
+  - action: 1
+    direction: 3
+    from:
+    - 16
+    - 16
+    new_direction: 2
+    to:
+    - 17
+    - 16
+  - action: 2
+    direction: 1
+    from:
+    - 16
+    - 17
+    new_direction: 1
+    to:
+    - 16
+    - 18
+  - action: 2
+    direction: 3
+    from:
+    - 16
+    - 17
+    new_direction: 3
+    to:
+    - 16
+    - 16
+  - action: 2
+    direction: 1
+    from:
+    - 16
+    - 18
+    new_direction: 1
+    to:
+    - 16
+    - 19
+  - action: 2
+    direction: 3
+    from:
+    - 16
+    - 18
+    new_direction: 3
+    to:
+    - 16
+    - 17
+  - action: 2
+    direction: 1
+    from:
+    - 16
+    - 19
+    new_direction: 1
+    to:
+    - 16
+    - 20
+  - action: 2
+    direction: 3
+    from:
+    - 16
+    - 19
+    new_direction: 3
+    to:
+    - 16
+    - 18
+  - action: 1
+    direction: 0
+    from:
+    - 16
+    - 20
+    new_direction: 3
+    to:
+    - 16
+    - 19
+  - action: 3
+    direction: 1
+    from:
+    - 16
+    - 20
+    new_direction: 2
+    to:
+    - 17
+    - 20
+  - action: 2
+    direction: 0
+    from:
+    - 16
+    - 23
+    new_direction: 0
+    to:
+    - 15
+    - 23
+  - action: 2
+    direction: 2
+    from:
+    - 16
+    - 23
+    new_direction: 2
+    to:
+    - 17
+    - 23
+  - action: 2
+    direction: 0
+    from:
+    - 17
+    - 1
+    new_direction: 0
+    to:
+    - 16
+    - 1
+  - action: 2
+    direction: 2
+    from:
+    - 17
+    - 1
+    new_direction: 2
+    to:
+    - 18
+    - 1
+  - action: 1
+    direction: 2
+    from:
+    - 17
+    - 11
+    new_direction: 1
+    to:
+    - 17
+    - 12
+  - action: 3
+    direction: 3
+    from:
+    - 17
+    - 11
+    new_direction: 0
+    to:
+    - 16
+    - 11
+  - action: 2
+    direction: 1
+    from:
+    - 17
+    - 12
+    new_direction: 1
+    to:
+    - 17
+    - 13
+  - action: 2
+    direction: 3
+    from:
+    - 17
+    - 12
+    new_direction: 3
+    to:
+    - 17
+    - 11
+  - action: 1
+    direction: 0
+    from:
+    - 17
+    - 13
+    new_direction: 3
+    to:
+    - 17
+    - 12
+  - action: 2
+    direction: 0
+    from:
+    - 17
+    - 13
+    new_direction: 0
+    to:
+    - 16
+    - 13
+  - action: 2
+    direction: 1
+    from:
+    - 17
+    - 13
+    new_direction: 1
+    to:
+    - 17
+    - 14
+  - action: 3
+    direction: 1
+    from:
+    - 17
+    - 13
+    new_direction: 2
+    to:
+    - 18
+    - 13
+  - action: 1
+    direction: 2
+    from:
+    - 17
+    - 13
+    new_direction: 1
+    to:
+    - 17
+    - 14
+  - action: 2
+    direction: 2
+    from:
+    - 17
+    - 13
+    new_direction: 2
+    to:
+    - 18
+    - 13
+  - action: 2
+    direction: 3
+    from:
+    - 17
+    - 13
+    new_direction: 3
+    to:
+    - 17
+    - 12
+  - action: 3
+    direction: 3
+    from:
+    - 17
+    - 13
+    new_direction: 0
+    to:
+    - 16
+    - 13
+  - action: 2
+    direction: 1
+    from:
+    - 17
+    - 14
+    new_direction: 1
+    to:
+    - 17
+    - 15
+  - action: 2
+    direction: 3
+    from:
+    - 17
+    - 14
+    new_direction: 3
+    to:
+    - 17
+    - 13
+  - action: 2
+    direction: 1
+    from:
+    - 17
+    - 15
+    new_direction: 1
+    to:
+    - 17
+    - 16
+  - action: 2
+    direction: 3
+    from:
+    - 17
+    - 15
+    new_direction: 3
+    to:
+    - 17
+    - 14
+  - action: 1
+    direction: 1
+    from:
+    - 17
+    - 16
+    new_direction: 0
+    to:
+    - 16
+    - 16
+  - action: 2
+    direction: 1
+    from:
+    - 17
+    - 16
+    new_direction: 1
+    to:
+    - 17
+    - 17
+  - action: 3
+    direction: 2
+    from:
+    - 17
+    - 16
+    new_direction: 3
+    to:
+    - 17
+    - 15
+  - action: 2
+    direction: 3
+    from:
+    - 17
+    - 16
+    new_direction: 3
+    to:
+    - 17
+    - 15
+  - action: 1
+    direction: 0
+    from:
+    - 17
+    - 17
+    new_direction: 3
+    to:
+    - 17
+    - 16
+  - action: 2
+    direction: 1
+    from:
+    - 17
+    - 17
+    new_direction: 1
+    to:
+    - 17
+    - 18
+  - action: 3
+    direction: 1
+    from:
+    - 17
+    - 17
+    new_direction: 2
+    to:
+    - 18
+    - 17
+  - action: 2
+    direction: 3
+    from:
+    - 17
+    - 17
+    new_direction: 3
+    to:
+    - 17
+    - 16
+  - action: 2
+    direction: 1
+    from:
+    - 17
+    - 18
+    new_direction: 1
+    to:
+    - 17
+    - 19
+  - action: 2
+    direction: 3
+    from:
+    - 17
+    - 18
+    new_direction: 3
+    to:
+    - 17
+    - 17
+  - action: 3
+    direction: 0
+    from:
+    - 17
+    - 19
+    new_direction: 1
+    to:
+    - 17
+    - 20
+  - action: 2
+    direction: 1
+    from:
+    - 17
+    - 19
+    new_direction: 1
+    to:
+    - 17
+    - 20
+  - action: 1
+    direction: 3
+    from:
+    - 17
+    - 19
+    new_direction: 2
+    to:
+    - 18
+    - 19
+  - action: 2
+    direction: 3
+    from:
+    - 17
+    - 19
+    new_direction: 3
+    to:
+    - 17
+    - 18
+  - action: 2
+    direction: 1
+    from:
+    - 17
+    - 20
+    new_direction: 1
+    to:
+    - 17
+    - 21
+  - action: 1
+    direction: 2
+    from:
+    - 17
+    - 20
+    new_direction: 1
+    to:
+    - 17
+    - 21
+  - action: 2
+    direction: 3
+    from:
+    - 17
+    - 20
+    new_direction: 3
+    to:
+    - 17
+    - 19
+  - action: 3
+    direction: 3
+    from:
+    - 17
+    - 20
+    new_direction: 0
+    to:
+    - 16
+    - 20
+  - action: 2
+    direction: 1
+    from:
+    - 17
+    - 21
+    new_direction: 1
+    to:
+    - 17
+    - 22
+  - action: 2
+    direction: 3
+    from:
+    - 17
+    - 21
+    new_direction: 3
+    to:
+    - 17
+    - 20
+  - action: 2
+    direction: 1
+    from:
+    - 17
+    - 22
+    new_direction: 1
+    to:
+    - 17
+    - 23
+  - action: 2
+    direction: 3
+    from:
+    - 17
+    - 22
+    new_direction: 3
+    to:
+    - 17
+    - 21
+  - action: 1
+    direction: 1
+    from:
+    - 17
+    - 23
+    new_direction: 0
+    to:
+    - 16
+    - 23
+  - action: 3
+    direction: 2
+    from:
+    - 17
+    - 23
+    new_direction: 3
+    to:
+    - 17
+    - 22
+  - action: 2
+    direction: 0
+    from:
+    - 18
+    - 1
+    new_direction: 0
+    to:
+    - 17
+    - 1
+  - action: 2
+    direction: 2
+    from:
+    - 18
+    - 1
+    new_direction: 2
+    to:
+    - 19
+    - 1
+  - action: 2
+    direction: 0
+    from:
+    - 18
+    - 13
+    new_direction: 0
+    to:
+    - 17
+    - 13
+  - action: 2
+    direction: 2
+    from:
+    - 18
+    - 13
+    new_direction: 2
+    to:
+    - 19
+    - 13
+  - action: 1
+    direction: 2
+    from:
+    - 18
+    - 17
+    new_direction: 1
+    to:
+    - 18
+    - 18
+  - action: 3
+    direction: 3
+    from:
+    - 18
+    - 17
+    new_direction: 0
+    to:
+    - 17
+    - 17
+  - action: 2
+    direction: 1
+    from:
+    - 18
+    - 18
+    new_direction: 1
+    to:
+    - 18
+    - 19
+  - action: 2
+    direction: 3
+    from:
+    - 18
+    - 18
+    new_direction: 3
+    to:
+    - 18
+    - 17
+  - action: 1
+    direction: 1
+    from:
+    - 18
+    - 19
+    new_direction: 0
+    to:
+    - 17
+    - 19
+  - action: 3
+    direction: 2
+    from:
+    - 18
+    - 19
+    new_direction: 3
+    to:
+    - 18
+    - 18
+  - action: 1
+    direction: 2
+    from:
+    - 19
+    - 1
+    new_direction: 1
+    to:
+    - 19
     - 2
-    - 11
-    new_direction: 2
-    to:
-    - 3
-    - 11
-  - action: 2
-    direction: 0
+  - action: 3
+    direction: 3
     from:
-    - 3
-    - 6
+    - 19
+    - 1
     new_direction: 0
     to:
+    - 18
+    - 1
+  - action: 2
+    direction: 1
+    from:
+    - 19
     - 2
-    - 6
-  - action: 3
-    direction: 0
-    from:
-    - 3
-    - 6
     new_direction: 1
     to:
+    - 19
     - 3
-    - 7
   - action: 2
-    direction: 2
-    from:
-    - 3
-    - 6
-    new_direction: 2
-    to:
-    - 4
-    - 6
-  - action: 1
     direction: 3
     from:
-    - 3
-    - 6
-    new_direction: 2
-    to:
-    - 4
-    - 6
-  - action: 2
-    direction: 0
-    from:
-    - 3
-    - 7
-    new_direction: 0
-    to:
+    - 19
     - 2
-    - 7
-  - action: 1
+    new_direction: 3
+    to:
+    - 19
+    - 1
+  - action: 2
     direction: 1
     from:
+    - 19
     - 3
-    - 7
-    new_direction: 0
+    new_direction: 1
     to:
+    - 19
+    - 4
+  - action: 2
+    direction: 3
+    from:
+    - 19
+    - 3
+    new_direction: 3
+    to:
+    - 19
     - 2
-    - 7
   - action: 2
-    direction: 2
+    direction: 1
     from:
+    - 19
+    - 4
+    new_direction: 1
+    to:
+    - 19
+    - 5
+  - action: 2
+    direction: 3
+    from:
+    - 19
+    - 4
+    new_direction: 3
+    to:
+    - 19
     - 3
-    - 7
-    new_direction: 2
-    to:
-    - 4
-    - 7
-  - action: 3
-    direction: 2
-    from:
-    - 3
-    - 7
-    new_direction: 3
-    to:
-    - 3
-    - 6
-  - action: 2
-    direction: 0
-    from:
-    - 3
-    - 11
-    new_direction: 0
-    to:
-    - 2
-    - 11
-  - action: 2
-    direction: 2
-    from:
-    - 3
-    - 11
-    new_direction: 2
-    to:
-    - 4
-    - 11
-  - action: 2
-    direction: 0
-    from:
-    - 4
-    - 6
-    new_direction: 0
-    to:
-    - 3
-    - 6
-  - action: 2
-    direction: 2
-    from:
-    - 4
-    - 6
-    new_direction: 2
-    to:
-    - 5
-    - 6
-  - action: 2
-    direction: 0
-    from:
-    - 4
-    - 7
-    new_direction: 0
-    to:
-    - 3
-    - 7
-  - action: 2
-    direction: 2
-    from:
-    - 4
-    - 7
-    new_direction: 2
-    to:
-    - 5
-    - 7
-  - action: 2
-    direction: 0
-    from:
-    - 4
-    - 11
-    new_direction: 0
-    to:
-    - 3
-    - 11
-  - action: 2
-    direction: 2
-    from:
-    - 4
-    - 11
-    new_direction: 2
-    to:
-    - 5
-    - 11
-  - action: 2
-    direction: 0
-    from:
-    - 5
-    - 6
-    new_direction: 0
-    to:
-    - 4
-    - 6
-  - action: 2
-    direction: 2
-    from:
-    - 5
-    - 6
-    new_direction: 2
-    to:
-    - 6
-    - 6
-  - action: 2
-    direction: 0
-    from:
-    - 5
-    - 7
-    new_direction: 0
-    to:
-    - 4
-    - 7
-  - action: 2
-    direction: 2
-    from:
-    - 5
-    - 7
-    new_direction: 2
-    to:
-    - 6
-    - 7
-  - action: 2
-    direction: 0
-    from:
-    - 5
-    - 11
-    new_direction: 0
-    to:
-    - 4
-    - 11
-  - action: 2
-    direction: 2
-    from:
-    - 5
-    - 11
-    new_direction: 2
-    to:
-    - 6
-    - 11
-  - action: 2
-    direction: 0
-    from:
-    - 6
-    - 6
-    new_direction: 0
-    to:
-    - 5
-    - 6
-  - action: 2
-    direction: 2
-    from:
-    - 6
-    - 6
-    new_direction: 2
-    to:
-    - 7
-    - 6
-  - action: 2
-    direction: 0
-    from:
-    - 6
-    - 7
-    new_direction: 0
-    to:
-    - 5
-    - 7
-  - action: 2
-    direction: 2
-    from:
-    - 6
-    - 7
-    new_direction: 2
-    to:
-    - 7
-    - 7
-  - action: 2
-    direction: 0
-    from:
-    - 6
-    - 11
-    new_direction: 0
-    to:
-    - 5
-    - 11
-  - action: 2
-    direction: 2
-    from:
-    - 6
-    - 11
-    new_direction: 2
-    to:
-    - 7
-    - 11
-  - action: 2
-    direction: 0
-    from:
-    - 7
-    - 6
-    new_direction: 0
-    to:
-    - 6
-    - 6
-  - action: 1
-    direction: 2
-    from:
-    - 7
-    - 6
-    new_direction: 1
-    to:
-    - 7
-    - 7
-  - action: 2
-    direction: 2
-    from:
-    - 7
-    - 6
-    new_direction: 2
-    to:
-    - 8
-    - 6
-  - action: 3
-    direction: 3
-    from:
-    - 7
-    - 6
-    new_direction: 0
-    to:
-    - 6
-    - 6
-  - action: 1
-    direction: 0
-    from:
-    - 7
-    - 7
-    new_direction: 3
-    to:
-    - 7
-    - 6
-  - action: 2
-    direction: 0
-    from:
-    - 7
-    - 7
-    new_direction: 0
-    to:
-    - 6
-    - 7
-  - action: 3
-    direction: 1
-    from:
-    - 7
-    - 7
-    new_direction: 2
-    to:
-    - 8
-    - 7
-  - action: 2
-    direction: 2
-    from:
-    - 7
-    - 7
-    new_direction: 2
-    to:
-    - 8
-    - 7
-  - action: 2
-    direction: 0
-    from:
-    - 7
-    - 11
-    new_direction: 0
-    to:
-    - 6
-    - 11
-  - action: 2
-    direction: 2
-    from:
-    - 7
-    - 11
-    new_direction: 2
-    to:
-    - 8
-    - 11
-  - action: 2
-    direction: 0
-    from:
-    - 8
-    - 6
-    new_direction: 0
-    to:
-    - 7
-    - 6
-  - action: 3
-    direction: 0
-    from:
-    - 8
-    - 6
-    new_direction: 1
-    to:
-    - 8
-    - 7
-  - action: 2
-    direction: 2
-    from:
-    - 8
-    - 6
-    new_direction: 2
-    to:
-    - 9
-    - 6
-  - action: 1
-    direction: 3
-    from:
-    - 8
-    - 6
-    new_direction: 2
-    to:
-    - 9
-    - 6
-  - action: 1
-    direction: 1
-    from:
-    - 8
-    - 7
-    new_direction: 0
-    to:
-    - 7
-    - 7
-  - action: 3
-    direction: 2
-    from:
-    - 8
-    - 7
-    new_direction: 3
-    to:
-    - 8
-    - 6
-  - action: 2
-    direction: 0
-    from:
-    - 8
-    - 11
-    new_direction: 0
-    to:
-    - 7
-    - 11
-  - action: 2
-    direction: 2
-    from:
-    - 8
-    - 11
-    new_direction: 2
-    to:
-    - 9
-    - 11
-  - action: 2
-    direction: 0
-    from:
-    - 9
-    - 6
-    new_direction: 0
-    to:
-    - 8
-    - 6
-  - action: 2
-    direction: 2
-    from:
-    - 9
-    - 6
-    new_direction: 2
-    to:
-    - 10
-    - 6
-  - action: 2
-    direction: 0
-    from:
-    - 9
-    - 11
-    new_direction: 0
-    to:
-    - 8
-    - 11
-  - action: 2
-    direction: 2
-    from:
-    - 9
-    - 11
-    new_direction: 2
-    to:
-    - 10
-    - 11
-  - action: 3
-    direction: 0
-    from:
-    - 10
-    - 4
-    new_direction: 1
-    to:
-    - 10
-    - 5
-  - action: 1
-    direction: 3
-    from:
-    - 10
-    - 4
-    new_direction: 2
-    to:
-    - 11
-    - 4
-  - action: 3
-    direction: 0
-    from:
-    - 10
-    - 5
-    new_direction: 1
-    to:
-    - 10
-    - 6
   - action: 2
     direction: 1
     from:
-    - 10
+    - 19
     - 5
     new_direction: 1
     to:
-    - 10
+    - 19
     - 6
-  - action: 1
-    direction: 3
-    from:
-    - 10
-    - 5
-    new_direction: 2
-    to:
-    - 11
-    - 5
   - action: 2
     direction: 3
     from:
-    - 10
+    - 19
     - 5
     new_direction: 3
-    to:
-    - 10
-    - 4
-  - action: 1
-    direction: 0
-    from:
-    - 10
-    - 6
-    new_direction: 3
-    to:
-    - 10
-    - 5
-  - action: 2
-    direction: 0
-    from:
-    - 10
-    - 6
-    new_direction: 0
-    to:
-    - 9
-    - 6
-  - action: 2
-    direction: 1
-    from:
-    - 10
-    - 6
-    new_direction: 1
-    to:
-    - 10
-    - 7
-  - action: 3
-    direction: 1
-    from:
-    - 10
-    - 6
-    new_direction: 2
-    to:
-    - 11
-    - 6
-  - action: 1
-    direction: 2
-    from:
-    - 10
-    - 6
-    new_direction: 1
-    to:
-    - 10
-    - 7
-  - action: 2
-    direction: 2
-    from:
-    - 10
-    - 6
-    new_direction: 2
-    to:
-    - 11
-    - 6
-  - action: 2
-    direction: 3
-    from:
-    - 10
-    - 6
-    new_direction: 3
-    to:
-    - 10
-    - 5
-  - action: 3
-    direction: 3
-    from:
-    - 10
-    - 6
-    new_direction: 0
-    to:
-    - 9
-    - 6
-  - action: 2
-    direction: 1
-    from:
-    - 10
-    - 7
-    new_direction: 1
-    to:
-    - 10
-    - 8
-  - action: 2
-    direction: 3
-    from:
-    - 10
-    - 7
-    new_direction: 3
-    to:
-    - 10
-    - 6
-  - action: 1
-    direction: 0
-    from:
-    - 10
-    - 8
-    new_direction: 3
-    to:
-    - 10
-    - 7
-  - action: 3
-    direction: 1
-    from:
-    - 10
-    - 8
-    new_direction: 2
-    to:
-    - 11
-    - 8
-  - action: 3
-    direction: 0
-    from:
-    - 10
-    - 9
-    new_direction: 1
-    to:
-    - 10
-    - 10
-  - action: 1
-    direction: 3
-    from:
-    - 10
-    - 9
-    new_direction: 2
-    to:
-    - 11
-    - 9
-  - action: 2
-    direction: 1
-    from:
-    - 10
-    - 10
-    new_direction: 1
-    to:
-    - 10
-    - 11
-  - action: 2
-    direction: 3
-    from:
-    - 10
-    - 10
-    new_direction: 3
-    to:
-    - 10
-    - 9
-  - action: 1
-    direction: 1
-    from:
-    - 10
-    - 11
-    new_direction: 0
-    to:
-    - 9
-    - 11
-  - action: 3
-    direction: 2
-    from:
-    - 10
-    - 11
-    new_direction: 3
-    to:
-    - 10
-    - 10
-  - action: 2
-    direction: 0
-    from:
-    - 11
-    - 4
-    new_direction: 0
-    to:
-    - 10
-    - 4
-  - action: 2
-    direction: 2
-    from:
-    - 11
-    - 4
-    new_direction: 2
-    to:
-    - 12
-    - 4
-  - action: 2
-    direction: 0
-    from:
-    - 11
-    - 5
-    new_direction: 0
-    to:
-    - 10
-    - 5
-  - action: 2
-    direction: 2
-    from:
-    - 11
-    - 5
-    new_direction: 2
-    to:
-    - 12
-    - 5
-  - action: 2
-    direction: 0
-    from:
-    - 11
-    - 6
-    new_direction: 0
-    to:
-    - 10
-    - 6
-  - action: 1
-    direction: 2
-    from:
-    - 11
-    - 6
-    new_direction: 1
-    to:
-    - 11
-    - 7
-  - action: 2
-    direction: 2
-    from:
-    - 11
-    - 6
-    new_direction: 2
-    to:
-    - 12
-    - 6
-  - action: 3
-    direction: 3
-    from:
-    - 11
-    - 6
-    new_direction: 0
-    to:
-    - 10
-    - 6
-  - action: 1
-    direction: 0
-    from:
-    - 11
-    - 7
-    new_direction: 3
-    to:
-    - 11
-    - 6
-  - action: 3
-    direction: 1
-    from:
-    - 11
-    - 7
-    new_direction: 2
-    to:
-    - 12
-    - 7
-  - action: 2
-    direction: 0
-    from:
-    - 11
-    - 8
-    new_direction: 0
-    to:
-    - 10
-    - 8
-  - action: 2
-    direction: 2
-    from:
-    - 11
-    - 8
-    new_direction: 2
-    to:
-    - 12
-    - 8
-  - action: 2
-    direction: 0
-    from:
-    - 11
-    - 9
-    new_direction: 0
-    to:
-    - 10
-    - 9
-  - action: 2
-    direction: 2
-    from:
-    - 11
-    - 9
-    new_direction: 2
-    to:
-    - 12
-    - 9
-  - action: 2
-    direction: 0
-    from:
-    - 12
-    - 4
-    new_direction: 0
-    to:
-    - 11
-    - 4
-  - action: 2
-    direction: 2
-    from:
-    - 12
-    - 4
-    new_direction: 2
-    to:
-    - 13
-    - 4
-  - action: 2
-    direction: 0
-    from:
-    - 12
-    - 5
-    new_direction: 0
-    to:
-    - 11
-    - 5
-  - action: 2
-    direction: 2
-    from:
-    - 12
-    - 5
-    new_direction: 2
-    to:
-    - 13
-    - 5
-  - action: 2
-    direction: 0
-    from:
-    - 12
-    - 6
-    new_direction: 0
-    to:
-    - 11
-    - 6
-  - action: 2
-    direction: 2
-    from:
-    - 12
-    - 6
-    new_direction: 2
-    to:
-    - 13
-    - 6
-  - action: 1
-    direction: 2
-    from:
-    - 12
-    - 7
-    new_direction: 1
-    to:
-    - 12
-    - 8
-  - action: 3
-    direction: 3
-    from:
-    - 12
-    - 7
-    new_direction: 0
-    to:
-    - 11
-    - 7
-  - action: 2
-    direction: 0
-    from:
-    - 12
-    - 8
-    new_direction: 0
-    to:
-    - 11
-    - 8
-  - action: 2
-    direction: 1
-    from:
-    - 12
-    - 8
-    new_direction: 1
-    to:
-    - 12
-    - 9
-  - action: 2
-    direction: 2
-    from:
-    - 12
-    - 8
-    new_direction: 2
-    to:
-    - 13
-    - 8
-  - action: 2
-    direction: 3
-    from:
-    - 12
-    - 8
-    new_direction: 3
-    to:
-    - 12
-    - 7
-  - action: 2
-    direction: 0
-    from:
-    - 12
-    - 9
-    new_direction: 0
-    to:
-    - 11
-    - 9
-  - action: 2
-    direction: 1
-    from:
-    - 12
-    - 9
-    new_direction: 1
-    to:
-    - 12
-    - 10
-  - action: 2
-    direction: 2
-    from:
-    - 12
-    - 9
-    new_direction: 2
-    to:
-    - 13
-    - 9
-  - action: 2
-    direction: 3
-    from:
-    - 12
-    - 9
-    new_direction: 3
-    to:
-    - 12
-    - 8
-  - action: 1
-    direction: 0
-    from:
-    - 12
-    - 10
-    new_direction: 3
-    to:
-    - 12
-    - 9
-  - action: 3
-    direction: 1
-    from:
-    - 12
-    - 10
-    new_direction: 2
-    to:
-    - 13
-    - 10
-  - action: 2
-    direction: 0
-    from:
-    - 13
-    - 4
-    new_direction: 0
-    to:
-    - 12
-    - 4
-  - action: 3
-    direction: 0
-    from:
-    - 13
-    - 4
-    new_direction: 1
-    to:
-    - 13
-    - 5
-  - action: 2
-    direction: 2
-    from:
-    - 13
-    - 4
-    new_direction: 2
-    to:
-    - 14
-    - 4
-  - action: 1
-    direction: 3
-    from:
-    - 13
-    - 4
-    new_direction: 2
-    to:
-    - 14
-    - 4
-  - action: 1
-    direction: 1
-    from:
-    - 13
-    - 5
-    new_direction: 0
-    to:
-    - 12
-    - 5
-  - action: 3
-    direction: 2
-    from:
-    - 13
-    - 5
-    new_direction: 3
-    to:
-    - 13
-    - 4
-  - action: 1
-    direction: 2
-    from:
-    - 13
-    - 6
-    new_direction: 1
-    to:
-    - 13
-    - 7
-  - action: 3
-    direction: 3
-    from:
-    - 13
-    - 6
-    new_direction: 0
-    to:
-    - 12
-    - 6
-  - action: 2
-    direction: 1
-    from:
-    - 13
-    - 7
-    new_direction: 1
-    to:
-    - 13
-    - 8
-  - action: 2
-    direction: 3
-    from:
-    - 13
-    - 7
-    new_direction: 3
-    to:
-    - 13
-    - 6
-  - action: 2
-    direction: 1
-    from:
-    - 13
-    - 8
-    new_direction: 1
-    to:
-    - 13
-    - 9
-  - action: 1
-    direction: 2
-    from:
-    - 13
-    - 8
-    new_direction: 1
-    to:
-    - 13
-    - 9
-  - action: 2
-    direction: 3
-    from:
-    - 13
-    - 8
-    new_direction: 3
-    to:
-    - 13
-    - 7
-  - action: 3
-    direction: 3
-    from:
-    - 13
-    - 8
-    new_direction: 0
-    to:
-    - 12
-    - 8
-  - action: 1
-    direction: 0
-    from:
-    - 13
-    - 9
-    new_direction: 3
-    to:
-    - 13
-    - 8
-  - action: 2
-    direction: 0
-    from:
-    - 13
-    - 9
-    new_direction: 0
-    to:
-    - 12
-    - 9
-  - action: 3
-    direction: 1
-    from:
-    - 13
-    - 9
-    new_direction: 2
-    to:
-    - 14
-    - 9
-  - action: 2
-    direction: 2
-    from:
-    - 13
-    - 9
-    new_direction: 2
-    to:
-    - 14
-    - 9
-  - action: 2
-    direction: 0
-    from:
-    - 13
-    - 10
-    new_direction: 0
-    to:
-    - 12
-    - 10
-  - action: 2
-    direction: 2
-    from:
-    - 13
-    - 10
-    new_direction: 2
-    to:
-    - 14
-    - 10
-  - action: 2
-    direction: 0
-    from:
-    - 14
-    - 4
-    new_direction: 0
-    to:
-    - 13
-    - 4
-  - action: 2
-    direction: 2
-    from:
-    - 14
-    - 4
-    new_direction: 2
-    to:
-    - 15
-    - 4
-  - action: 2
-    direction: 0
-    from:
-    - 14
-    - 9
-    new_direction: 0
-    to:
-    - 13
-    - 9
-  - action: 2
-    direction: 2
-    from:
-    - 14
-    - 9
-    new_direction: 2
-    to:
-    - 15
-    - 9
-  - action: 2
-    direction: 0
-    from:
-    - 14
-    - 10
-    new_direction: 0
-    to:
-    - 13
-    - 10
-  - action: 2
-    direction: 2
-    from:
-    - 14
-    - 10
-    new_direction: 2
-    to:
-    - 15
-    - 10
-  - action: 2
-    direction: 0
-    from:
-    - 15
-    - 4
-    new_direction: 0
-    to:
-    - 14
-    - 4
-  - action: 2
-    direction: 2
-    from:
-    - 15
-    - 4
-    new_direction: 2
-    to:
-    - 16
-    - 4
-  - action: 2
-    direction: 0
-    from:
-    - 15
-    - 9
-    new_direction: 0
-    to:
-    - 14
-    - 9
-  - action: 1
-    direction: 2
-    from:
-    - 15
-    - 9
-    new_direction: 1
-    to:
-    - 15
-    - 10
-  - action: 2
-    direction: 2
-    from:
-    - 15
-    - 9
-    new_direction: 2
-    to:
-    - 16
-    - 9
-  - action: 3
-    direction: 3
-    from:
-    - 15
-    - 9
-    new_direction: 0
-    to:
-    - 14
-    - 9
-  - action: 1
-    direction: 0
-    from:
-    - 15
-    - 10
-    new_direction: 3
-    to:
-    - 15
-    - 9
-  - action: 2
-    direction: 0
-    from:
-    - 15
-    - 10
-    new_direction: 0
-    to:
-    - 14
-    - 10
-  - action: 3
-    direction: 1
-    from:
-    - 15
-    - 10
-    new_direction: 2
-    to:
-    - 16
-    - 10
-  - action: 2
-    direction: 2
-    from:
-    - 15
-    - 10
-    new_direction: 2
-    to:
-    - 16
-    - 10
-  - action: 2
-    direction: 0
-    from:
-    - 16
-    - 4
-    new_direction: 0
-    to:
-    - 15
-    - 4
-  - action: 2
-    direction: 2
-    from:
-    - 16
-    - 4
-    new_direction: 2
-    to:
-    - 17
-    - 4
-  - action: 2
-    direction: 0
-    from:
-    - 16
-    - 9
-    new_direction: 0
-    to:
-    - 15
-    - 9
-  - action: 3
-    direction: 0
-    from:
-    - 16
-    - 9
-    new_direction: 1
-    to:
-    - 16
-    - 10
-  - action: 2
-    direction: 2
-    from:
-    - 16
-    - 9
-    new_direction: 2
-    to:
-    - 17
-    - 9
-  - action: 1
-    direction: 3
-    from:
-    - 16
-    - 9
-    new_direction: 2
-    to:
-    - 17
-    - 9
-  - action: 2
-    direction: 0
-    from:
-    - 16
-    - 10
-    new_direction: 0
-    to:
-    - 15
-    - 10
-  - action: 1
-    direction: 1
-    from:
-    - 16
-    - 10
-    new_direction: 0
-    to:
-    - 15
-    - 10
-  - action: 2
-    direction: 2
-    from:
-    - 16
-    - 10
-    new_direction: 2
-    to:
-    - 17
-    - 10
-  - action: 3
-    direction: 2
-    from:
-    - 16
-    - 10
-    new_direction: 3
-    to:
-    - 16
-    - 9
-  - action: 2
-    direction: 0
-    from:
-    - 17
-    - 4
-    new_direction: 0
-    to:
-    - 16
-    - 4
-  - action: 2
-    direction: 2
-    from:
-    - 17
-    - 4
-    new_direction: 2
-    to:
-    - 18
-    - 4
-  - action: 3
-    direction: 0
-    from:
-    - 17
-    - 8
-    new_direction: 1
-    to:
-    - 17
-    - 9
-  - action: 1
-    direction: 3
-    from:
-    - 17
-    - 8
-    new_direction: 2
-    to:
-    - 18
-    - 8
-  - action: 2
-    direction: 0
-    from:
-    - 17
-    - 9
-    new_direction: 0
-    to:
-    - 16
-    - 9
-  - action: 1
-    direction: 1
-    from:
-    - 17
-    - 9
-    new_direction: 0
-    to:
-    - 16
-    - 9
-  - action: 2
-    direction: 2
-    from:
-    - 17
-    - 9
-    new_direction: 2
-    to:
-    - 18
-    - 9
-  - action: 3
-    direction: 2
-    from:
-    - 17
-    - 9
-    new_direction: 3
-    to:
-    - 17
-    - 8
-  - action: 2
-    direction: 0
-    from:
-    - 17
-    - 10
-    new_direction: 0
-    to:
-    - 16
-    - 10
-  - action: 1
-    direction: 2
-    from:
-    - 17
-    - 10
-    new_direction: 1
-    to:
-    - 17
-    - 11
-  - action: 2
-    direction: 2
-    from:
-    - 17
-    - 10
-    new_direction: 2
-    to:
-    - 18
-    - 10
-  - action: 3
-    direction: 3
-    from:
-    - 17
-    - 10
-    new_direction: 0
-    to:
-    - 16
-    - 10
-  - action: 1
-    direction: 0
-    from:
-    - 17
-    - 11
-    new_direction: 3
-    to:
-    - 17
-    - 10
-  - action: 3
-    direction: 1
-    from:
-    - 17
-    - 11
-    new_direction: 2
-    to:
-    - 18
-    - 11
-  - action: 2
-    direction: 0
-    from:
-    - 18
-    - 4
-    new_direction: 0
-    to:
-    - 17
-    - 4
-  - action: 2
-    direction: 2
-    from:
-    - 18
-    - 4
-    new_direction: 2
     to:
     - 19
     - 4
   - action: 2
-    direction: 0
+    direction: 1
     from:
-    - 18
-    - 8
-    new_direction: 0
+    - 19
+    - 6
+    new_direction: 1
     to:
-    - 17
-    - 8
+    - 19
+    - 7
   - action: 2
-    direction: 2
+    direction: 3
     from:
-    - 18
-    - 8
-    new_direction: 2
+    - 19
+    - 6
+    new_direction: 3
+    to:
+    - 19
+    - 5
+  - action: 2
+    direction: 1
+    from:
+    - 19
+    - 7
+    new_direction: 1
     to:
     - 19
     - 8
   - action: 2
-    direction: 0
+    direction: 3
     from:
-    - 18
-    - 9
-    new_direction: 0
+    - 19
+    - 7
+    new_direction: 3
     to:
-    - 17
-    - 9
+    - 19
+    - 6
   - action: 2
-    direction: 2
+    direction: 1
     from:
-    - 18
-    - 9
-    new_direction: 2
+    - 19
+    - 8
+    new_direction: 1
     to:
     - 19
     - 9
   - action: 2
-    direction: 0
+    direction: 3
     from:
-    - 18
-    - 10
-    new_direction: 0
+    - 19
+    - 8
+    new_direction: 3
     to:
-    - 17
-    - 10
+    - 19
+    - 7
   - action: 2
-    direction: 2
+    direction: 1
     from:
-    - 18
-    - 10
-    new_direction: 2
+    - 19
+    - 9
+    new_direction: 1
     to:
     - 19
     - 10
   - action: 2
-    direction: 0
+    direction: 3
     from:
-    - 18
-    - 11
-    new_direction: 0
+    - 19
+    - 9
+    new_direction: 3
     to:
-    - 17
-    - 11
+    - 19
+    - 8
   - action: 2
-    direction: 2
+    direction: 1
     from:
-    - 18
-    - 11
-    new_direction: 2
+    - 19
+    - 10
+    new_direction: 1
     to:
     - 19
     - 11
   - action: 2
-    direction: 0
+    direction: 3
     from:
     - 19
-    - 4
+    - 10
+    new_direction: 3
+    to:
+    - 19
+    - 9
+  - action: 2
+    direction: 1
+    from:
+    - 19
+    - 11
+    new_direction: 1
+    to:
+    - 19
+    - 12
+  - action: 2
+    direction: 3
+    from:
+    - 19
+    - 11
+    new_direction: 3
+    to:
+    - 19
+    - 10
+  - action: 2
+    direction: 1
+    from:
+    - 19
+    - 12
+    new_direction: 1
+    to:
+    - 19
+    - 13
+  - action: 2
+    direction: 3
+    from:
+    - 19
+    - 12
+    new_direction: 3
+    to:
+    - 19
+    - 11
+  - action: 1
+    direction: 1
+    from:
+    - 19
+    - 13
     new_direction: 0
     to:
     - 18
-    - 4
-  - action: 2
-    direction: 2
-    from:
-    - 19
-    - 4
-    new_direction: 2
-    to:
-    - 20
-    - 4
-  - action: 1
-    direction: 2
-    from:
-    - 19
-    - 8
-    new_direction: 1
-    to:
-    - 19
-    - 9
-  - action: 3
-    direction: 3
-    from:
-    - 19
-    - 8
-    new_direction: 0
-    to:
-    - 18
-    - 8
-  - action: 1
-    direction: 0
-    from:
-    - 19
-    - 9
-    new_direction: 3
-    to:
-    - 19
-    - 8
-  - action: 2
-    direction: 0
-    from:
-    - 19
-    - 9
-    new_direction: 0
-    to:
-    - 18
-    - 9
-  - action: 3
-    direction: 1
-    from:
-    - 19
-    - 9
-    new_direction: 2
-    to:
-    - 20
-    - 9
-  - action: 2
-    direction: 2
-    from:
-    - 19
-    - 9
-    new_direction: 2
-    to:
-    - 20
-    - 9
-  - action: 2
-    direction: 0
-    from:
-    - 19
-    - 10
-    new_direction: 0
-    to:
-    - 18
-    - 10
-  - action: 3
-    direction: 0
-    from:
-    - 19
-    - 10
-    new_direction: 1
-    to:
-    - 19
-    - 11
-  - action: 2
-    direction: 2
-    from:
-    - 19
-    - 10
-    new_direction: 2
-    to:
-    - 20
-    - 10
-  - action: 1
-    direction: 3
-    from:
-    - 19
-    - 10
-    new_direction: 2
-    to:
-    - 20
-    - 10
-  - action: 1
-    direction: 1
-    from:
-    - 19
-    - 11
-    new_direction: 0
-    to:
-    - 18
-    - 11
+    - 13
   - action: 3
     direction: 2
     from:
     - 19
-    - 11
+    - 13
     new_direction: 3
     to:
     - 19
-    - 10
-  - action: 2
-    direction: 0
-    from:
-    - 20
-    - 4
-    new_direction: 0
-    to:
-    - 19
-    - 4
-  - action: 2
-    direction: 2
-    from:
-    - 20
-    - 4
-    new_direction: 2
-    to:
-    - 21
-    - 4
-  - action: 2
-    direction: 0
-    from:
-    - 20
-    - 9
-    new_direction: 0
-    to:
-    - 19
-    - 9
-  - action: 1
-    direction: 2
-    from:
-    - 20
-    - 9
-    new_direction: 1
-    to:
-    - 20
-    - 10
-  - action: 2
-    direction: 2
-    from:
-    - 20
-    - 9
-    new_direction: 2
-    to:
-    - 21
-    - 9
-  - action: 3
-    direction: 3
-    from:
-    - 20
-    - 9
-    new_direction: 0
-    to:
-    - 19
-    - 9
-  - action: 1
-    direction: 0
-    from:
-    - 20
-    - 10
-    new_direction: 3
-    to:
-    - 20
-    - 9
-  - action: 2
-    direction: 0
-    from:
-    - 20
-    - 10
-    new_direction: 0
-    to:
-    - 19
-    - 10
-  - action: 3
-    direction: 1
-    from:
-    - 20
-    - 10
-    new_direction: 2
-    to:
-    - 21
-    - 10
-  - action: 2
-    direction: 2
-    from:
-    - 20
-    - 10
-    new_direction: 2
-    to:
-    - 21
-    - 10
-  - action: 2
-    direction: 0
-    from:
-    - 21
-    - 4
-    new_direction: 0
-    to:
-    - 20
-    - 4
-  - action: 2
-    direction: 2
-    from:
-    - 21
-    - 4
-    new_direction: 2
-    to:
-    - 22
-    - 4
-  - action: 2
-    direction: 0
-    from:
-    - 21
-    - 9
-    new_direction: 0
-    to:
-    - 20
-    - 9
-  - action: 3
-    direction: 0
-    from:
-    - 21
-    - 9
-    new_direction: 1
-    to:
-    - 21
-    - 10
-  - action: 2
-    direction: 2
-    from:
-    - 21
-    - 9
-    new_direction: 2
-    to:
-    - 22
-    - 9
-  - action: 1
-    direction: 3
-    from:
-    - 21
-    - 9
-    new_direction: 2
-    to:
-    - 22
-    - 9
-  - action: 2
-    direction: 0
-    from:
-    - 21
-    - 10
-    new_direction: 0
-    to:
-    - 20
-    - 10
-  - action: 1
-    direction: 1
-    from:
-    - 21
-    - 10
-    new_direction: 0
-    to:
-    - 20
-    - 10
-  - action: 2
-    direction: 2
-    from:
-    - 21
-    - 10
-    new_direction: 2
-    to:
-    - 22
-    - 10
-  - action: 3
-    direction: 2
-    from:
-    - 21
-    - 10
-    new_direction: 3
-    to:
-    - 21
-    - 9
-  - action: 2
-    direction: 0
-    from:
-    - 22
-    - 4
-    new_direction: 0
-    to:
-    - 21
-    - 4
-  - action: 2
-    direction: 2
-    from:
-    - 22
-    - 4
-    new_direction: 2
-    to:
-    - 23
-    - 4
-  - action: 2
-    direction: 0
-    from:
-    - 22
-    - 9
-    new_direction: 0
-    to:
-    - 21
-    - 9
-  - action: 2
-    direction: 2
-    from:
-    - 22
-    - 9
-    new_direction: 2
-    to:
-    - 23
-    - 9
-  - action: 2
-    direction: 0
-    from:
-    - 22
-    - 10
-    new_direction: 0
-    to:
-    - 21
-    - 10
-  - action: 2
-    direction: 2
-    from:
-    - 22
-    - 10
-    new_direction: 2
-    to:
-    - 23
-    - 10
-  - action: 1
-    direction: 2
-    from:
-    - 23
-    - 4
-    new_direction: 1
-    to:
-    - 23
-    - 5
-  - action: 3
-    direction: 3
-    from:
-    - 23
-    - 4
-    new_direction: 0
-    to:
-    - 22
-    - 4
-  - action: 2
-    direction: 1
-    from:
-    - 23
-    - 5
-    new_direction: 1
-    to:
-    - 23
-    - 6
-  - action: 2
-    direction: 3
-    from:
-    - 23
-    - 5
-    new_direction: 3
-    to:
-    - 23
-    - 4
-  - action: 2
-    direction: 1
-    from:
-    - 23
-    - 6
-    new_direction: 1
-    to:
-    - 23
-    - 7
-  - action: 2
-    direction: 3
-    from:
-    - 23
-    - 6
-    new_direction: 3
-    to:
-    - 23
-    - 5
-  - action: 2
-    direction: 1
-    from:
-    - 23
-    - 7
-    new_direction: 1
-    to:
-    - 23
-    - 8
-  - action: 2
-    direction: 3
-    from:
-    - 23
-    - 7
-    new_direction: 3
-    to:
-    - 23
-    - 6
-  - action: 2
-    direction: 1
-    from:
-    - 23
-    - 8
-    new_direction: 1
-    to:
-    - 23
-    - 9
-  - action: 2
-    direction: 3
-    from:
-    - 23
-    - 8
-    new_direction: 3
-    to:
-    - 23
-    - 7
-  - action: 1
-    direction: 1
-    from:
-    - 23
-    - 9
-    new_direction: 0
-    to:
-    - 22
-    - 9
-  - action: 2
-    direction: 1
-    from:
-    - 23
-    - 9
-    new_direction: 1
-    to:
-    - 23
-    - 10
-  - action: 3
-    direction: 2
-    from:
-    - 23
-    - 9
-    new_direction: 3
-    to:
-    - 23
-    - 8
-  - action: 2
-    direction: 3
-    from:
-    - 23
-    - 9
-    new_direction: 3
-    to:
-    - 23
-    - 8
-  - action: 1
-    direction: 1
-    from:
-    - 23
-    - 10
-    new_direction: 0
-    to:
-    - 22
-    - 10
-  - action: 3
-    direction: 2
-    from:
-    - 23
-    - 10
-    new_direction: 3
-    to:
-    - 23
-    - 9
+    - 12

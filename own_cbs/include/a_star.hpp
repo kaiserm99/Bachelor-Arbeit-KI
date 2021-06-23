@@ -32,6 +32,12 @@ class AStar {
       std::unordered_set<State, StateHasher> closedSet;
       std::unordered_map<State, std::tuple<State, Action, int, int>, StateHasher> cameFrom;
 
+      const int initialConstraintEndTime = m_flatlandCBS.getInitialConstraintEndTime();
+
+      if (m_flatlandCBS.checkInitialConstraints()) {
+        agent.initialState = State(initialConstraintEndTime+1, agent.initialState.y, agent.initialState.x, agent.initialState.dir);
+      }
+      std::cout << agent.initialState << std::endl;
 
       // Insert the first Node into the Heap
       auto handle = openSet.push(Node(agent.initialState, agent.getHeuristicValue(agent.initialState), initialCost));
@@ -69,7 +75,15 @@ class AStar {
           std::reverse(tmpStates.begin(), tmpStates.end());
           std::reverse(solution.actions.begin(), solution.actions.end());
 
-          int time = 0;
+          int time;
+
+          // If there is a inital state, insert the default value
+          for (time = 0; time <= initialConstraintEndTime; time++) {
+            solution.states.emplace_back(defaultState);
+            tmpActions.emplace_back(std::make_pair(Action::Nothing, 0));
+          }
+
+          // Insert the other states and actions into the vectors
           int index = 0;
           for (const auto& state : tmpStates) {
             
@@ -93,6 +107,9 @@ class AStar {
             time += agent.speed;
             index++;
           }
+
+          // Append the taraget state
+          solution.states.emplace_back(tmpStates.back());
 
           solution.actions = tmpActions;
           solution.cost = solution.states.size();

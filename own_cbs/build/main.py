@@ -18,9 +18,9 @@ def set_speed(env, speed_ration_map):
 
 
 
-speed_ration_map = {1. / 1.: 1.,
+speed_ration_map = {1. / 1.: 0.,
                     1. / 2.: 0.,
-                    1. / 3.: 0.,
+                    1. / 3.: 1.,
                     1. / 4.: 0.}
 
 time_start = time.time()
@@ -33,7 +33,11 @@ env = RailEnv(
 
 
 _, info = env.reset()
-#set_speed(env, speed_ration_map)
+# set_speed(env, speed_ration_map)
+_,_,_,_ = env.step({ 0 : 2, 1 : 2})
+
+
+
 
 cbs = FlatlandCBS.FlatlandCBS(env)
 print(f"Created an reseted the Environment in {time.time()-time_start:5f}sec\n")

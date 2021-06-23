@@ -11,33 +11,61 @@
 #pragma once
 
 enum class Action {
-  Up,
+  Forward,
   Left,
   Right,
   Wait,
+  Nothing
 };
 
 std::ostream& operator<<(std::ostream& os, const Action& a) {
   switch (a) {
-    case Action::Up:    os << "2"; break;
-    case Action::Left:  os << "1"; break;
-    case Action::Right: os << "3"; break;
-    case Action::Wait:  os << "4"; break;
+    case Action::Forward:  os << "2"; break;
+    case Action::Left:     os << "1"; break;
+    case Action::Right:    os << "3"; break;
+    case Action::Wait:     os << "4"; break;
+    case Action::Nothing:  os << "0"; break;
   }
   return os;
 }
 
 int toInt(const Action& a) {
   switch (a) {
-    case Action::Up:    return 2;
-    case Action::Left:  return 1;
-    case Action::Right: return 3;
-    case Action::Wait:  return 4;
+    case Action::Forward:  return 2;
+    case Action::Left:     return 1;
+    case Action::Right:    return 3;
+    case Action::Wait:     return 4;
+    case Action::Nothing:  return 0;
   }
   assert(0);
 }
 
 // ---------------------- Action End -----------------------------------
+
+
+enum class Status {
+  InitialInapplicable,
+  InitialApplicable,
+  Applicable,
+  Inapplicable,
+  GoalApplicable,
+  GoalInapplicable
+};
+
+std::ostream& operator<<(std::ostream& os, const Status& a) {
+  switch (a) {
+    case Status::InitialInapplicable:   os << "InitialInapplicable"; break;
+    case Status::InitialApplicable:     os << "InitialApplicable"; break;
+    case Status::Applicable:            os << "Applicable"; break;
+    case Status::Inapplicable:          os << "Inapplicable"; break;
+    case Status::GoalApplicable:        os << "GoalApplicable"; break;
+    case Status::GoalInapplicable:      os << "GoalInapplicable"; break;
+  }
+  return os;
+}
+
+
+// ---------------------- Status End -----------------------------------
 
 struct GridLocation {
   GridLocation(int y, int x, int dir = -1) : y(y), x(x), dir(dir) {}
@@ -103,6 +131,10 @@ struct State {
     return time == s.time && y == s.y && x == s.x;
   }
 
+  bool operator==(const GridLocation& l) const {
+    return y == l.y && x == l.x;
+  }
+
   bool equalExceptTime(const State& s) const { return y == s.y && x == s.x; }
 
   friend std::ostream& operator<<(std::ostream& os, const State& s) {
@@ -126,3 +158,14 @@ namespace std {
 
 State defaultState = State(-1, -1, -1, -1);
 // ---------------------- State End -----------------------------------
+
+
+struct criticalStateResult {
+  criticalStateResult(Status status, State firstState, State secondState) : status(status), firstState(firstState), secondState(secondState) {}
+
+  Status status;
+  State firstState;
+  State secondState;
+};
+
+// ---------------------- criticalStateResult End -----------------------------------

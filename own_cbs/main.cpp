@@ -58,8 +58,8 @@ FlatlandCBS::FlatlandCBS(p::object railEnv) : m_railEnv(railEnv), m_map(p::extra
 	for (int handle = 0; handle < len(as); handle++) {
 
 	  // Set the Staring State for every Agent
-	  p::tuple start = p::extract<p::tuple>(as[handle].attr("initial_position"));
-	  int dir = p::extract<int>(as[handle].attr("initial_direction"));
+	  p::tuple start = p::extract<p::tuple>(as[handle].attr("position"));
+	  int dir = p::extract<int>(as[handle].attr("direction"));
 
 	  State initialState = State(0, p::extract<int>(start[0]), p::extract<int>(start[1]), dir);
 
@@ -101,6 +101,14 @@ void FlatlandCBS::setConstraints(const Constraints* constraints) {
   m_constraints = constraints;
 }
 
+bool FlatlandCBS::checkInitialConstraints() {
+  return m_constraints->checkInitial();
+}
+
+int FlatlandCBS::getInitialConstraintEndTime() const {
+  return m_constraints->initialConstraintEndTime;
+}
+
 
 void FlatlandCBS::getNeighbors(const State& s, const int speed, std::vector<Neighbor <Action, State> >& neighbors) {
 
@@ -125,7 +133,7 @@ void FlatlandCBS::getNeighbors(const State& s, const int speed, std::vector<Neig
     switch (next_action.action) {
       case 1: neighbors.emplace_back(Neighbor_t(n, Action::Left, 1)); break;
 
-      case 2: neighbors.emplace_back(Neighbor_t(n, Action::Up, 1)); break;
+      case 2: neighbors.emplace_back(Neighbor_t(n, Action::Forward, 1)); break;
 
       case 3: neighbors.emplace_back(Neighbor_t(n, Action::Right, 1)); break;
     }
@@ -206,18 +214,24 @@ bool FlatlandCBS::getFirstConflict(std::vector<PlanResult <Action, State> >& sol
     for (size_t handle1 = 0; handle1 < solution.size(); handle1++) {
 
       if (time >= solution[handle1].states.size()) continue;
+      
+      State conflictState1 = solution[handle1].states[time];
+
+      if (conflictState1 == defaultState) continue;
 
       for (size_t handle2 = handle1 + 1; handle2 < solution.size(); handle2++) {
         
         if (time >= solution[handle2].states.size()) continue;
-
-        // Get the possible conflict states
-        State conflictState1 = solution[handle1].states[time];
+        
         State conflictState2 = solution[handle2].states[time];
+
+        if (conflictState2 == defaultState) continue;
 
 
         // Found a Vertex error
         if (conflictState1.equalExceptTime(conflictState2)) {
+
+          std::cout << std::endl << "[t=" << time << "] Vertex conflict at: " << conflictState1 << ", " << conflictState2 << std::endl;
 
           // TODO: Check for an head error
           handleConflicts(conflictState1, conflictState2, time, handle1, handle2, solution, resultConstraints, 0);
@@ -234,20 +248,26 @@ bool FlatlandCBS::getFirstConflict(std::vector<PlanResult <Action, State> >& sol
 
       if (time >= solution[handle1].states.size()) continue;
 
+      State conflictState1a = solution[handle1].states[time-1];
+      State conflictState1b = solution[handle1].states[time];
+
+      if (conflictState1b == defaultState) continue;
+
       for (size_t handle2 = handle1 + 1; handle2 < solution.size(); handle2++) {
         
         if (time >= solution[handle2].states.size()) continue;
 
-        State conflictState1a = solution[handle1].states[time-1];
-        State conflictState1b = solution[handle1].states[time];
-
         State conflictState2a = solution[handle2].states[time-1];
         State conflictState2b = solution[handle2].states[time];
+
+        if (conflictState2b == defaultState) continue;
 
         // Found a Edge error
         if (conflictState1a.equalExceptTime(conflictState2b) && conflictState1b.equalExceptTime(conflictState2a)) {
 
-          handleConflicts(conflictState1b, conflictState2a, time, handle1, handle2, solution, resultConstraints, 1);
+          std::cout << std::endl << "[t=" << time << "] Edge conflict at: " << conflictState1b << ", " << conflictState2b << std::endl;
+
+          handleConflicts(conflictState1b, conflictState2b, time, handle1, handle2, solution, resultConstraints, 1);
 
           return true;
         }
