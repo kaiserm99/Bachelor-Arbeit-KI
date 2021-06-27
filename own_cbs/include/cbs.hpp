@@ -17,27 +17,33 @@ class SearchCBS {
   public:
     SearchCBS(FlatlandCBS& flatlandCBS) : m_flatlandCBS(flatlandCBS) {}
 
+    int localSearch(State initialState, Agent agent) {
+
+      return 10;
+    }
+
     bool search(std::vector<PlanResult<Action, State> >& solution) {
 
       // Initialize the first HighLevelNode
       HighLevelNode start;
-      start.solution.resize(m_flatlandCBS.agents.size());
-      start.constraints.resize(m_flatlandCBS.agents.size());
+      start.solution.resize(m_flatlandCBS.m_agents.size());
+      start.constraints.resize(m_flatlandCBS.m_agents.size());
       start.cost = 0;
       start.id = 0;
     
+      /*
       Constraints tst; 
-      tst.add(Constraint(1, 7, 18, 19));
-      tst.addInitial(0); 
-      tst.add(Constraint(13, 20, 17, 23));
+      // tst.add(Constraint(1, 7, 18, 19));
+      tst.addInitial(10); 
+      // tst.add(Constraint(13, 20, 17, 23));
       
       start.constraints[0] = tst;
-      start.constraints[1] = tst;
+      */
 
 
       // Compute the initial search and check if every solution is somehow possigle
-      for (int handle = 0; (unsigned) handle < m_flatlandCBS.agents.size(); handle++) {
-        Agent a = m_flatlandCBS.agents[handle];
+      for (int handle = 0; (unsigned) handle < m_flatlandCBS.m_agents.size(); handle++) {
+        Agent a = m_flatlandCBS.m_agents[handle];
         std::cout << a << std::endl;
 
         AStar_t astar(m_flatlandCBS, &start.constraints[handle]);
@@ -64,20 +70,83 @@ class SearchCBS {
 
         open.pop();
 
-        std::vector<std::pair<size_t, Constraint>> resultConstraints;
+        std::vector<std::pair<size_t, Constraints>> resultConstraints;
+        std::vector<std::pair< std::pair<size_t, size_t> , std::pair<Constraints, Constraint>>> resultDoubleConstraints;
 
-        if (!m_flatlandCBS.getFirstConflict(P.solution, resultConstraints)) {
+        if (!m_flatlandCBS.getFirstConflict(P.solution, P.constraints, resultConstraints, resultDoubleConstraints)) {
 
-          // std::cout << "Final HighLevelNode:" << std::endl << P << std::endl << std::endl;
+          std::cout << "Final HighLevelNode:" << std::endl << P << std::endl << std::endl;
 
           std::cout << "done; cost: " << P.cost << std::endl;
           solution = P.solution;
 
           return true;
         }
+
+
+        for (const auto& c : resultDoubleConstraints) {
+
+          size_t handle1 = c.first.first;
+          size_t handle2 = c.first.second;
+
+          HighLevelNode newNode = P;
+          newNode.id = id;
+          newNode.cost -= P.solution[handle1].cost;
+          newNode.cost -= P.solution[handle2].cost;
+
+          newNode.constraints[handle1].extend(c.second.first);
+          newNode.constraints[handle2].add(c.second.second);
+
+          std::cout << "Constrained " << handle1 << ", " << c.second.first << std::endl;
+          std::cout << "Constrained " << handle2 << ", " << c.second.second << std::endl;
+
+          AStar_t astar(m_flatlandCBS, &newNode.constraints[handle1]);
+          Agent a = m_flatlandCBS.m_agents[handle1];
+    
+          if (!astar.search(a, newNode.solution[handle1])) continue;
+
+
+          AStar_t astarTwo(m_flatlandCBS, &newNode.constraints[handle2]);
+          a = m_flatlandCBS.m_agents[handle2];
+          if (!astarTwo.search(a, newNode.solution[handle2])) continue;
+
+          newNode.cost += newNode.solution[handle1].cost;
+          newNode.cost += newNode.solution[handle2].cost;
+          // std::cout << newNode << std::endl;
+          auto h = open.push(newNode);
+          (*h).handle = h;
+
+          ++id;
+        }
+
+      
+        for (const auto& c : resultConstraints) {
+
+          size_t handle = c.first;
+
+          HighLevelNode newNode = P;
+          newNode.id = id;
+          newNode.cost -= P.solution[handle].cost;
+
+          newNode.constraints[handle].extend(c.second);
+          std::cout << "Constrained " << handle << ", " << c.second << std::endl;
+
+          AStar_t astar(m_flatlandCBS, &newNode.constraints[handle]);
+          Agent a = m_flatlandCBS.m_agents[handle];
+    
+          if (astar.search(a, newNode.solution[handle])) {
+
+            newNode.cost += newNode.solution[handle].cost;
+            // std::cout << newNode << std::endl;
+            auto h = open.push(newNode);
+            (*h).handle = h;
+          }
+
+          ++id;
+        }
       }
 
-      return true;
+      return false;
     }
 
   private:

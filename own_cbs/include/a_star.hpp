@@ -24,7 +24,9 @@ class AStar {
       m_flatlandCBS.setConstraints(constraints);
     }
     
-    bool search(Agent& agent, PlanResult<Action, State>& solution, int initialCost = 0) {
+    bool search(Agent& agent, PlanResult<Action, State>& solution, bool initialSearch = false, int initialCost = 0) {
+      solution.states.clear();
+      solution.actions.clear();
 
       // Create all the needed Data Structures
       openSet_t openSet;
@@ -37,7 +39,6 @@ class AStar {
       if (m_flatlandCBS.checkInitialConstraints()) {
         agent.initialState = State(initialConstraintEndTime+1, agent.initialState.y, agent.initialState.x, agent.initialState.dir);
       }
-      std::cout << agent.initialState << std::endl;
 
       // Insert the first Node into the Heap
       auto handle = openSet.push(Node(agent.initialState, agent.getHeuristicValue(agent.initialState), initialCost));
@@ -52,7 +53,10 @@ class AStar {
 
         Node current = openSet.top();
 
-        m_flatlandCBS.onExpandNode();
+        // std::cout << current << std::endl;
+
+        if (initialSearch) m_flatlandCBS.onExpandInitialNode();
+        else m_flatlandCBS.onExpandNode();
 
         if (agent.isSolution(current.state)) {
           solution.states.clear();
@@ -82,6 +86,9 @@ class AStar {
             solution.states.emplace_back(defaultState);
             tmpActions.emplace_back(std::make_pair(Action::Nothing, 0));
           }
+
+          // Initial action to place the agent on the grid
+          tmpActions.emplace_back(Action::Forward, 0);
 
           // Insert the other states and actions into the vectors
           int index = 0;
@@ -121,7 +128,7 @@ class AStar {
         stateToHeap.erase(current.state);
         closedSet.insert(current.state);
 
-        m_flatlandCBS.getNeighbors(current.state, agent.speed, neighbors);
+        m_flatlandCBS.getNeighbors(current.state, agent, neighbors);
 
         for (const Neighbor <Action, State>& neighbor : neighbors) {
           if (closedSet.find(neighbor.state) == closedSet.end()) {

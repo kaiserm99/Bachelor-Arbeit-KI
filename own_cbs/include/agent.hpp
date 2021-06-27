@@ -30,7 +30,7 @@ class Agent {
     }
 
     int getHeuristicValue(int y, int x, int dir) {
-      return (int) boost::lexical_cast<float>(p::extract<char const *>(p::str(m_heuristics[y][x][dir])));
+      return boost::lexical_cast<float>(p::extract<char const *>(p::str(m_heuristics[y][x][dir])));
     }
     
     bool isSolution(State& state) {

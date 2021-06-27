@@ -22,7 +22,14 @@ struct Constraint {
     x = -1;
   }
 
-  Constraint(int startingTime, int endingTime, int y, int x) : startingTime(startingTime), endingTime(endingTime), y(y), x(x)  {}
+  Constraint(int st, int et, int y, int x) :  startingTime(st), endingTime(et), y(y), x(x)  {
+    // if (st > et) startingTime = et;
+
+    // else startingTime = st;
+
+    assert(startingTime <= endingTime);
+  }
+
   int startingTime;
   int endingTime;
   int y;
@@ -61,10 +68,16 @@ struct Constraints {
     }
   }
 
-  // See: C++ extend a vector with another vector, (https://stackoverflow.com/questions/313432/c-extend-a-vector-with-another-vector)
+  
   void extend(const Constraints& other) {
-    constraints.reserve(constraints.size() + std::distance(other.constraints.begin(), other.constraints.end()));
-    constraints.insert(constraints.end(), other.constraints.begin(), other.constraints.end());
+
+    // See: C++ extend a vector with another vector, (https://stackoverflow.com/questions/313432/c-extend-a-vector-with-another-vector)
+    if (other.initialConstraintEndTime == -1) {
+      constraints.reserve(constraints.size() + std::distance(other.constraints.begin(), other.constraints.end()));
+      constraints.insert(constraints.end(), other.constraints.begin(), other.constraints.end());
+    } else {
+      addInitial(other.initialConstraintEndTime);
+    }
   }
 
   bool checkInitial() const {

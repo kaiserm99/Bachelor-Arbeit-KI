@@ -33,11 +33,10 @@ namespace np = boost::python::numpy;
 #include <cbs_functions.hpp>
 
 
-
-
 typedef Neighbor <Action, State> Neighbor_t;
 typedef Agent <State, GridLocation> Agent_t;
 typedef SearchCBS <FlatlandCBS, State, GridLocation, Agent_t, Action> SearchCBS_t;
+
 
 
 FlatlandCBS::FlatlandCBS(p::object railEnv) : m_railEnv(railEnv), m_map(p::extract<np::ndarray>(railEnv.attr("distance_map").attr("get")())) {
@@ -58,8 +57,8 @@ FlatlandCBS::FlatlandCBS(p::object railEnv) : m_railEnv(railEnv), m_map(p::extra
 	for (int handle = 0; handle < len(as); handle++) {
 
 	  // Set the Staring State for every Agent
-	  p::tuple start = p::extract<p::tuple>(as[handle].attr("position"));
-	  int dir = p::extract<int>(as[handle].attr("direction"));
+	  p::tuple start = p::extract<p::tuple>(as[handle].attr("initial_position"));
+	  int dir = p::extract<int>(as[handle].attr("initial_direction"));
 
 	  State initialState = State(0, p::extract<int>(start[0]), p::extract<int>(start[1]), dir);
 
@@ -74,7 +73,7 @@ FlatlandCBS::FlatlandCBS(p::object railEnv) : m_railEnv(railEnv), m_map(p::extra
 
     // Make sure to insert the newly created Agent into the handeled list
     Agent<State, GridLocation> agent(handle, initialState, targetLocation, speed, m_map[handle]);
-    agents.emplace_back(agent);
+    m_agents.emplace_back(agent);
 	}
 
 
@@ -87,13 +86,10 @@ FlatlandCBS::FlatlandCBS(p::object railEnv) : m_railEnv(railEnv), m_map(p::extra
 				
 				if (all(possibleTransitions)) { continue; }
 
-				possibleActions[GridLocation(y, x, dir)] = getNextGridLocations(GridLocation(y, x), dir, possibleTransitions);
+				m_possibleActions[GridLocation(y, x, dir)] = getNextGridLocations(GridLocation(y, x), dir, possibleTransitions);
 	 		}
 		}
 	}
-
-  // For Statistics
-  nodeExpandCount = 0;
 }
 
 // Just sets the Constraints to the given, so the AStar can get the right nieghbours
@@ -110,25 +106,29 @@ int FlatlandCBS::getInitialConstraintEndTime() const {
 }
 
 
-void FlatlandCBS::getNeighbors(const State& s, const int speed, std::vector<Neighbor <Action, State> >& neighbors) {
+void FlatlandCBS::getNeighbors(const State& s, Agent_t& agent, std::vector<Neighbor <Action, State> >& neighbors) {
 
 	neighbors.clear();
 
+  // Check if the agent can aplly it, by getting the heuristic value
+  if (agent.getHeuristicValue(s) == INT_MIN) return;
+
 	// Always append the waiting state
-	State n(s.time + speed, s.y, s.x, s.dir);
+	State n(s.time + agent.speed, s.y, s.x, s.dir);
 
   // Only check the waits with one timestep
   if (m_constraints->checkState(n, 1)) neighbors.emplace_back(Neighbor_t(n, Action::Wait, 1));
  
-  const auto& next_actions = possibleActions[GridLocation(s.y, s.x, s.dir)];
+  const auto& next_actions = m_possibleActions[GridLocation(s.y, s.x, s.dir)];
 
   for (const auto& next_action : next_actions) {
 
+
     // Create the new State, which is checked in the following
-    State n(s.time + speed, next_action.y, next_action.x, next_action.dir);
+    State n(s.time + agent.speed, next_action.y, next_action.x, next_action.dir);
 
     // If the State is not valid --> continue and do not insert
-    if (!m_constraints->checkState(n, speed)) continue;
+    if (!m_constraints->checkState(n, agent.speed)) continue;
 
     switch (next_action.action) {
       case 1: neighbors.emplace_back(Neighbor_t(n, Action::Left, 1)); break;
@@ -195,11 +195,13 @@ bool FlatlandCBS::all(const std::vector<int>& v) {
 
 // Only for Statistics
 void FlatlandCBS::onExpandNode() { nodeExpandCount++; }
+void FlatlandCBS::onExpandInitialNode() { initialNodeExpandCount++; }
 void FlatlandCBS::onExpandHighLevelNode() { highLevelNodeExpandCount++; }
 
 
 
-bool FlatlandCBS::getFirstConflict(std::vector<PlanResult <Action, State> >& solution, std::vector<std::pair<size_t, Constraint>>& resultConstraints) {
+
+bool FlatlandCBS::getFirstConflict(std::vector<PlanResult <Action, State> >& solution, std::vector<Constraints>& oldConstraints, std::vector<std::pair<size_t, Constraints>>& resultConstraints, std::vector<std::pair< std::pair<size_t, size_t> , std::pair<Constraints, Constraint>>>& resultDoubleConstraints) {
 
   size_t max_t = 0;
   for (const auto& sol : solution) {
@@ -217,7 +219,7 @@ bool FlatlandCBS::getFirstConflict(std::vector<PlanResult <Action, State> >& sol
       
       State conflictState1 = solution[handle1].states[time];
 
-      if (conflictState1 == defaultState) continue;
+      if (conflictState1 == defaultState) continue;  // Make sure to skipt the default states if there are any
 
       for (size_t handle2 = handle1 + 1; handle2 < solution.size(); handle2++) {
         
@@ -225,7 +227,7 @@ bool FlatlandCBS::getFirstConflict(std::vector<PlanResult <Action, State> >& sol
         
         State conflictState2 = solution[handle2].states[time];
 
-        if (conflictState2 == defaultState) continue;
+        if (conflictState2 == defaultState) continue;  // Make sure to skipt the default states if there are any
 
 
         // Found a Vertex error
@@ -233,15 +235,13 @@ bool FlatlandCBS::getFirstConflict(std::vector<PlanResult <Action, State> >& sol
 
           std::cout << std::endl << "[t=" << time << "] Vertex conflict at: " << conflictState1 << ", " << conflictState2 << std::endl;
 
-          // TODO: Check for an head error
-          handleConflicts(conflictState1, conflictState2, time, handle1, handle2, solution, resultConstraints, 0);
+          handleConflicts(conflictState1, conflictState2, time, handle1, handle2, solution, oldConstraints, resultConstraints, resultDoubleConstraints, 0);
 
           return true;
         }
 
       }
     }
-
 
     // Check for edge conflicts
     for (size_t handle1 = 0; handle1 < solution.size(); handle1++) {
@@ -267,7 +267,7 @@ bool FlatlandCBS::getFirstConflict(std::vector<PlanResult <Action, State> >& sol
 
           std::cout << std::endl << "[t=" << time << "] Edge conflict at: " << conflictState1b << ", " << conflictState2b << std::endl;
 
-          handleConflicts(conflictState1b, conflictState2b, time, handle1, handle2, solution, resultConstraints, 1);
+          handleConflicts(conflictState1b, conflictState2b, time, handle1, handle2, solution, oldConstraints, resultConstraints, resultDoubleConstraints, 1);
 
           return true;
         }
@@ -275,22 +275,10 @@ bool FlatlandCBS::getFirstConflict(std::vector<PlanResult <Action, State> >& sol
       }
 
     }
-
   }
 
   return false;  // Found no conflict so a valid solution is given
 }
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -319,22 +307,6 @@ int mainSearch(FlatlandCBS& f) {
     std::cout << std::endl << std::endl;
   }
 
-/*
-    p::list handleSolution;
-    std::cout << "Solution for: " << handle << std::endl;
-    for (size_t i = 0; i < f.solution[handle].states.size(); i++) {
-      std::cout << f.solution[handle].states[i];
-
-      // False way to print the Actions and State, but it is correct
-      int agentSpeed = f.agents[handle].speed;
-      if (i % agentSpeed == 0) { 
-        std::cout << "->" << f.solution[handle].actions[i / agentSpeed].first << "(cost: " << f.solution[handle].actions[i / agentSpeed].second << ")";
-      }
-      std::cout << std::endl;
-    }
-  }
-  */
-
 	return 0;
 }
 
@@ -355,6 +327,7 @@ p::dict FlatlandCBS::getStatistic() {
 	p::dict result;
 
 	result["Expanded LowLevelNodes"] = nodeExpandCount;
+  result["Expanded InitialLowLevelNodes"] = initialNodeExpandCount;
   result["Expanded HighLevelNodes"] = highLevelNodeExpandCount;
 
 	return result;

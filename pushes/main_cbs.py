@@ -410,8 +410,8 @@ def main():
         env = RailEnv(
             width=0,
             height=0,
-            rail_generator=rail_from_file("../scratch/test-envs/Test_6/Level_0.pkl"),
-            number_of_agents=2,
+            rail_generator=rail_from_file("../scratch/test-envs/Test_8/Level_0.pkl"),
+            number_of_agents=10,
             # malfunction_generator=ParamMalfunctionGen(stochastic_data)
         )
 

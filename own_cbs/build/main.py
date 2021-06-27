@@ -1,14 +1,30 @@
 #!/usr/bin/env python3
 
 import time
+import sys
+import numpy as np
+import argparse
+
+
+np.random.seed = 200
 
 from flatland.envs.rail_env import RailEnv
 from flatland.envs.rail_generators import rail_from_file
-import numpy as np
+from flatland.utils.rendertools import RenderTool, AgentRenderVariant
 
 import libFlatlandCBS as FlatlandCBS
 
-from flatland.utils.rendertools import RenderTool, AgentRenderVariant
+
+"""
+Debug Environments:
+
+Head collision: Map 4, Speed 1, Agents 8
+Applicable -> inital: Map 4, Speed 1, Agents 9
+"""
+
+
+direction_to_str = {0: "North", 1: "East", 2: "South", 3: "West"}
+action_to_str = {0 : "Do nothing", 1: "Left", 2 : "Forward", 3 : "Right", 4 : "Stop moving"}
 
 
 def set_speed(env, speed_ration_map):
@@ -18,24 +34,31 @@ def set_speed(env, speed_ration_map):
 
 
 
-speed_ration_map = {1. / 1.: 0.,
-                    1. / 2.: 0.,
-                    1. / 3.: 1.,
-                    1. / 4.: 0.}
+
+parser = argparse.ArgumentParser()
+parser.add_argument("-l", "--level", help="Insert level number", type=int)
+parser.add_argument("-a", "--agents", help="Insert agent number", type=int)
+
+
+args = parser.parse_args()
+
+
+speed_ration_map = {1. / 1.: 1,
+                    1. / 2.: 0,
+                    1. / 3.: 0,
+                    1. / 4.: 0}
 
 time_start = time.time()
 env = RailEnv(
     width=0,
     height=0,
-    rail_generator=rail_from_file("../../scratch/test-envs/Test_6/Level_0.pkl"),
-    number_of_agents=2
+    rail_generator=rail_from_file("../../scratch/test-envs/Test_" + str(args.level) + "/Level_0.pkl"),
+    number_of_agents=args.agents
 )
 
 
 _, info = env.reset()
-# set_speed(env, speed_ration_map)
-_,_,_,_ = env.step({ 0 : 2, 1 : 2})
-
+set_speed(env, speed_ration_map)
 
 
 
@@ -50,15 +73,18 @@ if status == 0:
     print(cbs.getStatistic())
 
 else:
-    exit(1)
+    print(f"\nFound no valid solution after {time.time()-time_start:5f}sec\n")
+    sys.exit(1)
 
 
-print(FlatlandCBS.getActions(cbs))
+action_dict = FlatlandCBS.getActions(cbs)
+
+print(action_dict)
 
 
 
 
-"""
+
 render = True
     
 
@@ -70,17 +96,45 @@ try:
         env_renderer.render_env(show=True, frames=False, show_observations=False, show_predictions=False, show_rowcols=True)
 
 
-    for step, action in enumerate([2, 2, 3, 1, 2, 2, 2, 1, 3, 2, 2, 1, 2, 2, 1, 2, 2, 3, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1]):
-
-        obs, all_rewards, done, info = env.step({0 : action})
-        print(f"[{step:3}] In goal: {[handle for handle, status in done.items() if status]}")
-        print(action)
+    current_actions = {}
+    for step in range(2000):
 
         if render:
             env_renderer.render_env(show=True, frames=False, show_observations=False, show_predictions=False)
-            time.sleep(0.5)
+            time.sleep(0.2)
+            # input("Weiter?")
+
+        for handle, agent in enumerate(env.agents):
+
+            print(f"{handle}: ", end="")
+
+            if agent.position is not None:
+                print(f"{agent.position}, {direction_to_str[agent.direction]} -> ", end="")
+
+            if (env.action_required(agent)):
+
+                action = action_dict[handle].pop(0)
+                
+                print(action_to_str[action])
+                current_actions[handle] = action
+
+            else:
+                print("+--+")
+
+            
+
+        obs, all_rewards, done, info = env.step(current_actions)
+
+
+
+        print(f"[{step:3}] In goal: {[handle for handle, status in done.items() if status]}")
+        
+
+        
+
+        if done["__all__"]:
+                print(f"\nAll Agents are in their targets! After {step} iterations.")
+                break
 
 finally:
     if render : env_renderer.close_window()
-"""
-

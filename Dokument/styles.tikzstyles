@@ -6,6 +6,7 @@
 % Node styles
 \tikzstyle{red}=[fill={rgb,255: red,255; green,0; blue,4}, draw=black, shape=rectangle, tikzit fill={rgb,255: red,255; green,0; blue,4}, tikzit shape=rectangle, minimum width=1cm, minimum height=1cm]
 \tikzstyle{green}=[fill=green, draw=black, shape=rectangle, tikzit shape=rectangle, minimum width=1cm, minimum height=1cm]
+\tikzstyle{blue}=[fill=blue, draw=black, shape=rectangle, tikzit shape=rectangle, minimum width=1cm, minimum height=1cm]
 \tikzstyle{yellow}=[fill=yellow, draw=black, shape=rectangle, tikzit shape=rectangle, minimum width=1cm, minimum height=1cm]
 \tikzstyle{normal}=[fill=white, draw=black, shape=rectangle, tikzit draw=black, tikzit shape=rectangle, minimum width=1cm, minimum height=1cm]
 \tikzstyle{big red}=[fill=red, draw=black, shape=rectangle, minimum height=1cm, minimum width=2cm, tikzit shape=rectangle]
