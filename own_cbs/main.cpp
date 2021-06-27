@@ -233,7 +233,7 @@ bool FlatlandCBS::getFirstConflict(std::vector<PlanResult <Action, State> >& sol
         // Found a Vertex error
         if (conflictState1.equalExceptTime(conflictState2)) {
 
-          std::cout << std::endl << "[t=" << time << "] Vertex conflict at: " << conflictState1 << ", " << conflictState2 << std::endl;
+          // std::cout << std::endl << "[t=" << time << "] Vertex conflict at: " << conflictState1 << ", " << conflictState2 << std::endl;
 
           handleConflicts(conflictState1, conflictState2, time, handle1, handle2, solution, oldConstraints, resultConstraints, resultDoubleConstraints, 0);
 
@@ -265,7 +265,7 @@ bool FlatlandCBS::getFirstConflict(std::vector<PlanResult <Action, State> >& sol
         // Found a Edge error
         if (conflictState1a.equalExceptTime(conflictState2b) && conflictState1b.equalExceptTime(conflictState2a)) {
 
-          std::cout << std::endl << "[t=" << time << "] Edge conflict at: " << conflictState1b << ", " << conflictState2b << std::endl;
+          // std::cout << std::endl << "[t=" << time << "] Edge conflict at: " << conflictState1b << ", " << conflictState2b << std::endl;
 
           handleConflicts(conflictState1b, conflictState2b, time, handle1, handle2, solution, oldConstraints, resultConstraints, resultDoubleConstraints, 1);
 

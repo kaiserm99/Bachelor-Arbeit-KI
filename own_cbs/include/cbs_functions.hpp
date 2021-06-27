@@ -100,7 +100,7 @@ void FlatlandCBS::handleConflicts(const State& conflictState1, const State& conf
 
   // Check for rear-end collision
   if (conflictState1.dir == conflictState2.dir) {
-    std::cout << "Rear-end collision" << std::endl;
+    // std::cout << "Rear-end collision" << std::endl;
 
     // Note: There is no need to check the previous state, because when an agent has an rear-end collision with an agent
     // which waits at the inital state, the value 0 gets returned
@@ -133,7 +133,7 @@ void FlatlandCBS::handleConflicts(const State& conflictState1, const State& conf
     
 
     if (!nextAgentOne.equalExceptTime(prevAgentTwo)) {
-      std::cout << "Head collision" << std::endl;
+      // std::cout << "Head collision" << std::endl;
 
       State prevAgentOne = getPrevState(conflictState1, handle1, solution).second;
       State nextAgentTwo = getNextState(conflictState2, handle2, solution).second;
@@ -176,7 +176,7 @@ void FlatlandCBS::handleConflicts(const State& conflictState1, const State& conf
       resultConstraints.emplace_back(std::make_pair(handle1, constraints));
 
     } else {
-      std::cout << "Agent " << handle2 << " is slower!" << std::endl;
+      // std::cout << "Agent " << handle2 << " is slower!" << std::endl;
 
       int upperBound = getNextState(resultTwo.secondState, handle1, solution).second.time - 1;
 
@@ -237,11 +237,11 @@ void FlatlandCBS::constrainAgent(const criticalStateResult& result, const size_t
     int count = 1;
     while (true) {
 
-      // std::cout << currState << std::endl;
+      // // std::cout << currState << std::endl;
 
       // If the found state is the target of agent 2, set to timestep of it
       if (currState == m_agents[handle2].targetLocation) {
-        std::cout << "Applicable -> targetLocation!" << std::endl;
+        // std::cout << "Applicable -> targetLocation!" << std::endl;
 
         upperBound = currState.time;
         upperBound += count * m_agents[handle1].speed;
@@ -252,7 +252,7 @@ void FlatlandCBS::constrainAgent(const criticalStateResult& result, const size_t
       // If the found state is the inital state, local search so agent 1 is taking the other route
       if (currState.y == m_agents[handle1].initialState.y && currState.x == m_agents[handle1].initialState.x) {
 
-        std::cout << "Applicable -> initial!" << std::endl;
+        // std::cout << "Applicable -> initial!" << std::endl;
 
         int r = initialSearch(result, handle1, oldConstraints, lowerBoundCurr);
 
@@ -266,7 +266,7 @@ void FlatlandCBS::constrainAgent(const criticalStateResult& result, const size_t
       // If the found state is an applicable state, take the time agent 2 would leave this state
       if (m_possibleActions[GridLocation(currState.y, currState.x, currState.dir)].size() >= 2) {
 
-        std::cout << "Applicable -> applicable!" << std::endl;
+        // std::cout << "Applicable -> applicable!" << std::endl;
 
         // Cannot be the target state, otherwise a if case earlier will trigger
         upperBound = getNextState(currState, handle2, solution).second.time - 1;
@@ -287,7 +287,7 @@ void FlatlandCBS::constrainAgent(const criticalStateResult& result, const size_t
     constraints.add(Constraint(lowerBoundNext, upperBound, nextState.y, nextState.x));
 
     if ((unsigned)result.firstState.time == conflictTime) {
-      std::cout << "Double constrain!" << std::endl;
+      // std::cout << "Double constrain!" << std::endl;
       Constraint conOther = Constraint(lowerBoundNext, upperBound, result.firstState.y, result.firstState.x);
       resultDoubleConstraints.emplace_back(std::make_pair(std::make_pair(handle1, handle2), std::make_pair(constraints, conOther)));
     }
@@ -319,7 +319,7 @@ void FlatlandCBS::constrainAgent(const criticalStateResult& result, const size_t
   }
 
   if (result.status == Status::InitialApplicable) {
-    std::cout << "Initial Applicable!" << std::endl;
+    // std::cout << "Initial Applicable!" << std::endl;
 
 
     int lowerBoundNext = 1;
@@ -338,7 +338,7 @@ void FlatlandCBS::constrainAgent(const criticalStateResult& result, const size_t
 
 
     if ((unsigned)result.firstState.time == conflictTime) {
-      std::cout << "Double constrain!" << std::endl;
+      // std::cout << "Double constrain!" << std::endl;
       Constraint conOther = Constraint(lowerBoundNext, upperBound, result.firstState.y, result.firstState.x);
       resultDoubleConstraints.emplace_back(std::make_pair(std::make_pair(handle1, handle2), std::make_pair(constraints, conOther)));
     }
@@ -373,7 +373,7 @@ void FlatlandCBS::constrainAgent(const criticalStateResult& result, const size_t
     constraints.add(Constraint(lowerBoundNext, upperBound, nextState.y, nextState.x));
 
     if ((unsigned)result.firstState.time == conflictTime) {
-      std::cout << "Goall \"double\" constrain!" << std::endl;
+      // std::cout << "Goall \"double\" constrain!" << std::endl;
 
       constraints.add(Constraint(lowerBoundNext, upperBound, result.firstState.y, result.firstState.x));
 
@@ -387,10 +387,6 @@ void FlatlandCBS::constrainAgent(const criticalStateResult& result, const size_t
 int FlatlandCBS::initialSearch(const criticalStateResult result, const int handle, std::vector<Constraints>& oldConstraints, const int lowerBoundCurr) {
   // Find the new inital state
   State newInitialState;
-
-  if (result.firstState == defaultState) {
-    std::cout << "True" << std::endl;
-  }
 
   for (const auto& gridLoc : m_possibleActions[GridLocation(result.firstState.y, result.firstState.x, result.firstState.dir)]) {
     if (gridLoc.y != result.firstState.y || gridLoc.x != result.firstState.x || gridLoc.dir != result.firstState.dir) {

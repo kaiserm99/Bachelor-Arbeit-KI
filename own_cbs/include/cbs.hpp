@@ -44,7 +44,7 @@ class SearchCBS {
       // Compute the initial search and check if every solution is somehow possigle
       for (int handle = 0; (unsigned) handle < m_flatlandCBS.m_agents.size(); handle++) {
         Agent a = m_flatlandCBS.m_agents[handle];
-        std::cout << a << std::endl;
+        // // std::cout << a << std::endl;
 
         AStar_t astar(m_flatlandCBS, &start.constraints[handle]);
 
@@ -54,7 +54,7 @@ class SearchCBS {
         start.cost += start.solution[handle].cost;
       }
 
-      std::cout << start << std::endl;
+      // std::cout << start << std::endl;
 
       typename boost::heap::d_ary_heap<HighLevelNode, boost::heap::arity<2>, boost::heap::mutable_<true>> open;
       auto h = open.push(start);
@@ -97,8 +97,8 @@ class SearchCBS {
           newNode.constraints[handle1].extend(c.second.first);
           newNode.constraints[handle2].add(c.second.second);
 
-          std::cout << "Constrained " << handle1 << ", " << c.second.first << std::endl;
-          std::cout << "Constrained " << handle2 << ", " << c.second.second << std::endl;
+          // std::cout << "Constrained " << handle1 << ", " << c.second.first << std::endl;
+          // std::cout << "Constrained " << handle2 << ", " << c.second.second << std::endl;
 
           AStar_t astar(m_flatlandCBS, &newNode.constraints[handle1]);
           Agent a = m_flatlandCBS.m_agents[handle1];
@@ -129,7 +129,7 @@ class SearchCBS {
           newNode.cost -= P.solution[handle].cost;
 
           newNode.constraints[handle].extend(c.second);
-          std::cout << "Constrained " << handle << ", " << c.second << std::endl;
+          // std::cout << "Constrained " << handle << ", " << c.second << std::endl;
 
           AStar_t astar(m_flatlandCBS, &newNode.constraints[handle]);
           Agent a = m_flatlandCBS.m_agents[handle];

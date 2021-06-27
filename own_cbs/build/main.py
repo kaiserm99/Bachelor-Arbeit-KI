@@ -85,7 +85,7 @@ print(action_dict)
 
 
 
-render = True
+render = False
     
 
 try:
