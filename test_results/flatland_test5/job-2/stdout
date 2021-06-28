@@ -1,0 +1,108 @@
+Loading Map with (25 x 25)
+Agent 0, start=(8,17), target=(3,13)
+Agent 1, start=(19,15), target=(11,13)
+Agent 2, start=(6,17), target=(7,17)
+Agent 3, start=(20,15), target=(7,13)
+Final HighLevelNode:
+id: 1 cost: 52
+Agent: 0
+ States:
+  0: (8,17,0)
+  1: (8,17,0)
+  2: (7,17,0)
+  3: (6,17,0)
+  4: (5,17,0)
+  5: (4,17,0)
+  6: (3,17,0)
+  7: (2,17,0)
+  8: (1,17,0)
+  9: (1,16,3)
+  10: (1,15,3)
+  11: (1,14,3)
+  12: (1,13,3)
+  13: (2,13,2)
+  14: (3,13,2)
+ Constraints:
+C(1->1: y=7, x=17)
+
+ cost: 15
+Agent: 1
+ States:
+  0: (19,15,0)
+  1: (18,15,0)
+  2: (17,15,0)
+  3: (16,15,0)
+  4: (15,15,0)
+  5: (14,15,0)
+  6: (13,15,0)
+  7: (12,15,0)
+  8: (12,14,3)
+  9: (12,13,3)
+  10: (11,13,0)
+ Constraints:
+
+ cost: 11
+Agent: 2
+ States:
+  0: (6,17,2)
+  1: (7,17,2)
+ Constraints:
+
+ cost: 2
+Agent: 3
+ States:
+  0: (20,15,2)
+  1: (21,15,2)
+  2: (22,15,2)
+  3: (22,14,3)
+  4: (22,13,3)
+  5: (22,12,3)
+  6: (22,11,3)
+  7: (21,11,0)
+  8: (20,11,0)
+  9: (19,11,0)
+  10: (18,11,0)
+  11: (17,11,0)
+  12: (16,11,0)
+  13: (15,11,0)
+  14: (14,11,0)
+  15: (13,11,0)
+  16: (12,11,0)
+  17: (11,11,0)
+  18: (11,12,1)
+  19: (10,12,0)
+  20: (9,12,0)
+  21: (9,13,1)
+  22: (8,13,0)
+  23: (7,13,0)
+ Constraints:
+
+ cost: 24
+
+
+done; cost: 52
+Actions for: 0
+2, 4, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 1, 2, 
+
+Actions for: 1
+2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 3, 
+
+Actions for: 2
+2, 2, 
+
+Actions for: 3
+2, 2, 2, 3, 2, 2, 2, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 1, 2, 3, 1, 2, 
+
+Created an reseted the Environment in 0.042054sec
+
+
+Found a solution in 0.001802sec
+
+{'Expanded LowLevelNodes': 66, 'Expanded InitialLowLevelNodes': 0, 'Expanded HighLevelNodes': 2}
+{0: [2, 4, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 1, 2], 1: [2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 3], 2: [2, 2], 3: [2, 2, 2, 3, 2, 2, 2, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 1, 2, 3, 1, 2]}
+
+All Agents are in their targets! After 23 iterations.
+
+Found a solution in 0.190260sec
+
+{'Expanded LowLevelNodes': 66, 'Expanded InitialLowLevelNodes': 0, 'Expanded HighLevelNodes': 2}
