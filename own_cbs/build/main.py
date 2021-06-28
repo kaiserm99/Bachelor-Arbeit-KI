@@ -43,8 +43,8 @@ parser.add_argument("-a", "--agents", help="Insert agent number", type=int)
 args = parser.parse_args()
 
 
-speed_ration_map = {1. / 1.: 1,
-                    1. / 2.: 0,
+speed_ration_map = {1. / 1.: .5,
+                    1. / 2.: .5,
                     1. / 3.: 0,
                     1. / 4.: 0}
 
@@ -58,7 +58,7 @@ env = RailEnv(
 
 
 _, info = env.reset()
-set_speed(env, speed_ration_map)
+#set_speed(env, speed_ration_map)
 
 
 
@@ -86,6 +86,7 @@ print(action_dict)
 
 
 render = False
+debug = False
     
 
 try:
@@ -106,20 +107,20 @@ try:
 
         for handle, agent in enumerate(env.agents):
 
-            print(f"{handle}: ", end="")
+            if debug: print(f"{handle}: ", end="")
 
             if agent.position is not None:
-                print(f"{agent.position}, {direction_to_str[agent.direction]} -> ", end="")
+                if debug: print(f"{agent.position}, {direction_to_str[agent.direction]} -> ", end="")
 
             if (env.action_required(agent)):
 
                 action = action_dict[handle].pop(0)
                 
-                print(action_to_str[action])
+                if debug: print(action_to_str[action])
                 current_actions[handle] = action
 
             else:
-                print("+--+")
+                if debug: print("+--+")
 
             
 
@@ -127,14 +128,16 @@ try:
 
 
 
-        print(f"[{step:3}] In goal: {[handle for handle, status in done.items() if status]}")
+        if debug: print(f"[{step:3}] In goal: {[handle for handle, status in done.items() if status]}")
         
 
         
 
         if done["__all__"]:
-                print(f"\nAll Agents are in their targets! After {step} iterations.")
-                break
+            print(f"\nAll Agents are in their targets! After {step} iterations.")
+            print(f"\nFound a solution in {time.time()-time_start:5f}sec\n")
+            print(cbs.getStatistic())
+            break
 
 finally:
     if render : env_renderer.close_window()

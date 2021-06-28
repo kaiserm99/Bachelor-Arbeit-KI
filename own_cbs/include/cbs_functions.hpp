@@ -99,8 +99,8 @@ void FlatlandCBS::handleConflicts(const State& conflictState1, const State& conf
   Constraints constraints;
 
   // Check for rear-end collision
-  if (conflictState1.dir == conflictState2.dir) {
-    // std::cout << "Rear-end collision" << std::endl;
+  if (conflictState1.dir == conflictState2.dir && edge == 0) {
+    if (DEBUG) std::cout << "Rear-end collision" << std::endl;
 
     // Note: There is no need to check the previous state, because when an agent has an rear-end collision with an agent
     // which waits at the inital state, the value 0 gets returned
@@ -110,7 +110,13 @@ void FlatlandCBS::handleConflicts(const State& conflictState1, const State& conf
     if (conflictTime - prevAgentOne.second.time > 1) {
       std::pair<bool, State> nextAgentOne = getNextState(conflictState1, handle1, solution);
 
-      constraints.add(Constraint(prevAgentOne.second.time+1, nextAgentOne.second.time-1, conflictState1.y, conflictState1.x));
+      // If the previous state is the default state, extend the initial constraints
+      if (solution[handle2].states[conflictTime-1].equalExceptTime(defaultState)) {
+
+        constraints.addInitial(nextAgentOne.second.time-1);
+      }
+      else constraints.add(Constraint(prevAgentOne.second.time+1, nextAgentOne.second.time-1, conflictState1.y, conflictState1.x));
+
       resultConstraints.emplace_back(std::make_pair(handle2, constraints));
     }
 
@@ -118,7 +124,12 @@ void FlatlandCBS::handleConflicts(const State& conflictState1, const State& conf
       std::pair<bool, State> prevAgentTwo = getPrevState(conflictState2, handle2, solution);
       std::pair<bool, State> nextAgentTwo = getNextState(conflictState2, handle2, solution);
 
-      constraints.add(Constraint(prevAgentTwo.second.time+1, nextAgentTwo.second.time-1, conflictState2.y, conflictState2.x));
+      if (solution[handle1].states[conflictTime-1].equalExceptTime(defaultState)) {
+
+        constraints.addInitial(nextAgentTwo.second.time-1);
+      }
+      else constraints.add(Constraint(prevAgentTwo.second.time+1, nextAgentTwo.second.time-1, conflictState2.y, conflictState2.x));
+
       resultConstraints.emplace_back(std::make_pair(handle1, constraints));
     }
 
@@ -133,10 +144,40 @@ void FlatlandCBS::handleConflicts(const State& conflictState1, const State& conf
     
 
     if (!nextAgentOne.equalExceptTime(prevAgentTwo)) {
-      // std::cout << "Head collision" << std::endl;
+      if (DEBUG) std::cout << "Head collision" << std::endl;
 
       State prevAgentOne = getPrevState(conflictState1, handle1, solution).second;
       State nextAgentTwo = getNextState(conflictState2, handle2, solution).second;
+
+      // Time in which agent 1 would enter the location
+      int lowerBound = prevAgentOne.time + 1;
+
+      // Time in which agent 2 leaved the location
+      int upperBound = nextAgentTwo.time - 1;
+
+      // If the previous state is the default state, extend the initial constraints
+      if (solution[handle1].states[conflictTime-1].equalExceptTime(defaultState)) {
+
+        constraints.addInitial(upperBound);
+      }
+
+      else constraints.add(Constraint(lowerBound, upperBound, conflictState1.y, conflictState1.x));
+
+      resultConstraints.emplace_back(std::make_pair(handle1, constraints));
+
+      return;
+    }
+  }
+
+  // Normal conflict
+
+  if (edge == 0) {
+    State nextAgentOne = getNextState(conflictState1, handle1, solution).second;
+    State nextAgentTwo = getNextState(conflictState2, handle2, solution).second;
+
+    if (nextAgentOne.equalExceptTime(nextAgentTwo)) {
+      
+      State prevAgentOne = getPrevState(conflictState1, handle1, solution).second;
 
       // TODO: Add the speed and may the goal
 
@@ -151,16 +192,17 @@ void FlatlandCBS::handleConflicts(const State& conflictState1, const State& conf
       resultConstraints.emplace_back(std::make_pair(handle1, constraints));
 
       return;
+
     }
   }
 
 
-  // Normal conflict
+
   criticalStateResult resultOne = getCriticalState(conflictTime, handle1, handle2, solution, edge);
   criticalStateResult resultTwo = getCriticalState(conflictTime, handle2, handle1, solution, edge);
 
-  // std::cout << "Status: " << resultOne.status << " -> Agent " << handle1 << ", cs: " << resultOne.firstState << ", o: " << resultOne.secondState << std::endl;
-  // std::cout << "Status: " << resultTwo.status << " -> Agent " << handle2 << ", cs: " << resultTwo.firstState << ", o: " << resultTwo.secondState << std::endl;
+  if (DEBUG) std::cout << "Status: " << resultOne.status << " -> Agent " << handle1 << ", cs: " << resultOne.firstState << ", o: " << resultOne.secondState << std::endl;
+  if (DEBUG) std::cout << "Status: " << resultTwo.status << " -> Agent " << handle2 << ", cs: " << resultTwo.firstState << ", o: " << resultTwo.secondState << std::endl;
 
 
   // If there is no escape for both agents, constrain the slower agent
@@ -176,7 +218,7 @@ void FlatlandCBS::handleConflicts(const State& conflictState1, const State& conf
       resultConstraints.emplace_back(std::make_pair(handle1, constraints));
 
     } else {
-      // std::cout << "Agent " << handle2 << " is slower!" << std::endl;
+      if (DEBUG) std::cout << "Agent " << handle2 << " is slower!" << std::endl;
 
       int upperBound = getNextState(resultTwo.secondState, handle1, solution).second.time - 1;
 
@@ -188,13 +230,13 @@ void FlatlandCBS::handleConflicts(const State& conflictState1, const State& conf
     return;
   }
 
-  /*
-  constrainAgent(resultTwo, handle2, handle1, solution, oldConstraints, resultConstraints);
-  constrainAgent(resultOne, handle1, handle2, solution, oldConstraints, resultConstraints);
-  */
+  
+  constrainAgent(resultOne, conflictTime, handle1, handle2, solution, oldConstraints, resultConstraints, resultDoubleConstraints);
+  constrainAgent(resultTwo, conflictTime, handle2, handle1, solution, oldConstraints, resultConstraints, resultDoubleConstraints);
+  
   // Nur vielleicht, muss evtl. weg
 
-  
+  /*
   else if (resultOne.status == Status::InitialInapplicable) {
     
     constrainAgent(resultTwo, conflictTime, handle2, handle1, solution, oldConstraints, resultConstraints, resultDoubleConstraints);
@@ -209,11 +251,12 @@ void FlatlandCBS::handleConflicts(const State& conflictState1, const State& conf
   }
 
   else {
-
-    constrainAgent(resultTwo, conflictTime, handle2, handle1, solution, oldConstraints, resultConstraints, resultDoubleConstraints);
+    
     constrainAgent(resultOne, conflictTime, handle1, handle2, solution, oldConstraints, resultConstraints, resultDoubleConstraints);
+    constrainAgent(resultTwo, conflictTime, handle2, handle1, solution, oldConstraints, resultConstraints, resultDoubleConstraints);
 
   }
+  */
   
 }
 
@@ -241,7 +284,7 @@ void FlatlandCBS::constrainAgent(const criticalStateResult& result, const size_t
 
       // If the found state is the target of agent 2, set to timestep of it
       if (currState == m_agents[handle2].targetLocation) {
-        // std::cout << "Applicable -> targetLocation!" << std::endl;
+        if (DEBUG) std::cout << "Applicable -> targetLocation!" << std::endl;
 
         upperBound = currState.time;
         upperBound += count * m_agents[handle1].speed;
@@ -252,7 +295,7 @@ void FlatlandCBS::constrainAgent(const criticalStateResult& result, const size_t
       // If the found state is the inital state, local search so agent 1 is taking the other route
       if (currState.y == m_agents[handle1].initialState.y && currState.x == m_agents[handle1].initialState.x) {
 
-        // std::cout << "Applicable -> initial!" << std::endl;
+        if (DEBUG) std::cout << "Applicable -> initial!" << std::endl;
 
         int r = initialSearch(result, handle1, oldConstraints, lowerBoundCurr);
 
@@ -266,7 +309,7 @@ void FlatlandCBS::constrainAgent(const criticalStateResult& result, const size_t
       // If the found state is an applicable state, take the time agent 2 would leave this state
       if (m_possibleActions[GridLocation(currState.y, currState.x, currState.dir)].size() >= 2) {
 
-        // std::cout << "Applicable -> applicable!" << std::endl;
+        if (DEBUG) std::cout << "Applicable -> applicable!" << std::endl;
 
         // Cannot be the target state, otherwise a if case earlier will trigger
         upperBound = getNextState(currState, handle2, solution).second.time - 1;
@@ -287,7 +330,7 @@ void FlatlandCBS::constrainAgent(const criticalStateResult& result, const size_t
     constraints.add(Constraint(lowerBoundNext, upperBound, nextState.y, nextState.x));
 
     if ((unsigned)result.firstState.time == conflictTime) {
-      // std::cout << "Double constrain!" << std::endl;
+      if (DEBUG) std::cout << "Double constrain!" << std::endl;
       Constraint conOther = Constraint(lowerBoundNext, upperBound, result.firstState.y, result.firstState.x);
       resultDoubleConstraints.emplace_back(std::make_pair(std::make_pair(handle1, handle2), std::make_pair(constraints, conOther)));
     }
@@ -319,7 +362,7 @@ void FlatlandCBS::constrainAgent(const criticalStateResult& result, const size_t
   }
 
   if (result.status == Status::InitialApplicable) {
-    // std::cout << "Initial Applicable!" << std::endl;
+    if (DEBUG) std::cout << "Initial Applicable!" << std::endl;
 
 
     int lowerBoundNext = 1;
@@ -338,7 +381,7 @@ void FlatlandCBS::constrainAgent(const criticalStateResult& result, const size_t
 
 
     if ((unsigned)result.firstState.time == conflictTime) {
-      // std::cout << "Double constrain!" << std::endl;
+      if (DEBUG) std::cout << "Double constrain!" << std::endl;
       Constraint conOther = Constraint(lowerBoundNext, upperBound, result.firstState.y, result.firstState.x);
       resultDoubleConstraints.emplace_back(std::make_pair(std::make_pair(handle1, handle2), std::make_pair(constraints, conOther)));
     }
@@ -373,7 +416,7 @@ void FlatlandCBS::constrainAgent(const criticalStateResult& result, const size_t
     constraints.add(Constraint(lowerBoundNext, upperBound, nextState.y, nextState.x));
 
     if ((unsigned)result.firstState.time == conflictTime) {
-      // std::cout << "Goall \"double\" constrain!" << std::endl;
+      if (DEBUG) std::cout << "Goall \"double\" constrain!" << std::endl;
 
       constraints.add(Constraint(lowerBoundNext, upperBound, result.firstState.y, result.firstState.x));
 

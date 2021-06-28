@@ -24,6 +24,8 @@
 namespace p = boost::python;
 namespace np = boost::python::numpy;
 
+bool DEBUG = false;
+
 // Warning: This sequence of includes is important
 #include <main_includes.hpp>
 #include <constraint.hpp>
@@ -103,6 +105,18 @@ bool FlatlandCBS::checkInitialConstraints() {
 
 int FlatlandCBS::getInitialConstraintEndTime() const {
   return m_constraints->initialConstraintEndTime;
+}
+
+int FlatlandCBS::getHighestEndingTime(const State s) const {
+  int result = -1;
+  for (const auto& c : m_constraints->constraints) {
+    
+    if (s.y != c.y || s.x != c.x) continue;
+
+    if (c.startingTime <= s.time && s.time <= c.endingTime && result < c.endingTime)  result = c.endingTime;
+  }
+
+  return result;
 }
 
 
@@ -233,7 +247,7 @@ bool FlatlandCBS::getFirstConflict(std::vector<PlanResult <Action, State> >& sol
         // Found a Vertex error
         if (conflictState1.equalExceptTime(conflictState2)) {
 
-          // std::cout << std::endl << "[t=" << time << "] Vertex conflict at: " << conflictState1 << ", " << conflictState2 << std::endl;
+          if (DEBUG) std::cout << std::endl << "[t=" << time << "] Vertex conflict at: " << conflictState1 << ", " << conflictState2 << std::endl;
 
           handleConflicts(conflictState1, conflictState2, time, handle1, handle2, solution, oldConstraints, resultConstraints, resultDoubleConstraints, 0);
 
@@ -265,7 +279,7 @@ bool FlatlandCBS::getFirstConflict(std::vector<PlanResult <Action, State> >& sol
         // Found a Edge error
         if (conflictState1a.equalExceptTime(conflictState2b) && conflictState1b.equalExceptTime(conflictState2a)) {
 
-          // std::cout << std::endl << "[t=" << time << "] Edge conflict at: " << conflictState1b << ", " << conflictState2b << std::endl;
+          if (DEBUG) std::cout << std::endl << "[t=" << time << "] Edge conflict at: " << conflictState1b << ", " << conflictState2b << std::endl;
 
           handleConflicts(conflictState1b, conflictState2b, time, handle1, handle2, solution, oldConstraints, resultConstraints, resultDoubleConstraints, 1);
 

@@ -44,7 +44,7 @@ class SearchCBS {
       // Compute the initial search and check if every solution is somehow possigle
       for (int handle = 0; (unsigned) handle < m_flatlandCBS.m_agents.size(); handle++) {
         Agent a = m_flatlandCBS.m_agents[handle];
-        // // std::cout << a << std::endl;
+        std::cout << a << std::endl;
 
         AStar_t astar(m_flatlandCBS, &start.constraints[handle]);
 
@@ -54,15 +54,21 @@ class SearchCBS {
         start.cost += start.solution[handle].cost;
       }
 
-      // std::cout << start << std::endl;
-
       typename boost::heap::d_ary_heap<HighLevelNode, boost::heap::arity<2>, boost::heap::mutable_<true>> open;
       auto h = open.push(start);
       (*h).handle = h;
 
       solution.clear();
       int id = 1;
+
+      // Only for infinite loops
+      size_t currentConstraint = -1;
+      std::pair<size_t, size_t> currentDoubleConstraint = std::make_pair(-1, -1);
+      size_t count = 0;
+
       while (!open.empty()) {
+
+        if (count == 50000) return false;
 
         HighLevelNode P = open.top();  // Get the high level node with the lowest costs
 
@@ -97,8 +103,17 @@ class SearchCBS {
           newNode.constraints[handle1].extend(c.second.first);
           newNode.constraints[handle2].add(c.second.second);
 
-          // std::cout << "Constrained " << handle1 << ", " << c.second.first << std::endl;
-          // std::cout << "Constrained " << handle2 << ", " << c.second.second << std::endl;
+          
+          // if (DEBUG) std::cout << "Constrained " << handle1 << ", " << c.second.first << std::endl;
+          // if (DEBUG) std::cout << "Constrained " << handle2 << ", " << c.second.second << std::endl;
+
+          if (handle1 == currentDoubleConstraint.first && handle2 == currentDoubleConstraint.second) count++;
+          else {
+            currentDoubleConstraint = std::make_pair(handle1, handle2);
+            count = 0;
+          }
+
+          // std::cout << handle1 << "," << handle2 << "|";
 
           AStar_t astar(m_flatlandCBS, &newNode.constraints[handle1]);
           Agent a = m_flatlandCBS.m_agents[handle1];
@@ -129,7 +144,16 @@ class SearchCBS {
           newNode.cost -= P.solution[handle].cost;
 
           newNode.constraints[handle].extend(c.second);
-          // std::cout << "Constrained " << handle << ", " << c.second << std::endl;
+
+          if (DEBUG) std::cout << "Constrained " << handle << ", " << c.second << std::endl;
+          
+          // std::cout << handle << "|";
+
+          if (handle == currentConstraint) count++;
+          else {
+            currentConstraint = handle; 
+            count = 0;
+          } 
 
           AStar_t astar(m_flatlandCBS, &newNode.constraints[handle]);
           Agent a = m_flatlandCBS.m_agents[handle];

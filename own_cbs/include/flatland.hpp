@@ -29,6 +29,7 @@ class FlatlandCBS {
 
     bool checkInitialConstraints();
     int getInitialConstraintEndTime() const;
+    int getHighestEndingTime(const State s) const;
 
     // Methodes for the CBS search
     bool getFirstConflict(std::vector<PlanResult <Action, State> >& solution, std::vector<Constraints>& oldConstraints, std::vector<std::pair<size_t, Constraints>>& resultConstraints, std::vector<std::pair< std::pair<size_t, size_t> , std::pair<Constraints, Constraint>>>& resultDoubleConstraints);

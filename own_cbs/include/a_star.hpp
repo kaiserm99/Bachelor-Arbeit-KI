@@ -34,9 +34,13 @@ class AStar {
       std::unordered_set<State, StateHasher> closedSet;
       std::unordered_map<State, std::tuple<State, Action, int, int>, StateHasher> cameFrom;
 
-      const int initialConstraintEndTime = m_flatlandCBS.getInitialConstraintEndTime();
+      int initialConstraintEndTime = m_flatlandCBS.getInitialConstraintEndTime();
+
+      
 
       if (m_flatlandCBS.checkInitialConstraints()) {
+        int tmp = m_flatlandCBS.getHighestEndingTime(State(initialConstraintEndTime, agent.initialState));
+        if (tmp != -1) initialConstraintEndTime = tmp;
         agent.initialState = State(initialConstraintEndTime+1, agent.initialState.y, agent.initialState.x, agent.initialState.dir);
       }
 
