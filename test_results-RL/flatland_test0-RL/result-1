@@ -1,7 +1,0 @@
->> DeadLockAvoidance
-Env Creation Time :  0.007180690765380859
->> DDDQNPolicy
-qnetwork_local loaded ('neurips2020-flatland-starter-kit/checkpoints/210122165109-5000.pth.local')
-1234567891011Reward:  2.0
-Steps: 12
-Time: 0.295790
