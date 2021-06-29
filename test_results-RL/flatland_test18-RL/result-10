@@ -1,0 +1,15 @@
+>> DeadLockAvoidance
+Env Creation Time :  0.04175448417663574
+>> DeadLockAvoidance
+Traceback (most recent call last):
+  File "neurips2020-flatland-starter-kit/run.py", line 180, in <module>
+    observation = tree_observation.get_many(list(range(nb_agents)))
+  File "/home/kaiserm/neurips2020-flatland-starter-kit/utils/fast_tree_obs.py", line 159, in get_many
+    self.dead_lock_avoidance_agent.start_step(False)
+  File "/home/kaiserm/neurips2020-flatland-starter-kit/utils/dead_lock_avoidance_agent.py", line 121, in start_step
+    self.extract_agent_can_move()
+  File "/home/kaiserm/neurips2020-flatland-starter-kit/utils/dead_lock_avoidance_agent.py", line 159, in extract_agent_can_move
+    next_position, next_direction, action, _ = self.shortest_distance_walker.walk_one_step(handle)
+  File "/home/kaiserm/neurips2020-flatland-starter-kit/utils/shortest_distance_walker.py", line 87, in walk_one_step
+    return new_position, new_direction, action, possible_transitions
+UnboundLocalError: local variable 'new_position' referenced before assignment
