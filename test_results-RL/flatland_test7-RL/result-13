@@ -1,5 +1,5 @@
 >> DeadLockAvoidance
-Env Creation Time :  0.017189502716064453
+Env Creation Time :  0.017475128173828125
 >> DeadLockAvoidance
 Traceback (most recent call last):
   File "neurips2020-flatland-starter-kit/run.py", line 180, in <module>
