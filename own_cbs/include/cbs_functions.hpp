@@ -231,12 +231,11 @@ void FlatlandCBS::handleConflicts(const State& conflictState1, const State& conf
   }
 
   
-  constrainAgent(resultOne, conflictTime, handle1, handle2, solution, oldConstraints, resultConstraints, resultDoubleConstraints);
-  constrainAgent(resultTwo, conflictTime, handle2, handle1, solution, oldConstraints, resultConstraints, resultDoubleConstraints);
+  // constrainAgent(resultOne, conflictTime, handle1, handle2, solution, oldConstraints, resultConstraints, resultDoubleConstraints);
+  // constrainAgent(resultTwo, conflictTime, handle2, handle1, solution, oldConstraints, resultConstraints, resultDoubleConstraints);
   
   // Nur vielleicht, muss evtl. weg
 
-  /*
   else if (resultOne.status == Status::InitialInapplicable) {
     
     constrainAgent(resultTwo, conflictTime, handle2, handle1, solution, oldConstraints, resultConstraints, resultDoubleConstraints);
@@ -255,9 +254,7 @@ void FlatlandCBS::handleConflicts(const State& conflictState1, const State& conf
     constrainAgent(resultOne, conflictTime, handle1, handle2, solution, oldConstraints, resultConstraints, resultDoubleConstraints);
     constrainAgent(resultTwo, conflictTime, handle2, handle1, solution, oldConstraints, resultConstraints, resultDoubleConstraints);
 
-  }
-  */
-  
+  }  
 }
 
 

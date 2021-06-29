@@ -52,7 +52,7 @@ time_start = time.time()
 env = RailEnv(
     width=0,
     height=0,
-    rail_generator=rail_from_file("../../scratch/test-envs/Test_" + str(args.level) + "/Level_0.pkl"),
+    rail_generator=rail_from_file("Bachelor-Arbeit-KI/scratch/test-envs/Test_" + str(args.level) + "/Level_0.pkl"),
     number_of_agents=args.agents
 )
 

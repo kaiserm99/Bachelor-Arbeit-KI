@@ -23,11 +23,11 @@ struct Constraint {
   }
 
   Constraint(int st, int et, int y, int x) :  startingTime(st), endingTime(et), y(y), x(x)  {
-    // if (st > et) startingTime = et;
+    if (st > et) startingTime = et;
 
-    // else startingTime = st;
+    else startingTime = st;
 
-    assert(startingTime <= endingTime);
+    // assert(startingTime <= endingTime);
   }
 
   int startingTime;
