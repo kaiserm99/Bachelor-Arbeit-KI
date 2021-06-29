@@ -17,10 +17,6 @@ class SearchCBS {
   public:
     SearchCBS(FlatlandCBS& flatlandCBS) : m_flatlandCBS(flatlandCBS) {}
 
-    int localSearch(State initialState, Agent agent) {
-
-      return 10;
-    }
 
     bool search(std::vector<PlanResult<Action, State> >& solution) {
 
@@ -65,10 +61,10 @@ class SearchCBS {
       size_t currentConstraint = -1;
       std::pair<size_t, size_t> currentDoubleConstraint = std::make_pair(-1, -1);
       size_t count = 0;
-
+      
       while (!open.empty()) {
 
-        if (count == 50000) return false;
+        if (count == 10000) return false;
 
         HighLevelNode P = open.top();  // Get the high level node with the lowest costs
 

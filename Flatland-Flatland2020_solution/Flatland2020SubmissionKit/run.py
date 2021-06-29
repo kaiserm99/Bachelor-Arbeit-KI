@@ -19,10 +19,20 @@ from libPythonCBS import PythonCBS
 from typing import List, Tuple
 from logging import warning
 
+import argparse
+
 import os
 import subprocess
 import numpy as np
 import time
+
+parser = argparse.ArgumentParser()
+parser.add_argument("-l", "--level", help="Insert level number", type=int)
+parser.add_argument("-a", "--agents", help="Insert agent number", type=int)
+
+
+args = parser.parse_args()
+
 
 #####################################################################
 # parameter trigger local testing and remote testing
@@ -30,7 +40,7 @@ import time
 
 remote_test = False
 save_txt_file = False
-debug_print = False
+debug_print = True
 env_renderer_enable = False
 input_pause_renderer = False
 
@@ -60,15 +70,10 @@ max_duration = 20
 
 
 agent_percentages = [1.1] * 400  # agent percentages for initial planning, learnt from local instances
-replan = [(i % 10 != 0) and (10 <= i < 290) for i in range(400)]  # replan or not
-
-
-max_iterations = [100]  # max iterations for LNS, learnt from local instances
-
+replan = [False] * 400  # replan or not
+max_iterations = [0] * 40  # max iterations for LNS
 frameworks = ["LNS"] * 40
-for i in range(len(max_iterations)):
-    if max_iterations[i] > 0:
-        frameworks[i] = "Parallel-LNS"
+time_limit = 580
 
 
 
@@ -95,8 +100,8 @@ global_time_start = time.time()
 local_env = RailEnv(
     width=0,
     height=0,
-    rail_generator=rail_from_file("../../scratch/test-envs/Test_8/Level_0.pkl"),
-    number_of_agents=13,
+    rail_generator=rail_from_file("../../scratch/test-envs/Test_" + str(args.level) + "/Level_0.pkl"),
+    number_of_agents=args.agents,
 )
 
 observation, info = local_env.reset()
@@ -126,6 +131,7 @@ CBS = PythonCBS(local_env, frameworks[evaluation_number//10], time_limit, defaul
 CBS.search(agent_percentages[evaluation_number], max_iterations[evaluation_number//10])
 CBS.buildMCP()
 
+time_init = time.time()
 
 while True:
 
@@ -134,12 +140,17 @@ while True:
 
     steps += 1
 
+    if steps == max_time_steps:
+       print(f"Max steps reached, after {steps}! In {time.time()-time_init:5f}sec")
+       print("Reward : ", sum(list(all_rewards.values())))
+       break
+
     if done['__all__']:
+        print(f"\nAll Agents are in their targets! After {steps} iterations.")
         print("Reward : ", sum(list(all_rewards.values())))
-        print("all arrived after", steps)
-        CBS.clearMCP()
-        
+        print(f"\nFound a solution in {time.time()-time_init:5f}sec\n")
         break
+
 
 
 

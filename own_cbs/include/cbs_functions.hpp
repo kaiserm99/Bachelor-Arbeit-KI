@@ -254,9 +254,8 @@ void FlatlandCBS::handleConflicts(const State& conflictState1, const State& conf
     constrainAgent(resultOne, conflictTime, handle1, handle2, solution, oldConstraints, resultConstraints, resultDoubleConstraints);
     constrainAgent(resultTwo, conflictTime, handle2, handle1, solution, oldConstraints, resultConstraints, resultDoubleConstraints);
 
-  }  
+  }
 }
-
 
 void FlatlandCBS::constrainAgent(const criticalStateResult& result, const size_t conflictTime, const size_t handle1, const size_t handle2, std::vector<PlanResult <Action, State> >& solution, std::vector<Constraints>& oldConstraints, std::vector<std::pair<size_t, Constraints>>& resultConstraints, std::vector<std::pair< std::pair<size_t, size_t> , std::pair<Constraints, Constraint>>>& resultDoubleConstraints) {
   // TODO: Add the special case, Local search, nochmal drüberschauen

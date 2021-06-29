@@ -43,10 +43,10 @@ parser.add_argument("-a", "--agents", help="Insert agent number", type=int)
 args = parser.parse_args()
 
 
-speed_ration_map = {1. / 1.: .5,
-                    1. / 2.: .5,
+speed_ration_map = {1. / 1.: .0,
+                    1. / 2.: .0,
                     1. / 3.: 0,
-                    1. / 4.: 0}
+                    1. / 4.: 1}
 
 time_start = time.time()
 env = RailEnv(
@@ -58,7 +58,7 @@ env = RailEnv(
 
 
 _, info = env.reset()
-#set_speed(env, speed_ration_map)
+set_speed(env, speed_ration_map)
 
 
 
@@ -85,8 +85,8 @@ print(action_dict)
 
 
 
-render = False
-debug = False
+render = True
+debug = True
     
 
 try:
