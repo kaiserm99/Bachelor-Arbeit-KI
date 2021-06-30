@@ -25,6 +25,7 @@ import os
 import subprocess
 import numpy as np
 import time
+import copy
 
 parser = argparse.ArgumentParser()
 parser.add_argument("-l", "--level", help="Insert level number", type=int)
@@ -135,23 +136,23 @@ time_init = time.time()
 
 while True:
 
-    action = CBS.getActions(local_env, steps, 3.0)
+    if steps >= 1:
+        prev_done = copy.deepcopy(done)
+
+    action = CBS.getActions(local_env, steps, 1.0)
     _, all_rewards, done, info = local_env.step(action)
 
     steps += 1
 
-    if steps == max_time_steps:
-       print(f"Max steps reached, after {steps}! In {time.time()-time_init:5f}sec")
-       print("Reward : ", sum(list(all_rewards.values())))
-       break
-
     if done['__all__']:
-        print(f"\nAll Agents are in their targets! After {steps} iterations.")
-        print("Reward : ", sum(list(all_rewards.values())))
-        print(f"\nFound a solution in {time.time()-time_init:5f}sec\n")
+
+        if sum(list(all_rewards.values())) < 0:
+
+            print(sum(prev_done.values()))
+
+        else:
+            print(int(sum(list(all_rewards.values()))))
+
+        print(f"Steps: {steps}")
+        print(f"Time: {time.time()-time_init:5f}")
         break
-
-
-
-
-print("Evaluation of all environments complete...")
