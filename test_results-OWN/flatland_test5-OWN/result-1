@@ -1,0 +1,62 @@
+Loading Map with (25 x 25)
+Agent 0, start=(8,17), target=(3,13)
+Agent 1, start=(19,15), target=(11,13)
+Final HighLevelNode:
+id: 0 cost: 25
+Agent: 0
+ States:
+  0: (8,17,0)
+  1: (7,17,0)
+  2: (6,17,0)
+  3: (5,17,0)
+  4: (4,17,0)
+  5: (3,17,0)
+  6: (2,17,0)
+  7: (1,17,0)
+  8: (1,16,3)
+  9: (1,15,3)
+  10: (1,14,3)
+  11: (1,13,3)
+  12: (2,13,2)
+  13: (3,13,2)
+ Constraints:
+
+ cost: 14
+Agent: 1
+ States:
+  0: (19,15,0)
+  1: (18,15,0)
+  2: (17,15,0)
+  3: (16,15,0)
+  4: (15,15,0)
+  5: (14,15,0)
+  6: (13,15,0)
+  7: (12,15,0)
+  8: (12,14,3)
+  9: (12,13,3)
+  10: (11,13,0)
+ Constraints:
+
+ cost: 11
+
+
+done; cost: 25
+Actions for: 0
+2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 1, 2, 
+
+Actions for: 1
+2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 3, 
+
+Created an reseted the Environment in 0.036445sec
+
+
+Found a solution in 0.000740sec
+
+{'Expanded LowLevelNodes': 25, 'Expanded InitialLowLevelNodes': 0, 'Expanded HighLevelNodes': 1}
+{0: [2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 1, 2], 1: [2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 3]}
+
+All Agents are in their targets! After 13 iterations.
+
+Found a solution in 0.194573sec
+
+{'Expanded LowLevelNodes': 25, 'Expanded InitialLowLevelNodes': 0, 'Expanded HighLevelNodes': 1}
