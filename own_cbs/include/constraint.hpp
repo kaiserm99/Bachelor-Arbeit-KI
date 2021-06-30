@@ -88,7 +88,6 @@ struct Constraints {
   bool checkState(const State& s, const int speed) const {
     for (const auto& c : constraints) {
 
-      
       if (s.y != c.y || s.x != c.x) continue;  // If the Constraint and the State has not the same Position --> no need to check
 
       // Check all the States with depending on the speed afterwards

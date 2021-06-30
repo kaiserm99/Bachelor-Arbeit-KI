@@ -1,3 +1,3 @@
-/home/kaiserm/Bachelor-Arbeit-KI/own_cbs/build/CMakeFiles/rebuild_cache.dir
-/home/kaiserm/Bachelor-Arbeit-KI/own_cbs/build/CMakeFiles/edit_cache.dir
-/home/kaiserm/Bachelor-Arbeit-KI/own_cbs/build/CMakeFiles/FlatlandCBS.dir
+/home/marco/Bachelor-Arbeit-KI/own_cbs/build/CMakeFiles/rebuild_cache.dir
+/home/marco/Bachelor-Arbeit-KI/own_cbs/build/CMakeFiles/edit_cache.dir
+/home/marco/Bachelor-Arbeit-KI/own_cbs/build/CMakeFiles/FlatlandCBS.dir

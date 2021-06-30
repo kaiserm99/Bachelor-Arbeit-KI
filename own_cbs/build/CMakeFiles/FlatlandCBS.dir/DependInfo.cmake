@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/kaiserm/Bachelor-Arbeit-KI/own_cbs/main.cpp" "/home/kaiserm/Bachelor-Arbeit-KI/own_cbs/build/CMakeFiles/FlatlandCBS.dir/main.cpp.o"
+  "/home/marco/Bachelor-Arbeit-KI/own_cbs/main.cpp" "/home/marco/Bachelor-Arbeit-KI/own_cbs/build/CMakeFiles/FlatlandCBS.dir/main.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

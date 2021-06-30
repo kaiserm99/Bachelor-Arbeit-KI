@@ -1,4 +1,4 @@
-# Install script for directory: /home/kaiserm/Bachelor-Arbeit-KI/own_cbs
+# Install script for directory: /home/marco/Bachelor-Arbeit-KI/own_cbs
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/kaiserm/Bachelor-Arbeit-KI/own_cbs/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/marco/Bachelor-Arbeit-KI/own_cbs/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

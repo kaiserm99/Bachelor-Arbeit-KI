@@ -24,7 +24,7 @@
 namespace p = boost::python;
 namespace np = boost::python::numpy;
 
-bool DEBUG = true;
+constexpr bool DEBUG = false;
 
 // Warning: This sequence of includes is important
 #include <main_includes.hpp>

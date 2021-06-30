@@ -28,7 +28,7 @@ criticalStateResult FlatlandCBS::getCriticalState(const size_t conflictTime, siz
     // std::cout << stateTwo.first << ", " << stateTwo.second << std::endl;
     
     // If true the inital state of agent 1 has been reached, now determine if applicable or applicable
-    if (stateOne.second == m_agents[handle1].initialState) {
+    if (stateOne.second.y == m_agents[handle1].initialState.y && stateOne.second.x == m_agents[handle1].initialState.x) {
       if (m_possibleActions[GridLocation(stateOne.second.y, stateOne.second.x, stateOne.second.dir)].size() >= 2) return criticalStateResult(Status::InitialApplicable, stateOne.second, stateTwo.second);
 
       return criticalStateResult(Status::InitialInapplicable, stateOne.second, stateTwo.second);
@@ -45,7 +45,9 @@ criticalStateResult FlatlandCBS::getCriticalState(const size_t conflictTime, siz
 
     if (m_possibleActions[GridLocation(stateTwo.second.y, stateTwo.second.x, stateTwo.second.dir)].size() >= 2) {
       // Make sure the critical state is not an at the first step of an edge error
-      if (edge != 1 || (unsigned) stateOne.second.time != conflictTime) return criticalStateResult(Status::Inapplicable, stateOne.second, stateTwo.second);
+      if (edge != 1 || (unsigned) stateOne.second.time != conflictTime) {
+        return criticalStateResult(Status::Inapplicable, stateOne.second, stateTwo.second);
+      }
     }
 
     stateOne = getPrevState(stateOne.second, handle1, solution);
@@ -327,7 +329,7 @@ void FlatlandCBS::constrainAgent(const criticalStateResult& result, const size_t
 
     if ((unsigned)result.firstState.time == conflictTime) {
       if (DEBUG) std::cout << "Double constrain!" << std::endl;
-      Constraint conOther = Constraint(lowerBoundNext, upperBound, result.firstState.y, result.firstState.x);
+      Constraint conOther = Constraint(getPrevState(result.secondState, handle2, solution).second.time + 1, lowerBoundCurr - 1, result.firstState.y, result.firstState.x);
       resultDoubleConstraints.emplace_back(std::make_pair(std::make_pair(handle1, handle2), std::make_pair(constraints, conOther)));
     }
     else resultConstraints.emplace_back(std::make_pair(handle1, constraints));

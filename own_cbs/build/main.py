@@ -52,7 +52,8 @@ time_start = time.time()
 env = RailEnv(
     width=0,
     height=0,
-    rail_generator=rail_from_file("Bachelor-Arbeit-KI/scratch/test-envs/Test_" + str(args.level) + "/Level_0.pkl"),
+    #Bachelor-Arbeit-KI/scratch/test-envs/Test_
+    rail_generator=rail_from_file("../../scratch/test-envs/Test_" + str(args.level) + "/Level_0.pkl"),
     number_of_agents=args.agents
 )
 
@@ -85,8 +86,8 @@ print(action_dict)
 
 
 
-render = True
-debug = True
+render = False
+debug = False
     
 
 try:
@@ -102,7 +103,7 @@ try:
 
         if render:
             env_renderer.render_env(show=True, frames=False, show_observations=False, show_predictions=False)
-            time.sleep(0.2)
+            # time.sleep(0.2)
             # input("Weiter?")
 
         for handle, agent in enumerate(env.agents):
