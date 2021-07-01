@@ -1,12 +1,12 @@
 Max timestep = 937
 Malfunction rate = 0
 
-Find a solution for 19 agents with 0 agents dead and 0 agents unplannedagent priority 0
-Sum of costs = 614 and makespan = 68runtime =0.000817807
-LNS improves the solution to: Sum of costs = 614 and makespan = 68 runtime 0.000828551 priority 0
+Find a solution for 14 agents with 0 agents dead and 0 agents unplannedagent priority 0
+Sum of costs = 371 and makespan = 68runtime =0.000493312
+LNS improves the solution to: Sum of costs = 371 and makespan = 68 runtime 0.000504218 priority 0
 /home/kaiserm/.local/lib/python3.8/site-packages/flatland/envs/schedule_generators.py:285: UserWarning: reset position for agent[3]: (10, 14) -> (11, 13)
   warnings.warn(
 re_generate cnt=2
-Reward: 6
+7
 Steps: 937
-Time: 2.250671
+Time: 1.615457

@@ -1,9 +1,9 @@
 Max timestep = 15000
 Malfunction rate = 0
 
-Find a solution for 18 agents with 0 agents dead and 0 agents unplannedagent priority 0
-Sum of costs = 2575 and makespan = 429runtime =0.0306987
-LNS improves the solution to: Sum of costs = 2575 and makespan = 429 runtime 0.0307256 priority 0
-Reward: 18
+Find a solution for 13 agents with 0 agents dead and 0 agents unplannedagent priority 0
+Sum of costs = 1981 and makespan = 429runtime =0.0275607
+LNS improves the solution to: Sum of costs = 1981 and makespan = 429 runtime 0.0275995 priority 0
+13
 Steps: 429
-Time: 1.295300
+Time: 1.173676

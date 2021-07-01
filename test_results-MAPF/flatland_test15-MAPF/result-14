@@ -1,9 +1,9 @@
 Max timestep = 2400
 Malfunction rate = 0
 
-Find a solution for 20 agents with 0 agents dead and 0 agents unplannedagent priority 0
-Sum of costs = 1389 and makespan = 191runtime =0.00289316
-LNS improves the solution to: Sum of costs = 1389 and makespan = 191 runtime 0.00291721 priority 0
+Find a solution for 15 agents with 0 agents dead and 0 agents unplannedagent priority 0
+Sum of costs = 856 and makespan = 114runtime =0.00179589
+LNS improves the solution to: Sum of costs = 856 and makespan = 114 runtime 0.00182049 priority 0
 ERROR: illegal action= -1 for agent with index= 3 "DO NOTHING" will be executed instead
 ERROR: illegal action= -1 for agent with index= 3 "DO NOTHING" will be executed instead
 ERROR: illegal action= -1 for agent with index= 3 "DO NOTHING" will be executed instead
@@ -16,6 +16,31 @@ ERROR: illegal action= -1 for agent with index= 3 "DO NOTHING" will be executed 
 ERROR: illegal action= -1 for agent with index= 3 "DO NOTHING" will be executed instead
 ERROR: illegal action= -1 for agent with index= 3 "DO NOTHING" will be executed instead
 ERROR: illegal action= -1 for agent with index= 3 "DO NOTHING" will be executed instead
-Reward: 4
+ERROR: illegal action= -1 for agent with index= 3 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 3 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 3 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 3 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 3 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 3 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 3 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 3 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 3 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 3 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 3 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 3 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 3 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 3 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 3 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 3 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 3 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 3 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 3 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 3 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 3 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 3 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 3 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 3 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 3 "DO NOTHING" will be executed instead
+4
 Steps: 2400
-Time: 7.066483
+Time: 5.405401
