@@ -15,12 +15,3 @@ Agent 12, start=(32,23), target=(7,25)
 Agent 13, start=(11,6), target=(13,22)
 Agent 14, start=(12,36), target=(18,35)
 Agent 15, start=(1,5), target=(8,35)
-Agent 16, start=(7,28), target=(19,5)
-Agent 17, start=(16,36), target=(32,11)
-Agent 18, start=(22,6), target=(11,6)
-Agent 19, start=(6,23), target=(12,25)
-Created an reseted the Environment in 0.257237sec
-
-
-Found no valid solution after 0.073338sec
-

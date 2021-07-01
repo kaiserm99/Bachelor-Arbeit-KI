@@ -1,0 +1,40 @@
+Loading Map with (25 x 25)
+Agent 0, start=(17,14), target=(10,17)
+Final HighLevelNode:
+id: 0 cost: 15
+Agent: 0
+ States:
+  0: (17,14,0)
+  1: (16,14,0)
+  2: (15,14,0)
+  3: (15,13,3)
+  4: (15,12,3)
+  5: (14,12,0)
+  6: (13,12,0)
+  7: (12,12,0)
+  8: (11,12,0)
+  9: (10,12,0)
+  10: (10,13,1)
+  11: (10,14,1)
+  12: (10,15,1)
+  13: (10,16,1)
+  14: (10,17,1)
+ Constraints:
+
+ cost: 15
+
+
+done; cost: 15
+Actions for: 0
+2, 2, 2, 1, 2, 3, 2, 2, 2, 2, 3, 2, 2, 2, 2, 
+
+Created an reseted the Environment in 0.032301sec
+
+
+Found a solution in 0.000504sec
+
+{'Expanded LowLevelNodes': 15, 'Expanded InitialLowLevelNodes': 0, 'Expanded HighLevelNodes': 1}
+{0: [2, 2, 2, 1, 2, 3, 2, 2, 2, 2, 3, 2, 2, 2, 2]}
+Steps: 14
+Time: 0.189253
+{'Expanded LowLevelNodes': 15, 'Expanded InitialLowLevelNodes': 0, 'Expanded HighLevelNodes': 1}

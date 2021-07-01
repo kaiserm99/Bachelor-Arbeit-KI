@@ -133,13 +133,13 @@ Actions for: 0
 Actions for: 1
 2, 1, 2, 2, 2, 2, 2, 2, 2, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 2, 
 
-Created an reseted the Environment in 0.091251sec
+Created an reseted the Environment in 0.091141sec
 
 
-Found a solution in 0.003004sec
+Found a solution in 0.002942sec
 
 {'Expanded LowLevelNodes': 111, 'Expanded InitialLowLevelNodes': 0, 'Expanded HighLevelNodes': 1}
 {0: [2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 2, 1, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 3, 1, 2, 2, 3, 2, 2, 2], 1: [2, 1, 2, 2, 2, 2, 2, 2, 2, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 2]}
 Steps: 88
-Time: 0.210428
+Time: 0.205682
 {'Expanded LowLevelNodes': 111, 'Expanded InitialLowLevelNodes': 0, 'Expanded HighLevelNodes': 1}

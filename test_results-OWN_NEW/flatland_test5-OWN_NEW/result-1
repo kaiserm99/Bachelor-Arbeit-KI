@@ -47,13 +47,13 @@ Actions for: 0
 Actions for: 1
 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 3, 
 
-Created an reseted the Environment in 0.036532sec
+Created an reseted the Environment in 0.035741sec
 
 
-Found a solution in 0.000769sec
+Found a solution in 0.000737sec
 
 {'Expanded LowLevelNodes': 25, 'Expanded InitialLowLevelNodes': 0, 'Expanded HighLevelNodes': 1}
 {0: [2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 1, 2], 1: [2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 3]}
 Steps: 13
-Time: 0.189010
+Time: 0.181828
 {'Expanded LowLevelNodes': 25, 'Expanded InitialLowLevelNodes': 0, 'Expanded HighLevelNodes': 1}

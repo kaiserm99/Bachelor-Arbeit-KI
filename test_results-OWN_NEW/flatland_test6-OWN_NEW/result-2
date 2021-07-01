@@ -2,9 +2,8 @@ Loading Map with (25 x 25)
 Agent 0, start=(18,18), target=(12,16)
 Agent 1, start=(12,15), target=(13,8)
 Agent 2, start=(17,19), target=(14,23)
-Agent 3, start=(15,23), target=(12,18)
 Final HighLevelNode:
-id: 13 cost: 126
+id: 5 cost: 99
 Agent: 0
  States:
   0: (18,18,1)
@@ -46,10 +45,8 @@ Agent: 0
   36: (12,17,3)
   37: (12,16,3)
  Constraints:
-C(3->5: y=17, x=20)
-C(2->6: y=17, x=19)
-C(8->16: y=17, x=20)
-C(7->17: y=17, x=19)
+C(3->16: y=17, x=20)
+C(2->17: y=17, x=19)
 C(25->27: y=14, x=23)
 
  cost: 38
@@ -124,41 +121,9 @@ Agent: 2
  Constraints:
 
  cost: 28
-Agent: 3
- States:
-  0: (15,23,2)
-  1: (16,23,2)
-  2: (17,23,2)
-  3: (17,22,3)
-  4: (17,21,3)
-  5: (17,20,3)
-  6: (17,19,3)
-  7: (17,18,3)
-  8: (17,17,3)
-  9: (17,16,3)
-  10: (17,15,3)
-  11: (17,14,3)
-  12: (17,13,3)
-  13: (17,12,3)
-  14: (17,11,3)
-  15: (16,11,0)
-  16: (15,11,0)
-  17: (14,11,0)
-  18: (13,11,0)
-  19: (12,11,0)
-  20: (12,12,1)
-  21: (12,13,1)
-  22: (12,14,1)
-  23: (12,15,1)
-  24: (12,16,1)
-  25: (12,17,1)
-  26: (12,18,1)
- Constraints:
-
- cost: 27
 
 
-done; cost: 126
+done; cost: 99
 Actions for: 0
 2, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1, 3, 2, 2, 2, 1, 2, 4, 4, 4, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 
 
@@ -168,16 +133,13 @@ Actions for: 1
 Actions for: 2
 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 2, 2, 2, 2, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 2, 
 
-Actions for: 3
-2, 2, 2, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 2, 2, 2, 2, 3, 2, 2, 2, 2, 2, 2, 
-
-Created an reseted the Environment in 0.039277sec
+Created an reseted the Environment in 0.035865sec
 
 
-Found a solution in 0.031436sec
+Found a solution in 0.018966sec
 
-{'Expanded LowLevelNodes': 1468, 'Expanded InitialLowLevelNodes': 44, 'Expanded HighLevelNodes': 13}
-{0: [2, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1, 3, 2, 2, 2, 1, 2, 4, 4, 4, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2], 1: [2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 2, 2, 2, 2, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 2, 2, 1, 2, 2, 2, 2, 3], 2: [2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 2, 2, 2, 2, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 2], 3: [2, 2, 2, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 2, 2, 2, 2, 3, 2, 2, 2, 2, 2, 2]}
+{'Expanded LowLevelNodes': 940, 'Expanded InitialLowLevelNodes': 0, 'Expanded HighLevelNodes': 8}
+{0: [2, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1, 3, 2, 2, 2, 1, 2, 4, 4, 4, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2], 1: [2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 2, 2, 2, 2, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 2, 2, 1, 2, 2, 2, 2, 3], 2: [2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 2, 2, 2, 2, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 2]}
 Steps: 37
-Time: 0.245060
-{'Expanded LowLevelNodes': 1468, 'Expanded InitialLowLevelNodes': 44, 'Expanded HighLevelNodes': 13}
+Time: 0.213092
+{'Expanded LowLevelNodes': 940, 'Expanded InitialLowLevelNodes': 0, 'Expanded HighLevelNodes': 8}

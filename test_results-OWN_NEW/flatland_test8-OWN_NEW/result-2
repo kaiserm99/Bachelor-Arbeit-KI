@@ -2,9 +2,8 @@ Loading Map with (25 x 25)
 Agent 0, start=(18,8), target=(22,10)
 Agent 1, start=(18,11), target=(9,6)
 Agent 2, start=(16,9), target=(18,11)
-Agent 3, start=(11,6), target=(17,10)
 Final HighLevelNode:
-id: 0 cost: 98
+id: 0 cost: 87
 Agent: 0
  States:
   0: (18,8,0)
@@ -107,25 +106,9 @@ Agent: 2
  Constraints:
 
  cost: 37
-Agent: 3
- States:
-  0: (11,6,2)
-  1: (11,7,1)
-  2: (12,7,2)
-  3: (12,8,1)
-  4: (12,9,1)
-  5: (12,10,1)
-  6: (13,10,2)
-  7: (14,10,2)
-  8: (15,10,2)
-  9: (16,10,2)
-  10: (17,10,2)
- Constraints:
-
- cost: 11
 
 
-done; cost: 98
+done; cost: 87
 Actions for: 0
 2, 2, 3, 1, 2, 2, 2, 1, 2, 2, 3, 2, 2, 1, 1, 2, 2, 3, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1, 
 
@@ -135,16 +118,13 @@ Actions for: 1
 Actions for: 2
 2, 2, 2, 2, 1, 2, 2, 3, 2, 2, 1, 1, 2, 2, 3, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 1, 2, 3, 1, 2, 3, 1, 
 
-Actions for: 3
-2, 1, 3, 1, 2, 2, 3, 2, 2, 2, 2, 
-
-Created an reseted the Environment in 0.041916sec
+Created an reseted the Environment in 0.036734sec
 
 
-Found a solution in 0.002757sec
+Found a solution in 0.002460sec
 
-{'Expanded LowLevelNodes': 98, 'Expanded InitialLowLevelNodes': 0, 'Expanded HighLevelNodes': 1}
-{0: [2, 2, 3, 1, 2, 2, 2, 1, 2, 2, 3, 2, 2, 1, 1, 2, 2, 3, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1], 1: [2, 2, 1, 3, 2, 1, 3, 2, 1, 2, 2, 3, 2, 2, 2], 2: [2, 2, 2, 2, 1, 2, 2, 3, 2, 2, 1, 1, 2, 2, 3, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 1, 2, 3, 1, 2, 3, 1], 3: [2, 1, 3, 1, 2, 2, 3, 2, 2, 2, 2]}
+{'Expanded LowLevelNodes': 87, 'Expanded InitialLowLevelNodes': 0, 'Expanded HighLevelNodes': 1}
+{0: [2, 2, 3, 1, 2, 2, 2, 1, 2, 2, 3, 2, 2, 1, 1, 2, 2, 3, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1], 1: [2, 2, 1, 3, 2, 1, 3, 2, 1, 2, 2, 3, 2, 2, 2], 2: [2, 2, 2, 2, 1, 2, 2, 3, 2, 2, 1, 1, 2, 2, 3, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 1, 2, 3, 1, 2, 3, 1]}
 Steps: 36
-Time: 0.218157
-{'Expanded LowLevelNodes': 98, 'Expanded InitialLowLevelNodes': 0, 'Expanded HighLevelNodes': 1}
+Time: 0.201916
+{'Expanded LowLevelNodes': 87, 'Expanded InitialLowLevelNodes': 0, 'Expanded HighLevelNodes': 1}

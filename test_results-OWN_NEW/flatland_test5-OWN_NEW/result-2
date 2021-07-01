@@ -2,9 +2,8 @@ Loading Map with (25 x 25)
 Agent 0, start=(8,17), target=(3,13)
 Agent 1, start=(19,15), target=(11,13)
 Agent 2, start=(6,17), target=(7,17)
-Agent 3, start=(20,15), target=(7,13)
 Final HighLevelNode:
-id: 1 cost: 52
+id: 1 cost: 28
 Agent: 0
  States:
   0: (8,17,0)
@@ -49,38 +48,9 @@ Agent: 2
  Constraints:
 
  cost: 2
-Agent: 3
- States:
-  0: (20,15,2)
-  1: (21,15,2)
-  2: (22,15,2)
-  3: (22,14,3)
-  4: (22,13,3)
-  5: (22,12,3)
-  6: (22,11,3)
-  7: (21,11,0)
-  8: (20,11,0)
-  9: (19,11,0)
-  10: (18,11,0)
-  11: (17,11,0)
-  12: (16,11,0)
-  13: (15,11,0)
-  14: (14,11,0)
-  15: (13,11,0)
-  16: (12,11,0)
-  17: (11,11,0)
-  18: (11,12,1)
-  19: (10,12,0)
-  20: (9,12,0)
-  21: (9,13,1)
-  22: (8,13,0)
-  23: (7,13,0)
- Constraints:
-
- cost: 24
 
 
-done; cost: 52
+done; cost: 28
 Actions for: 0
 2, 4, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 1, 2, 
 
@@ -90,16 +60,13 @@ Actions for: 1
 Actions for: 2
 2, 2, 
 
-Actions for: 3
-2, 2, 2, 3, 2, 2, 2, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 1, 2, 3, 1, 2, 
-
-Created an reseted the Environment in 0.040446sec
+Created an reseted the Environment in 0.037809sec
 
 
-Found a solution in 0.001829sec
+Found a solution in 0.001166sec
 
-{'Expanded LowLevelNodes': 66, 'Expanded InitialLowLevelNodes': 0, 'Expanded HighLevelNodes': 2}
-{0: [2, 4, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 1, 2], 1: [2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 3], 2: [2, 2], 3: [2, 2, 2, 3, 2, 2, 2, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 1, 2, 3, 1, 2]}
-Steps: 23
-Time: 0.195526
-{'Expanded LowLevelNodes': 66, 'Expanded InitialLowLevelNodes': 0, 'Expanded HighLevelNodes': 2}
+{'Expanded LowLevelNodes': 42, 'Expanded InitialLowLevelNodes': 0, 'Expanded HighLevelNodes': 2}
+{0: [2, 4, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 1, 2], 1: [2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 3], 2: [2, 2]}
+Steps: 14
+Time: 0.183965
+{'Expanded LowLevelNodes': 42, 'Expanded InitialLowLevelNodes': 0, 'Expanded HighLevelNodes': 2}
