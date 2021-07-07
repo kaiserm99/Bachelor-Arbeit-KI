@@ -1,0 +1,106 @@
+Max timestep = 147894
+Malfunction rate = 0
+
+Find a solution for 3 agents with 0 agents dead and 0 agents unplannedagent priority 0
+Sum of costs = 1105 and makespan = 523runtime =0.270451
+LNS improves the solution to: Sum of costs = 1105 and makespan = 523 runtime 1.22159 priority 0
+ERROR: illegal action= -1 for agent with index= 0 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 0 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 0 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 0 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 0 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 0 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 0 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 0 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 0 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 0 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 0 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 0 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 0 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 0 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 0 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 0 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 0 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 0 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 0 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 0 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 0 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 0 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 0 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 0 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 0 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 0 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 0 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 0 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 0 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 0 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 0 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 0 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 0 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 0 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 0 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 0 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 0 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 0 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 0 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 0 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 0 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 0 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 0 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 0 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 0 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 0 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 0 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 0 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 0 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 0 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 0 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 0 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 0 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 0 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 0 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 0 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 0 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 0 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 0 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 0 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 0 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 0 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 0 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 0 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 0 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 0 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 0 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 0 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 0 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 0 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 0 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 0 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 0 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 0 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 0 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 0 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 0 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 0 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 0 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 0 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 0 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 0 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 0 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 0 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 0 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 0 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 0 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 0 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 0 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 0 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 0 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 0 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 0 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 0 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 0 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 0 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 0 "DO NOTHING" will be executed instead
+0
+Steps: 147894
+Time: 1113.395455

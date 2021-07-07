@@ -1,0 +1,18 @@
+Loading Map with (25 x 25)
+Agent 0, start=(16,3), target=(14,21)
+Agent 1, start=(8,13), target=(12,4)
+Agent 2, start=(10,14), target=(12,8)
+Agent 3, start=(16,7), target=(18,9)
+Agent 4, start=(11,4), target=(12,5)
+Agent 5, start=(12,10), target=(16,9)
+Agent 6, start=(13,3), target=(13,23)
+Agent 7, start=(13,13), target=(8,24)
+Agent 8, start=(17,14), target=(12,3)
+Agent 9, start=(14,3), target=(8,18)
+Agent 10, start=(12,11), target=(8,13)
+Agent 11, start=(11,10), target=(9,21)
+Created an reseted the Environment in 0.071974sec
+
+
+Found no valid solution after 0.031342sec
+
