@@ -1,0 +1,10 @@
+Max timestep = 18481
+Malfunction rate = 0
+
+Find a solution for 13 agents with 0 agents dead and 0 agents unplannedagent priority 0
+Sum of costs = 1586 and makespan = 204runtime =0.0312506
+LNS improves the solution to: Sum of costs = 1584 and makespan = 206 runtime 0.534113 priority 0
+ERROR: illegal action= -1 for agent with index= 10 "DO NOTHING" will be executed instead
+7
+Steps: 18481
+Time: 52.005222

@@ -1,0 +1,8 @@
+Max timestep = 1837
+Malfunction rate = 0
+
+Find a solution for 1 agents with 0 agents dead and 0 agents unplannedagent priority 0
+Sum of costs = 30 and makespan = 30runtime =8.6041e-05
+1
+Steps: 30
+Time: 0.245286

@@ -1,0 +1,26 @@
+Max timestep = 9600
+Malfunction rate = 0
+
+Find a solution for 13 agents with 0 agents dead and 0 agents unplannedagent priority 0
+Sum of costs = 1521 and makespan = 186runtime =0.013433
+LNS improves the solution to: Sum of costs = 1496 and makespan = 186 runtime 0.487152 priority 0
+ERROR: illegal action= -1 for agent with index= 6 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 6 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 6 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 6 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 6 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 6 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 6 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 6 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 6 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 6 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 6 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 6 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 6 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 6 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 6 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 6 "DO NOTHING" will be executed instead
+ERROR: illegal action= -1 for agent with index= 6 "DO NOTHING" will be executed instead
+9
+Steps: 9600
+Time: 11.717761
