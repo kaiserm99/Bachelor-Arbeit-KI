@@ -11,6 +11,7 @@ np.random.seed = 200
 from flatland.envs.rail_env import RailEnv
 from flatland.envs.rail_generators import rail_from_file
 from flatland.utils.rendertools import RenderTool, AgentRenderVariant
+from flatland.envs.malfunction_generators import MalfunctionParameters, ParamMalfunctionGen
 
 import libFlatlandCBS as FlatlandCBS
 
@@ -48,18 +49,26 @@ speed_ration_map = {1. / 1.: .0,
                     1. / 3.: 0,
                     1. / 4.: 1}
 
+stochastic_data = MalfunctionParameters(
+                  malfunction_rate=1/40,
+                  min_duration=3,
+                  max_duration=4)
+
 time_start = time.time()
 env = RailEnv(
     width=0,
     height=0,
     #Bachelor-Arbeit-KI/scratch/test-envs/Test_
     rail_generator=rail_from_file("../../scratch/test-envs/Test_" + str(args.level) + "/Level_0.pkl"),
-    number_of_agents=args.agents
+    number_of_agents=args.agents,
+    random_seed=7,
+    record_steps=True
 )
 
 
+
 _, info = env.reset()
-set_speed(env, speed_ration_map)
+# set_speed(env, speed_ration_map)
 
 
 
@@ -88,7 +97,7 @@ print(action_dict)
 
 render = False
 debug = False
-    
+
 
 try:
 
@@ -103,7 +112,7 @@ try:
 
         if render:
             env_renderer.render_env(show=True, frames=False, show_observations=False, show_predictions=False)
-            # time.sleep(0.2)
+            time.sleep(0.2)
             # input("Weiter?")
 
         for handle, agent in enumerate(env.agents):
@@ -128,7 +137,6 @@ try:
         obs, all_rewards, done, info = env.step(current_actions)
 
 
-
         if debug: print(f"[{step:3}] In goal: {[handle for handle, status in done.items() if status]}")
         
 
@@ -138,6 +146,7 @@ try:
             print(f"\nAll Agents are in their targets! After {step} iterations.")
             print(f"\nFound a solution in {time.time()-time_start:5f}sec\n")
             print(cbs.getStatistic())
+            print(env.cur_episode)
             break
 
 finally:

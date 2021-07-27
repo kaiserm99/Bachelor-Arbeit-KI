@@ -59,4 +59,4 @@ gnuplot -e "set terminal wxt size 1200,800;
                  '$filename' using 1:3 w lp t 'InitNodes',
                  '$filename' using 1:4 w lp t 'HighNodes',
                  '$filename' using 1:5 w lp t 'Time';
-            pause 4"
+            pause mouse"

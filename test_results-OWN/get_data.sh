@@ -7,7 +7,7 @@ filename="tmp$1.txt"
 
 rm -f $filename
 
-for x in {1..14}
+for x in {1..15}
 do
 
     var=$(tail -1 flatland_test$1-OWN/result-$x)

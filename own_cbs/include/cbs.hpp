@@ -29,12 +29,19 @@ class SearchCBS {
     
       /*
       Constraints tst; 
-      // tst.add(Constraint(1, 7, 18, 19));
-      tst.addInitial(10); 
-      // tst.add(Constraint(13, 20, 17, 23));
+      tst.add(Constraint(0, 190, 17, 19));
+      tst.addInitial(3); 
       
-      start.constraints[0] = tst;
+      start.constraints[1] = tst;
+
+      Constraints tsts; 
+      tsts.add(Constraint(5, 9, 17, 22));
+
+      start.constraints[0] = tsts;
       */
+      
+
+      
 
 
       // Compute the initial search and check if every solution is somehow possigle

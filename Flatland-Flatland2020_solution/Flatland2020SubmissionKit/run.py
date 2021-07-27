@@ -45,44 +45,23 @@ debug_print = True
 env_renderer_enable = False
 input_pause_renderer = False
 
-#####################################################################
-# local testing parameters
-#####################################################################
-x_dim = 30
-y_dim = 30
-
-# parameters to sparse_rail_genertor
-max_num_stations = 3
-given_seed = 12
-given_max_rails_between_cities = 2 # not clear what this does
-given_max_rails_in_city = 3 # not clear what this does
-given_num_agents = 10
-
-# speed profile, 1 -> speed is 1, 1_2 -> speed 0.5, 1_3 -> speed 1/3, etc. sum has to be 1
-given_1_speed_train_percentage = 1
-given_1_2_speed_train_percentage = 0
-given_1_3_speed_train_percentage = 0
-given_1_4_speed_train_percentage = 0
-
-# malfunction parameters
-malfunction_rate = 0.4          # fraction number, probability of having a stop.
-min_duration = 3
-max_duration = 20
-
-
-agent_percentages = [1.1] * 400  # agent percentages for initial planning, learnt from local instances
-replan = [False] * 400  # replan or not
-max_iterations = [0] * 40  # max iterations for LNS
-frameworks = ["LNS"] * 40
-time_limit = 580
+agent_priority_strategy = 3  #  the strategy for sorting agents, choosing a number between 0 and 5
+neighbor_generation_strategy = 3    # 0: random walk; 1: start; 2: intersection; 3: adaptive; 4: iterative
+debug = False
+framework = "LNS"  # "LNS" for large neighborhood search or "Parallel-LNS" for parallel LNS.
+time_limit = 200  #Time limit for computing initial solution.
+default_group_size = 5  # max number of agents in a group for LNS
+stop_threshold = 30
+max_iteration = 1000 # when set to 0, the algorithm only run prioritized planning for initial solution.
+agent_percentage = 1.1 # >1 to plan all agents. Otherwise plan only certain percentage of agents.
+replan = True # turn on/off partial replanning.
+replan_timelimit = 3.0 # Time limit for replanning.
 
 
 
 #####################################################################
 # Instantiate a Remote Client
 #####################################################################
-if remote_test:
-    remote_client = FlatlandRemoteClient()
 
 
 #####################################################################
@@ -118,23 +97,27 @@ max_time_steps = int(4 * 2 * (local_env.width + local_env.height + 20))
 
 time_taken_by_controller = []
 time_taken_per_step = []
-steps = 0
 
 
 
-debug = False
-time_limit = 200
-default_group_size = 5  # max number of agents in a group
-stop_threshold = 30
-agent_priority_strategy = 3
-neighbor_generation_strategy = 3
-CBS = PythonCBS(local_env, frameworks[evaluation_number//10], time_limit, default_group_size, debug, replan[evaluation_number],stop_threshold,agent_priority_strategy,neighbor_generation_strategy)
-CBS.search(agent_percentages[evaluation_number], max_iterations[evaluation_number//10])
-CBS.buildMCP()
 
 time_init = time.time()
 
-while True:
+debug = False
+render = True
+
+CBS = PythonCBS(local_env, framework, time_limit, default_group_size, debug, replan,stop_threshold,agent_priority_strategy,neighbor_generation_strategy)
+CBS.search(agent_percentage, max_iteration)
+CBS.buildMCP()
+
+if render: 
+    env_renderer = RenderTool(local_env, screen_width=2000, screen_height=2000, show_debug=True)
+
+    env_renderer.render_env(show=True, frames=False, show_observations=False, show_predictions=False, show_rowcols=True)
+
+
+
+for steps in range(5000):
 
     if steps >= 1:
         prev_done = copy.deepcopy(done)
@@ -142,7 +125,11 @@ while True:
     action = CBS.getActions(local_env, steps, 1.0)
     _, all_rewards, done, info = local_env.step(action)
 
-    steps += 1
+    if render:
+        env_renderer.render_env(show=True, frames=False, show_observations=False, show_predictions=False)
+        # time.sleep(0.2)
+        input("Weiter?")
+
 
     if done['__all__']:
 
