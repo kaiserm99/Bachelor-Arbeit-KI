@@ -1,0 +1,32 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=normal] (0) at (1, 1) {};
+		\node [style=normal] (1) at (3, 1) {};
+		\node [style=none] (2) at (4, 2) {};
+		\node [style=none] (3) at (6, 2) {};
+		\node [style=none] (4) at (6, 0) {};
+		\node [style=none] (5) at (4, 0) {};
+		\node [style=normal] (6) at (7, 1) {};
+		\node [style=normal] (7) at (5, 3) {};
+		\node [style=none] (9) at (-1.75, 1) {Agent 1:};
+		\node [style=none] (10) at (9, 1) {};
+		\node [style=none] (11) at (10, 1) {};
+		\node [style=none] (12) at (9.5, 1.25) {};
+		\node [style=none] (13) at (9.5, 0.75) {};
+		\node [style=normal] (14) at (12, 1) {};
+		\node [style=normal] (15) at (14, 1) {};
+		\node [style=yellow] (20) at (18, 1) {UP};
+		\node [style=yellow] (21) at (16, 1) {UP+1};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw (2.center) to (4.center);
+		\draw (5.center) to (3.center);
+		\draw (3.center) to (4.center);
+		\draw (4.center) to (5.center);
+		\draw (2.center) to (5.center);
+		\draw (2.center) to (3.center);
+		\draw (13.center) to (11.center);
+		\draw (11.center) to (12.center);
+		\draw (11.center) to (10.center);
+	\end{pgfonlayer}
+\end{tikzpicture}

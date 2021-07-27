@@ -1,0 +1,23 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=normal] (60) at (1, 1) {0};
+		\node [style=normal] (61) at (3, 1) {1};
+		\node [style=normal] (64) at (9, 1) {};
+		\node [style=none] (66) at (4, 2) {};
+		\node [style=none] (67) at (4, 0) {};
+		\node [style=none] (68) at (6, 0) {};
+		\node [style=none] (69) at (6, 2) {};
+		\node [style=none] (70) at (5, 1.5) {2};
+		\node [style=yellow] (71) at (7, 1) {m-1};
+		\node [style=yellow] (72) at (5, 3) {m-1};
+		\node [style=none] (73) at (-2, 1) {Agent 1:};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw (69.center) to (67.center);
+		\draw (66.center) to (68.center);
+		\draw (67.center) to (68.center);
+		\draw (68.center) to (69.center);
+		\draw (69.center) to (66.center);
+		\draw (66.center) to (67.center);
+	\end{pgfonlayer}
+\end{tikzpicture}

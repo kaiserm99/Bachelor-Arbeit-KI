@@ -1,0 +1,18 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=none] (18) at (-6.5, 1.25) {Agent 1:};
+		\node [style=none] (19) at (-6.5, -1.25) {Agent 2:};
+		\node [style=normal] (20) at (-3.5, 1.25) {4};
+		\node [style=normal] (21) at (-3.5, -1.25) {5};
+		\node [style=normal] (22) at (-1.5, 1.25) {5};
+		\node [style=normal] (23) at (0.5, 1.25) {6};
+		\node [style=normal] (24) at (2.5, 1.25) {7};
+		\node [style=normal] (27) at (-1.5, -1.25) {6};
+		\node [style=normal] (28) at (0.5, -1.25) {7};
+		\node [style=normal] (29) at (2.5, -1.25) {8};
+		\node [style=red] (31) at (4.5, 1.25) {8-13};
+		\node [style=red] (32) at (4.5, -1.25) {9};
+		\node [style=normal] (33) at (6.5, 1.25) {14};
+		\node [style=normal] (34) at (6.5, -1.25) {10};
+	\end{pgfonlayer}
+\end{tikzpicture}
