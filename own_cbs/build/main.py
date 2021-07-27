@@ -95,14 +95,14 @@ print(action_dict)
 
 
 
-render = False
+render = True
 debug = False
 
 
 try:
 
     if render: 
-        env_renderer = RenderTool(env, screen_width=2000, screen_height=2000, show_debug=True)
+        env_renderer = RenderTool(env, screen_width=1000, screen_height=1000, show_debug=False)
 
         env_renderer.render_env(show=True, frames=False, show_observations=False, show_predictions=False, show_rowcols=True)
 
@@ -112,7 +112,8 @@ try:
 
         if render:
             env_renderer.render_env(show=True, frames=False, show_observations=False, show_predictions=False)
-            time.sleep(0.2)
+            env_renderer.gl.save_image(f"img/level{args.level}_step{step:02}.png")
+            # time.sleep(0.2)
             # input("Weiter?")
 
         for handle, agent in enumerate(env.agents):
@@ -146,7 +147,6 @@ try:
             print(f"\nAll Agents are in their targets! After {step} iterations.")
             print(f"\nFound a solution in {time.time()-time_start:5f}sec\n")
             print(cbs.getStatistic())
-            print(env.cur_episode)
             break
 
 finally:
